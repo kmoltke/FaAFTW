@@ -1,0 +1,140 @@
+{
+    "id1": {
+            "id": 1,
+            "artist": "The Beatles",
+            "album": "Abbey Road",
+            "year": 1969,
+            "genre": "Rock",
+            "price": 20.99
+        },
+    "id2": {
+            "id": 2,
+            "artist": "Led Zeppelin",
+            "album": "IV",
+            "year": 1971,
+            "genre": "Rock",
+            "price": 22.99,
+            "image": "images/led-zeppelin-led-zeppelin-lv.jpg"
+        },
+    "id3": {
+            "id": 3,
+            "artist": "Pink Floyd",
+            "album": "Dark Side of the Moon",
+            "year": 1973,
+            "genre": "Rock",
+            "price": 24.99
+        },
+    "id4": {
+            "id": 4,
+            "artist": "The Rolling Stones",
+            "album": "Exile on Main St.",
+            "year": 1972,
+            "genre": "Rock",
+            "price": 21.99
+        },
+    "id5": {
+            "id": 5,
+            "artist": "David Bowie",
+            "album": "The Rise and Fall of Ziggy Stardust and the Spiders from Mars",
+            "year": 1972,
+            "genre": "Rock",
+            "price": 23.99
+        },
+    "id6": {
+            "id": 6,
+            "artist": "Jimi Hendrix",
+            "album": "Electric Ladyland",
+            "year": 1968,
+            "genre": "Rock",
+            "price": 19.99
+        },
+    "id7": {
+            "id": 7,
+            "artist": "The Doors",
+            "album": "The Doors",
+            "year": 1967,
+            "genre": "Rock",
+            "price": 17.99
+        },
+    "id8": {
+            "id": 8,
+            "artist": "Fleetwood Mac",
+            "album": "Rumours",
+            "year": 1977,
+            "genre": "Rock",
+            "price": 22.99
+        },
+    "id9": {
+            "id": 9,
+            "artist": "Stevie Wonder",
+            "album": "Songs in the Key of Life",
+            "year": 1976,
+            "genre": "R&B",
+            "price": 22.99
+        },
+    "id10": {
+            "id": 10,
+            "artist": "Marvin Gaye",
+            "album": "What's Going On",
+            "year": 1971,
+            "genre": "R&B",
+            "price": 20.99
+        },
+    "id11": {
+            "id": 11,
+            "artist": "James Brown",
+            "album": "Live at the Apollo",
+            "year": 1963,
+            "genre": "R&B",
+            "price": 18.99
+        },
+    "id12": {
+            "id": 12,
+            "artist": "Prince",
+            "album": "1999",
+            "year": 1982,
+            "genre": "Pop",
+            "price": 24.99
+        },
+    "id13": {
+            "id": 13,
+            "artist": "Michael Jackson",
+            "album": "Off the Wall",
+            "year": 1979,
+            "genre": "Pop",
+            "price": 22.99
+        },
+    "id14": {
+            "id": 14,
+            "artist": "Madonna",
+            "album": "Like a Prayer",
+            "year": 1989,
+            "genre": "Pop",
+            "price": 21.99
+        },
+    "id15": {
+            "id": 15,
+            "artist": "Ramones",
+            "album": "Ramones",
+            "year": 1976,
+            "genre": "Punk",
+            "price": 16.99
+        },
+    "id16": {
+            "id": 16,
+            "artist": "Metallica",
+            "album": "Master of Puppets",
+            "year": 1986,
+            "genre":"Heavy metal",
+            "price": 19.99
+        },
+    "id17": {
+        "id": "ID1",
+        "artist": "The Rolling Stones",
+        "album": "Exile on Main St.",
+        "year": 1972,
+        "genre": "Rock",
+        "price": 21.99,
+        "description": "Standard vinyl LP pressing. Digitally remixed 50th Anniversary edition of The Beatles' musical masterpiece. This Abbey Road release features the new stereo album mix, sourced directly from the original eight-track session tapes. To produce the mix, Giles Martin working with Sam Okell, was guided by the album's original stereo mix supervised by his father, George Martin. It is time to experience Abbey Road again!"
+      }
+}
