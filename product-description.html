@@ -5,13 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles/product-description-style.css" />
   </head>
   <body>
-    <div>
-      <div id="imageContainer"></div>
-      <div id="overviewContainer"></div>
+    <a href="index.html"> &lt; &lt; go back</a>
+    <div class="productOuter" id="productOuter">
+      <div class="productImage" id="productImage"></div>
+      <div class="productOverview" id="productOverview"></div>
     </div>
-    <div id="dataContainer"></div>
-    <script src="scripts/fetch.js"></script>
+    <div class="productDetails" id="productDetails"></div>
+    <script src="scripts/products.js"></script>
+    <script>
+      document.body.onload = async () => {
+        const data = await loadProductDataAsync();
+        const query = queryParams();
+
+        renderProduct(data, query.id);
+      };
+    </script>
   </body>
 </html>
