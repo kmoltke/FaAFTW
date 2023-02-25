@@ -20,7 +20,7 @@
         const data = await loadProductDataAsync();
         const query = queryParams();
 
-        renderProduct(data, query.id);
+        renderProduct(data, +query.id);
       };
     </script>
   </body>

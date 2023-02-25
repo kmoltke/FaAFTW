@@ -5,15 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>welcome</title>
+    <link rel="stylesheet" href="styles/product-description-style.css" />
   </head>
   <body>
+    <div>
+      <p>filter</p>
+      <button onclick="filter('');">All</button>
+      <button onclick="filter('Rock');">Rock</button>
+      <button onclick="filter('Pop');">Pop</button>
+      <button onclick="filter('Punk');">Punk</button>
+      <button onclick="filter('Heavy metal');">Heavy Metal</button>
+    </div>
     <div id="productList"></div>
     <script src="scripts/products.js"></script>
     <script>
+      var data = null;
       document.body.onload = async () => {
         const vinyls = await loadProductDataAsync();
         renderList(vinyls);
+        data = vinyls;
       };
+      function filter(genre) {
+        if (!genre) {
+          renderList(data);
+        } else {
+          const filter = filterGenre(data, genre);
+          renderList(filter);
+        }
+      }
     </script>
   </body>
 </html>
