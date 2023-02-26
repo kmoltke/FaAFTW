@@ -12,6 +12,7 @@ async function loadProductDataAsync() {
   return response.json();
 }
 
+//function used to render the product in product-description html page
 function renderProduct(vinyls, productId) {
   const product = vinyls.find((x) => x.id === productId);
   console.log(product);
@@ -21,6 +22,12 @@ function renderProduct(vinyls, productId) {
     const productDetails = document.getElementById("productDetails");
 
     //create elements
+    const imageElement = document.createElement("a");
+    const image = document.createElement("img");
+    image.className = "image";
+    image.src = product.image ?? "images/no-image.jpg";
+    imageElement.appendChild(image);
+
     const albumElement = document.createElement("h1");
     albumElement.className = "productTitle";
     albumElement.innerHTML = `${product.album}`;
@@ -30,35 +37,43 @@ function renderProduct(vinyls, productId) {
     artistElement.innerHTML = `${product.artist}`;
 
     const priceElement = document.createElement("p");
-    priceElement.innerHTML = `Price: ${product.price}`;
+    priceElement.className = "productPrice";
+    priceElement.innerHTML = `${product.price},-`;
 
+    const button = document.createElement("button");
+    button.innerHTML = "Add to Cart";
+    button.className = "cardButton";
+
+    const descriptionElement = document.createElement("p");
+    descriptionElement.innerHTML = `${
+      product.description ?? "no description available"
+    }`;
+
+    // details elements
     const yearElement = document.createElement("p");
     yearElement.innerHTML = `Year: ${product.year}`;
 
     const genreElement = document.createElement("p");
     genreElement.innerHTML = `Genre: ${product.genre}`;
 
-    const descriptionElement = document.createElement("p");
-    descriptionElement.innerHTML = `Description: ${
-      product.description ?? "no description available"
-    }`;
+    const typeElement = document.createElement("p");
+    typeElement.innerHTML = `Type: ${product.type}`;
 
-    const imageElement = document.createElement("a");
-    const image = document.createElement("img");
-    image.className = "image";
-    image.src = product.image;
-    imageElement.appendChild(image);
+    const labelElement = document.createElement("p");
+    labelElement.innerHTML = `Label: ${product.label}`;
 
     //append elements to html containers
-    productOverview.appendChild(albumElement);
-    productOverview.appendChild(artistElement);
-    productOverview.appendChild(priceElement);
-    productOverview.appendChild(descriptionElement);
+    productOverview.append(
+      albumElement,
+      artistElement,
+      priceElement,
+      button,
+      descriptionElement
+    );
 
     productImage.appendChild(imageElement);
 
-    productDetails.appendChild(yearElement);
-    productDetails.appendChild(genreElement);
+    productDetails.append(yearElement, genreElement, typeElement, labelElement);
   } else {
     const productOuter = document.getElementById("dataContainer");
     const priceElement = document.createElement("p");
@@ -66,21 +81,62 @@ function renderProduct(vinyls, productId) {
     productOuter.appendChild(priceElement);
   }
 }
-//categories: all, genre(rock,pop,r&b,jazz), lpformat(vinyl lp, double vinyl lp)
 
-function filterGenre(vinyls, genre) {
-  console.log(vinyls);
-  const filteredproductList = vinyls.filter(
-    (element) => element.genre === genre
-  );
-  return filteredproductList;
+//categories: all, genre(rock,pop,r&b,jazz), lpformat(vinyl lp, double vinyl lp)
+function filterByGenre(vinyls, genre) {
+  if (!genre) {
+    renderList(vinyls);
+  } else {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("category", "genre:" + genre);
+    const queryString = searchParams.toString();
+    window.history.replaceState(null, null, "?" + queryString);
+    const filteredProducts = vinyls.filter(
+      (element) => element.genre === genre
+    );
+    renderList(filteredProducts);
+  }
+}
+function filterByDecade(vinyls, decade) {
+  if (!decade) {
+    renderList(vinyls);
+  } else {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("category", "decade:" + decade);
+    const queryString = searchParams.toString();
+    window.history.replaceState(null, null, "?" + queryString);
+    localStorage.setItem("selectedCategory", "decade:" + decade);
+
+    const filteredProducts = vinyls.filter(
+      (element) => element.decade === decade
+    );
+    renderList(filteredProducts);
+  }
 }
 
+function clearCategoryFilter() {
+  window.history.replaceState(null, null, window.location.pathname);
+  renderList(data);
+}
+
+function renderPage(vinyls) {
+  const selectedCategory = queryParams().category;
+  if (selectedCategory) {
+    const [categoryType, categoryValue] = selectedCategory.split(":");
+    if (categoryType === "genre") {
+      vinyls = filterByGenre(vinyls, categoryValue);
+    } else if (categoryType === "decade") {
+      vinyls = filterByDecade(vinyls, categoryValue);
+    }
+  } else {
+    renderList(vinyls);
+  }
+}
+
+//fnction used for index.html to render all products based on provided list(vinyls)
 function renderList(vinyls) {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
-  console.log(vinyls);
-
   vinyls.forEach((element) => {
     const productCard = document.createElement("div");
     productCard.className = "productCard";
@@ -109,7 +165,7 @@ function renderList(vinyls) {
     imageElement.href = "product-description.html?id=" + element.id;
     const image = document.createElement("img");
     image.className = "image";
-    image.src = element.image ?? "images/istockphoto-1041993546-612x612.jpg";
+    image.src = element.image ?? "images/no-image.jpg";
 
     imageElement.appendChild(image);
 
@@ -123,8 +179,8 @@ function renderList(vinyls) {
     productList.appendChild(productCard);
   });
 
-  const missing = 4 - vinyls.length;
-
+  // hack to make the size of the cards the same if elements listed are smaller than 4
+  const missing = 5 - vinyls.length;
   if (missing > 0) {
     for (let i = 0; i < missing; i++) {
       productList.appendChild(document.createElement("div"));
