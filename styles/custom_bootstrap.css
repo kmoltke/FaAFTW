@@ -1,0 +1,44 @@
+.carousel .carousel-item img {
+    /*max-height: 400px;*/
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel {
+    margin: 50px;
+    padding: 10px;
+    background-color: #f0ebeb;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a {
+    font-size: 1.96875rem;
+    font-size: 36px;
+    margin-bottom: 0.5em;
+    font-family: Neuzeit S, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: white;
+}
+
+.carousel-caption {
+    background-color: rgba(87, 86, 86, 0.5);
+    max-width: 400px;
+    margin: auto;
+}
+.carousel-caption > a {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+}
+
+.carousel-caption a:hover {
+    color: black;
+}
