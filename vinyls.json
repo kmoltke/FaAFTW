@@ -204,6 +204,7 @@
     "type": "180G 1LP",
     "label": "BLACKENED",
     "image": null,
-    "description": "Dummy Text."
+    "description": "Dummy Text.",
+    "featured": true
   }
 ]

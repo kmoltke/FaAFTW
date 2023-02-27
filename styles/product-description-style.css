@@ -75,6 +75,16 @@ body {
   border-radius: 5px;
 }
 
+.productTitle {
+  font-size: 1.96875rem;
+  font-size: 36px;
+  margin-bottom: 0.5em;
+  font-family: Neuzeit S, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
 /* mobile */
 @media only screen and (max-width: 720px) {
   .productOuter {
@@ -88,18 +98,6 @@ body {
   .productImage {
     display: block;
     width: 100%;
-  }
-}
-
-@media screen and (min-width: 720px) {
-  .productTitle {
-    font-size: 1.96875rem;
-    font-size: 36px;
-    margin-bottom: 0.5em;
-    font-family: Neuzeit S, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    letter-spacing: -0.01em;
   }
 }
 
