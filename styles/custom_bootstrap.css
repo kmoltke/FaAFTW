@@ -16,7 +16,28 @@
     font-size: 16px;
 }
 
-a {
+/*a {*/
+/*    font-size: 1.96875rem;*/
+/*    font-size: 36px;*/
+/*    margin-bottom: 0.5em;*/
+/*    font-family: Neuzeit S, sans-serif;*/
+/*    font-style: normal;*/
+/*    font-weight: 900;*/
+/*    letter-spacing: -0.01em;*/
+/*    color: white;*/
+/*}*/
+
+.carousel-caption {
+    background-color: rgba(87, 86, 86, 0.5);
+    max-width: 400px;
+    margin: auto;
+    position: static;
+}
+.carousel-caption a {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
     font-size: 1.96875rem;
     font-size: 36px;
     margin-bottom: 0.5em;
@@ -24,19 +45,6 @@ a {
     font-style: normal;
     font-weight: 900;
     letter-spacing: -0.01em;
-    color: white;
-}
-
-.carousel-caption {
-    background-color: rgba(87, 86, 86, 0.5);
-    max-width: 400px;
-    margin: auto;
-}
-.carousel-caption > a {
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 16px;
-    color: black;
 }
 
 .carousel-caption a:hover {
