@@ -1,107 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-    <title>welcome</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/custom_bootstrap.css">
-    <link rel="stylesheet" href="styles/product-description-style.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>the vinyl countdown</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles/custom_bootstrap.css" />
+    <link rel="stylesheet" href="styles/product-description-style.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+  </head>
+  <body>
+    <header>
+      <!-- navbar start-->
+      <div id="navbar">
+        <a href="#default" id="logo">
+          <img
+            id="logoel1"
+            src="images\logo\332096491_571562201699624_6671416270433743475_n.png"
+            alt=""
+          />
+          <div id="logoel2">the vinyl countdown</div>
+        </a>
+        <div id="navbar-right">
+          <a href="#home">Home</a>
+          <a href="#login">Login</a>
+          <a href="#cart">Cart</a>
+        </div>
+      </div>
+      <!-- navbar end -->
+    </header>
 
-</head>
-<body>
-
-<div id="container_featured">
-
-<!--  Featured new vinyls carousel -->
-    <div id="featuredVinyls" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <!-- main content start -->
+    <main>
+      <div style="height: 170px"></div>
+      <h2>Featured new releases</h2>
+      <div id="container_featured">
+        <!--  Featured new vinyls carousel -->
+        <div id="featuredVinyls" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li
+              data-target="#carouselExampleIndicators"
+              data-slide-to="0"
+              class="active"
+            ></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/id1-1.jpg" alt="First slide">
-                    <div class="carousel-caption d-block">
-                        <h5><a href="product-description.html?id=1">Abbey Road</a></h5>
-                        <p>The Beatles</p>
-                    </div>
-
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="images/id2-1.jpg" alt="Second slide">
-                    <div class="carousel-caption d-block">
-                        <h5><a href="product-description.html?id=2">IV</a></h5>
-                        <p>Led Zeppelin</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="images/id3-1.jpg" alt="Third slide">
-                    <div class="carousel-caption d-block">
-                        <h5><a href="product-description.html?id=3">Dark Side of the Moon</a></h5>
-                        <p>Pink Floyd</p>
-                    </div>
-                </div>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100"
+                src="images/id1-1.jpg"
+                alt="First slide"
+              />
+              <div class="carousel-caption d-block">
+                <h5><a href="product-description.html?id=1">Abbey Road</a></h5>
+                <p>The Beatles</p>
+              </div>
             </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="images/id2-1.jpg"
+                alt="Second slide"
+              />
+              <div class="carousel-caption d-block">
+                <h5><a href="product-description.html?id=2">IV</a></h5>
+                <p>Led Zeppelin</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="images/id3-1.jpg"
+                alt="Third slide"
+              />
+              <div class="carousel-caption d-block">
+                <h5>
+                  <a href="product-description.html?id=3"
+                    >Dark Side of the Moon</a
+                  >
+                </h5>
+                <p>Pink Floyd</p>
+              </div>
+            </div>
+          </div>
 
-        <a class="carousel-control-prev" href="#featuredVinyls" role="button" data-slide="prev">
+          <a
+            class="carousel-control-prev"
+            href="#featuredVinyls"
+            role="button"
+            data-slide="prev"
+          >
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#featuredVinyls" role="button" data-slide="next">
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#featuredVinyls"
+            role="button"
+            data-slide="next"
+          >
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
+          </a>
+        </div>
+      </div>
 
-
-<!-- filter container -->
-<div class="filterContainer">
-    <p>filter by:</p>
-    <div class="dropdown">
-        <button class="dropbtn">Genre</button>
-        <div class="dropdown-content">
+      <h2>Browse</h2>
+      <!-- filter container -->
+      <div class="filterContainer">
+        <p>filter by:</p>
+        <div class="dropdown">
+          <button class="dropbtn">Genre</button>
+          <div class="dropdown-content">
             <button onclick="filterByGenre(data,'Rock');">Rock</button>
             <button onclick="filterByGenre(data,'Pop');">Pop</button>
             <button onclick="filterByGenre(data,'Electronic');">
-                Electronic
+              Electronic
             </button>
             <button onclick="filterByGenre(data,'Heavy metal');">
-                Heavy Metal
+              Heavy Metal
             </button>
+          </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn">Decade</button>
-        <div class="dropdown-content">
+        <div class="dropdown">
+          <button class="dropbtn">Decade</button>
+          <div class="dropdown-content">
             <button onclick="filterByDecade(data,'70s');">70s</button>
             <button onclick="filterByDecade(data,'80s');">80s</button>
             <button onclick="filterByDecade(data,'90s');">90s</button>
             <button onclick="filterByDecade(data,'2000s');">2000s</button>
             <button onclick="filterByDecade(data,'2010s');">2010s</button>
+          </div>
         </div>
-    </div>
-    <button class="dropbtn" onclick="clearCategoryFilter();">Reset</button>
-</div>
+        <button class="dropbtn" onclick="clearCategoryFilter();">Reset</button>
+      </div>
 
-<!-- from here and down the product list is generated by javascript -->
-<div id="productList"></div>
-<script src="scripts/products.js"></script>
-<script>
-    var data = null;
-    document.body.onload = async () => {
+      <!-- from here and down the product list is generated by javascript -->
+      <div id="productList"></div>
+    </main>
+    <!-- main content end -->
+
+    <!-- scripts -->
+    <script src="scripts/products.js"></script>
+    <script>
+      var data = null;
+      document.body.onload = async () => {
         const vinyls = await loadProductDataAsync();
         renderPage(vinyls);
         data = vinyls;
-    };
-</script>
+      };
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+      addEventListener("scroll", scrollFunction);
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

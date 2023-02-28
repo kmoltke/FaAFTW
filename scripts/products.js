@@ -32,7 +32,7 @@ function renderProduct(vinyls, productId) {
     albumElement.className = "productTitle";
     albumElement.innerHTML = `${product.album}`;
 
-    const artistElement = document.createElement("h2");
+    const artistElement = document.createElement("h3");
     artistElement.className = "productArtist";
     artistElement.innerHTML = `${product.artist}`;
 
@@ -192,4 +192,27 @@ function renderList(vinyls) {
 function queryParams() {
   const urlSearchParams = new URLSearchParams(window.location.search);
   return Object.fromEntries(urlSearchParams.entries());
+}
+
+// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    document.getElementById("navbar").style.padding = "10px 10px";
+    document.getElementById("logoel2").style.fontSize = "25px";
+    document.getElementById("logoel1").style.opacity = 0;
+  } else {
+    document.getElementById("navbar").style.padding = "50px 10px";
+    document.getElementById("logoel2").style.fontSize = "18px";
+    document.getElementById("logoel1").style.opacity = 1;
+  }
+}
+
+function myFunction() {
+  var x = document.getElementById("navbar-right");
+  if (x.className === "navbar-right") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar-right";
+  }
 }
