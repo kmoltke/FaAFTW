@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles/product-description-style.css" />
+    <link rel="stylesheet" href="styles/product-description.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/template.css" />
   </head>
   <body>
     <header>
-      <div style="height: 120px"></div>
+      <div style="height: 150px"></div>
       <!-- navbar start-->
       <div id="navbar">
         <a href="#default" id="logo">
@@ -31,13 +32,17 @@
     </header>
 
     <main>
-      <div style="height: 120px"></div>
-      <a href="index.html"> &lt; &lt; go back</a>
-      <div class="productOuter" id="productOuter">
-        <div class="productImage" id="productImage"></div>
-        <div class="productOverview" id="productOverview"></div>
-      </div>
-      <div class="productDetails" id="productDetails"></div>
+      <section>
+        <h1 style="margin-bottom: 0">Product description</h1>
+        <a href="index.html">
+          <h3 style="margin-top: 0.5em">&lt; &lt; go back</h3>
+        </a>
+        <div class="productOuter" id="productOuter">
+          <div class="productImage" id="productImage"></div>
+          <div class="productOverview" id="productOverview"></div>
+        </div>
+        <div class="productDetails" id="productDetails"></div>
+      </section>
     </main>
 
     <script src="scripts/products.js"></script>

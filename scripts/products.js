@@ -83,35 +83,16 @@ function renderProduct(vinyls, productId) {
 }
 
 //categories: all, genre(rock,pop,r&b,jazz), lpformat(vinyl lp, double vinyl lp)
-function filterByGenre(vinyls, genre) {
-  if (!genre) {
-    renderList(vinyls);
-  } else {
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set("category", "genre:" + genre);
-    const queryString = searchParams.toString();
-    window.history.replaceState(null, null, "?" + queryString);
-    const filteredProducts = vinyls.filter(
-      (element) => element.genre === genre
-    );
-    renderList(filteredProducts);
-  }
-}
-function filterByDecade(vinyls, decade) {
-  if (!decade) {
-    renderList(vinyls);
-  } else {
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set("category", "decade:" + decade);
-    const queryString = searchParams.toString();
-    window.history.replaceState(null, null, "?" + queryString);
-    localStorage.setItem("selectedCategory", "decade:" + decade);
+function filterBy(vinyls, category, subcategory) {
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set("category", `${category}:` + subcategory);
+  const queryString = searchParams.toString();
+  window.history.replaceState(null, null, "?" + queryString);
 
-    const filteredProducts = vinyls.filter(
-      (element) => element.decade === decade
-    );
-    renderList(filteredProducts);
-  }
+  const filteredProducts = vinyls.filter(
+    (element) => element[category] === subcategory
+  );
+  renderList(filteredProducts);
 }
 
 function clearCategoryFilter() {
@@ -123,11 +104,7 @@ function renderPage(vinyls) {
   const selectedCategory = queryParams().category;
   if (selectedCategory) {
     const [categoryType, categoryValue] = selectedCategory.split(":");
-    if (categoryType === "genre") {
-      vinyls = filterByGenre(vinyls, categoryValue);
-    } else if (categoryType === "decade") {
-      vinyls = filterByDecade(vinyls, categoryValue);
-    }
+    filterBy(vinyls, categoryType, categoryValue);
   } else {
     renderList(vinyls);
   }
@@ -172,10 +149,12 @@ function renderList(vinyls) {
     productDetailsContainer.appendChild(albumElement);
     productDetailsContainer.appendChild(artistElement);
 
-    productCard.appendChild(imageElement);
-    productCard.appendChild(productDetailsContainer);
-    productCard.appendChild(priceElement);
-    productCard.appendChild(button);
+    productCard.append(
+      imageElement,
+      productDetailsContainer,
+      priceElement,
+      button
+    );
     productList.appendChild(productCard);
   });
 
