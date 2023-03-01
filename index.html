@@ -32,6 +32,7 @@
         </a>
         <div id="navbar-right">
           <a href="#home">Home</a>
+          <a href="#browse">Browse</a>
           <a href="#login">Login</a>
           <a href="#cart">Cart</a>
         </div>
@@ -41,8 +42,7 @@
 
     <!-- main content start -->
     <main>
-      <div style="height: 170px"></div>
-      <h2>Featured new releases</h2>
+
       <div id="container_featured">
         <!--  Featured new vinyls carousel -->
         <div id="featuredVinyls" class="carousel slide" data-ride="carousel">
@@ -55,43 +55,51 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
+          <h3>Featured new releases</h3>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                class="d-block w-100"
-                src="images/id1-1.jpg"
-                alt="First slide"
-              />
-              <div class="carousel-caption d-block">
-                <h5><a href="product-description.html?id=1">Abbey Road</a></h5>
-                <p>The Beatles</p>
+              <div class="carousel-item-content">
+                <div class="carousel-caption d-block">
+                  <h2>
+                    <a href="product-description.html?id=1"
+                      >Abbey Road - The Beatles →</a
+                    >
+                  </h2>
+                </div>
+                <img
+                  class="d-block w-100"
+                  src="images/id1-1.jpg"
+                  alt="First slide"
+                />
               </div>
             </div>
             <div class="carousel-item">
+              <div class="carousel-caption d-block">
+                <h2>
+                  <a href="product-description.html?id=2"
+                    >IV - Led Zeppelin →</a
+                  >
+                </h2>
+              </div>
               <img
                 class="d-block w-100"
                 src="images/id2-1.jpg"
                 alt="Second slide"
               />
-              <div class="carousel-caption d-block">
-                <h5><a href="product-description.html?id=2">IV</a></h5>
-                <p>Led Zeppelin</p>
-              </div>
             </div>
             <div class="carousel-item">
+              <div class="carousel-caption d-block">
+                <h2>
+                  <a href="product-description.html?id=3"
+                    >Dark Side of the Moon - Pink Floyd →</a
+                  >
+                </h2>
+              </div>
               <img
                 class="d-block w-100"
                 src="images/id3-1.jpg"
                 alt="Third slide"
               />
-              <div class="carousel-caption d-block">
-                <h5>
-                  <a href="product-description.html?id=3"
-                    >Dark Side of the Moon</a
-                  >
-                </h5>
-                <p>Pink Floyd</p>
-              </div>
             </div>
           </div>
 
@@ -116,40 +124,43 @@
         </div>
       </div>
 
-      <h2>Browse</h2>
-      <!-- filter container -->
-      <div class="filterContainer">
-        <p>filter by:</p>
-        <div class="dropdown">
-          <button class="dropbtn">Genre</button>
-          <div class="dropdown-content">
-            <button onclick="filterByGenre(data,'Rock');">Rock</button>
-            <button onclick="filterByGenre(data,'Pop');">Pop</button>
-            <button onclick="filterByGenre(data,'Electronic');">
-              Electronic
-            </button>
-            <button onclick="filterByGenre(data,'Heavy metal');">
-              Heavy Metal
-            </button>
+      <section id="browseContainer">
+        <h2>Browse</h2>
+        <!-- filter container -->
+        <div class="filterContainer">
+          <p>filter by:</p>
+          <div class="dropdown">
+            <button class="dropbtn">Genre</button>
+            <div class="dropdown-content">
+              <button onclick="filterByGenre(data,'Rock');">Rock</button>
+              <button onclick="filterByGenre(data,'Pop');">Pop</button>
+              <button onclick="filterByGenre(data,'Electronic');">
+                Electronic
+              </button>
+              <button onclick="filterByGenre(data,'Heavy metal');">
+                Heavy Metal
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="dropdown">
-          <button class="dropbtn">Decade</button>
-          <div class="dropdown-content">
-            <button onclick="filterByDecade(data,'70s');">70s</button>
-            <button onclick="filterByDecade(data,'80s');">80s</button>
-            <button onclick="filterByDecade(data,'90s');">90s</button>
-            <button onclick="filterByDecade(data,'2000s');">2000s</button>
-            <button onclick="filterByDecade(data,'2010s');">2010s</button>
+          <div class="dropdown">
+            <button class="dropbtn">Decade</button>
+            <div class="dropdown-content">
+              <button onclick="filterByDecade(data,'70s');">70s</button>
+              <button onclick="filterByDecade(data,'80s');">80s</button>
+              <button onclick="filterByDecade(data,'90s');">90s</button>
+              <button onclick="filterByDecade(data,'2000s');">2000s</button>
+              <button onclick="filterByDecade(data,'2010s');">2010s</button>
+            </div>
           </div>
+          <button class="dropbtn" onclick="clearCategoryFilter();">Reset</button>
         </div>
-        <button class="dropbtn" onclick="clearCategoryFilter();">Reset</button>
-      </div>
-
-      <!-- from here and down the product list is generated by javascript -->
-      <div id="productList"></div>
-    </main>
-    <!-- main content end -->
+  
+        <!-- from here and down the product list is generated by javascript -->
+        <div id="productList"></div>
+      </main>
+      <!-- main content end -->
+      </section>
+      
 
     <!-- scripts -->
     <script src="scripts/products.js"></script>
