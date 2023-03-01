@@ -1,0 +1,73 @@
+.carousel .carousel-item img {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 40, 50%);
+  transition: 0.3s;
+  margin-bottom: 3em;
+}
+
+.carousel .carousel-item img:hover {
+  box-shadow: 0 8px 50px 0 rgba(0, 0, 40, 50%);
+}
+
+.carousel {
+  background-color: rgb(69, 99, 56);
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  width: 100vw;
+  padding-bottom: 3em;
+  padding-top: 180px;
+  margin-bottom: 1em;
+}
+
+.carousel-caption {
+  padding-top: 0px;
+  position: static;
+  text-align: start;
+  z-index: 99;
+}
+
+.carousel-caption a {
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  font-size: 1.96875rem;
+  font-size: 36px;
+  margin-bottom: 0.5em;
+  font-family: "Oswald", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  z-index: 99;
+}
+
+.carousel-caption a:hover {
+  color: black;
+}
+
+.carousel-item-content {
+  margin-bottom: 4sem;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.carousel-item-content h2 {
+  margin-left: 0;
+}
+
+#container_featured {
+  width: 100vw;
+  height: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  top: 424px;
+  bottom: 424px;
+}
