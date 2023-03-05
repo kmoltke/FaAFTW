@@ -97,6 +97,7 @@
   padding: 0%;
 }
 .productCard .productTitle {
+  font-family: "Oswald", sans-serif;
   font-weight: bold;
   color: #000;
   text-decoration: none;
@@ -108,10 +109,10 @@
   margin-top: 0.5em;
 }
 .productCard .productPrice {
+  font-family: "Oswald", sans-serif;
   font-size: 24px;
   margin: 15px;
   margin-top: auto;
-  font-family: "Oswald", sans-serif;
 }
 .productCard button {
   border: none;
