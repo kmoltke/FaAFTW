@@ -20,16 +20,26 @@
   width: 100vw;
   padding-bottom: 3em;
   padding-top: 180px;
-  margin-bottom: 1em;
   padding-left: 50px;
   padding-right: 50px;
+}
+.carousel h2 {
+  max-width: 1200px;
+  text-align: start;
+  margin: auto;
+}
+.carousel h3 {
+  max-width: 1200px;
+  text-align: start;
+  margin: auto;
 }
 
 .carousel-caption {
   padding-top: 0px;
   position: static;
-  text-align: start;
+
   z-index: 99;
+  /* max-width: 1300px; */
 }
 
 .carousel-caption a {
@@ -57,6 +67,7 @@
 
 .carousel-item-content h2 {
   margin-left: 0;
+  max-width: 1300px;
 }
 
 #container_featured {

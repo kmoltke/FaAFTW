@@ -7,6 +7,8 @@
     });
 } */
 
+// global variables
+
 async function loadProductDataAsync() {
   const response = await fetch("./vinyls.json");
   return response.json();
@@ -93,6 +95,37 @@ function filterBy(vinyls, category, subcategory) {
     (element) => element[category] === subcategory
   );
   renderList(filteredProducts);
+  console.log(filteredProducts);
+}
+
+function DisplayFeatured(vinyls) {
+  const filteredProducts = vinyls.filter(
+    (element) => element.featured === true
+  );
+  const carousel = document.getElementById("carousel-inner");
+  carousel.innerHTML = "";
+  for (let index = 0; index < filteredProducts.length; index++) {
+    const element = filteredProducts[index];
+    let html;
+    if (index === 0) {
+      html = '<div class="carousel-item active">';
+    } else {
+      html = '<div class="carousel-item">';
+    }
+    html +=
+      '<div class="carousel-caption d-block">' +
+      "<h2>" +
+      `<a href="product-description.html?id=2"> ${element.album} - ${element.artist} →</a> ` +
+      "</h2>" +
+      "</div>" +
+      `<img class="d-block w-100" src=${
+        element.image ?? "images/no-image.jpg"
+      } alt="Second slide" /> ` +
+      "</div>";
+
+    carousel.innerHTML += html;
+  }
+  console.log(filteredProducts);
 }
 
 function clearCategoryFilter() {
@@ -110,51 +143,56 @@ function renderPage(vinyls) {
   }
 }
 
+function renderCard(element) {
+  const productCard = document.createElement("div");
+  productCard.className = "productCard";
+
+  const productDetailsContainer = document.createElement("div");
+  productDetailsContainer.className = "productDetails";
+
+  const albumElement = document.createElement("a");
+  albumElement.className = "productTitle";
+  albumElement.href = "product-description.html?id=" + element.id;
+  albumElement.innerHTML = `${element.album}`;
+
+  const artistElement = document.createElement("p");
+  artistElement.className = "productArtist";
+  artistElement.innerHTML = `${element.artist}`;
+
+  const priceElement = document.createElement("p");
+  priceElement.className = "productPrice";
+  priceElement.innerHTML = `${element.price},-`;
+
+  const button = document.createElement("button");
+  button.innerHTML = "Add to Cart";
+  button.className = "cardButton";
+
+  const imageElement = document.createElement("a");
+  imageElement.href = "product-description.html?id=" + element.id;
+  const image = document.createElement("img");
+  image.className = "image";
+  image.src = element.image ?? "images/no-image.jpg";
+
+  imageElement.appendChild(image);
+
+  productDetailsContainer.appendChild(albumElement);
+  productDetailsContainer.appendChild(artistElement);
+
+  productCard.append(
+    imageElement,
+    productDetailsContainer,
+    priceElement,
+    button
+  );
+  return productCard;
+}
+
 //fnction used for index.html to render all products based on provided list(vinyls)
 function renderList(vinyls) {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
   vinyls.forEach((element) => {
-    const productCard = document.createElement("div");
-    productCard.className = "productCard";
-
-    const productDetailsContainer = document.createElement("div");
-    productDetailsContainer.className = "productDetails";
-
-    const albumElement = document.createElement("a");
-    albumElement.className = "productTitle";
-    albumElement.href = "product-description.html?id=" + element.id;
-    albumElement.innerHTML = `${element.album}`;
-
-    const artistElement = document.createElement("p");
-    artistElement.className = "productArtist";
-    artistElement.innerHTML = `${element.artist}`;
-
-    const priceElement = document.createElement("p");
-    priceElement.className = "productPrice";
-    priceElement.innerHTML = `${element.price},-`;
-
-    const button = document.createElement("button");
-    button.innerHTML = "Add to Cart";
-    button.className = "cardButton";
-
-    const imageElement = document.createElement("a");
-    imageElement.href = "product-description.html?id=" + element.id;
-    const image = document.createElement("img");
-    image.className = "image";
-    image.src = element.image ?? "images/no-image.jpg";
-
-    imageElement.appendChild(image);
-
-    productDetailsContainer.appendChild(albumElement);
-    productDetailsContainer.appendChild(artistElement);
-
-    productCard.append(
-      imageElement,
-      productDetailsContainer,
-      priceElement,
-      button
-    );
+    const productCard = renderCard(element);
     productList.appendChild(productCard);
   });
 
@@ -174,7 +212,6 @@ function queryParams() {
 }
 
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
-
 function myFunction() {
   var x = document.getElementById("navbar-right");
   if (x.className === "navbar-right") {

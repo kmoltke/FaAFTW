@@ -206,5 +206,33 @@
     "image": null,
     "description": "Dummy Text.",
     "featured": true
+  },
+  {
+    "id": 17,
+    "artist": "Dummy Artist",
+    "album": "Dummy Title",
+    "decade": "80s",
+    "year": 1986,
+    "genre": "Heavy metal",
+    "price": 235,
+    "type": "180G 1LP",
+    "label": "BLACKENED",
+    "image": null,
+    "description": "Dummy Text.",
+    "featured": true
+  },
+  {
+    "id": 18,
+    "artist": "Dummy Artist",
+    "album": "Dummy Title",
+    "decade": "80s",
+    "year": 1986,
+    "genre": "Heavy metal",
+    "price": 235,
+    "type": "180G 1LP",
+    "label": "BLACKENED",
+    "image": null,
+    "description": "Dummy Text.",
+    "featured": true
   }
 ]
