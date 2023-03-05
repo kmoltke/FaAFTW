@@ -62,6 +62,7 @@
     minmax(min(var(--minWidth), 100%), 1fr)
   );
   margin: auto;
+  padding-bottom: 25px;
 }
 .productCard {
   display: flex;

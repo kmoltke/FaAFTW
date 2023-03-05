@@ -12,7 +12,7 @@ header {
   overflow: hidden;
   background-color: #212121;
   padding: 50px 10px; /* Large padding which will shrink on scroll (using JS) */
-  transition: 0.2s; /* Adds a transition effect when the padding is decreased */
+  transition: padding 0.2s; /* Adds a transition effect when the padding is decreased */
   position: fixed; /* Sticky/fixed navbar */
   width: 100%;
   top: 0; /* At the top */
@@ -67,7 +67,7 @@ header {
   font-size: 18px;
   max-width: 300px;
   letter-spacing: 0.05em;
-  transition: 200ms;
+  transition: font-size 200ms;
 }
 
 /* Links on mouse-over */

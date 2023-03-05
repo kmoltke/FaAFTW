@@ -103,19 +103,29 @@ function DisplayFeatured(vinyls) {
     (element) => element.featured === true
   );
   const carousel = document.getElementById("carousel-inner");
+  const carouselCont = document.getElementById("carouselExampleCaptions");
+
+  function setBg() {
+    const activeSlide = document.querySelector(
+      ".carousel .carousel-item.active"
+    );
+    // console.log(activeSlide.dataset.color);
+    carouselCont.style.backgroundColor = activeSlide.dataset.color;
+  }
+
   carousel.innerHTML = "";
   for (let index = 0; index < filteredProducts.length; index++) {
     const element = filteredProducts[index];
     let html;
     if (index === 0) {
-      html = '<div class="carousel-item active">';
+      html = `<div class="carousel-item active" data-color="${element.featuredColor}">`;
     } else {
-      html = '<div class="carousel-item">';
+      html = `<div class="carousel-item" data-color="${element.featuredColor}">`;
     }
     html +=
       '<div class="carousel-caption d-block">' +
       "<h2>" +
-      `<a href="product-description.html?id=2"> ${element.album} - ${element.artist} →</a> ` +
+      `<a href="product-description.html?id=${element.id}"> ${element.album} - ${element.artist} →</a> ` +
       "</h2>" +
       "</div>" +
       `<img class="d-block w-100" src=${
@@ -125,6 +135,10 @@ function DisplayFeatured(vinyls) {
 
     carousel.innerHTML += html;
   }
+
+  carouselCont.addEventListener("slid.bs.carousel", setBg);
+  setBg();
+
   console.log(filteredProducts);
 }
 
