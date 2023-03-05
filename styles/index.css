@@ -62,6 +62,7 @@
     minmax(min(var(--minWidth), 100%), 1fr)
   );
   margin: auto;
+  padding-bottom: 25px;
 }
 .productCard {
   display: flex;
@@ -96,6 +97,7 @@
   padding: 0%;
 }
 .productCard .productTitle {
+  font-family: "Oswald", sans-serif;
   font-weight: bold;
   color: #000;
   text-decoration: none;
@@ -107,10 +109,10 @@
   margin-top: 0.5em;
 }
 .productCard .productPrice {
+  font-family: "Oswald", sans-serif;
   font-size: 24px;
   margin: 15px;
   margin-top: auto;
-  font-family: "Oswald", sans-serif;
 }
 .productCard button {
   border: none;
@@ -122,4 +124,37 @@
   cursor: pointer;
   width: 100%;
   font-size: 15px;
+}
+#browseContainer {
+  padding-top: 70px;
+  height: 100vh;
+}
+
+/* pagination */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+  justify-content: center;
+}
+.pagination-number,
+.pagination-button {
+  font-size: 1.1rem;
+  background-color: transparent;
+  border: none;
+  margin: 0.25rem 0.25rem;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.2rem;
+}
+.pagination-number:hover,
+.pagination-button:not(.disabled):hover {
+  background: #fff;
+}
+.pagination-number.active {
+  color: #fff;
+  background: #0085b6;
 }

@@ -42,3 +42,9 @@ section {
   margin: auto;
   padding: 25px 50px 50px 50px;
 }
+
+@media only screen and (max-width: 720px) {
+  section {
+    padding: 25px 25px 50px 25px;
+  }
+}

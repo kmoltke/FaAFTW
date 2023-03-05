@@ -5,6 +5,7 @@
   box-shadow: 0 4px 20px 0 rgba(0, 0, 40, 50%);
   transition: 0.3s;
   margin-bottom: 3em;
+  aspect-ratio: 1;
 }
 
 .carousel .carousel-item img:hover {
@@ -12,43 +13,47 @@
 }
 
 .carousel {
-  background-color: rgb(69, 99, 56);
-  font-weight: bold;
-  color: #000;
+  font-weight: normal;
+  color: #ffffff;
   text-decoration: none;
   font-size: 16px;
-  width: 100vw;
   padding-bottom: 3em;
   padding-top: 180px;
-  margin-bottom: 1em;
   padding-left: 50px;
   padding-right: 50px;
+  transition: background-color 0.2s;
+}
+.carousel h2 {
+  max-width: 1200px;
+  text-align: start;
+  margin: auto;
+}
+.carousel h3 {
+  max-width: 1200px;
+  text-align: start;
+  margin: auto;
+  opacity: 0.6;
+  font-weight: normal;
 }
 
 .carousel-caption {
-  padding-top: 0px;
+  padding-top: 5px;
   position: static;
-  text-align: start;
   z-index: 99;
+  /* max-width: 1300px; */
 }
 
 .carousel-caption a {
-  font-weight: bold;
+  display: inline-block;
   text-decoration: none;
-  font-size: 16px;
   color: white;
-  font-size: 1.96875rem;
   font-size: 36px;
-  margin-bottom: 0.5em;
-  font-family: "Oswald", sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  letter-spacing: -0.01em;
+  margin-bottom: 1em;
   z-index: 99;
 }
 
 .carousel-caption a:hover {
-  color: black;
+  color: rgba(255, 255, 255, 0.534);
 }
 
 .carousel-item-content {
@@ -57,6 +62,7 @@
 
 .carousel-item-content h2 {
   margin-left: 0;
+  max-width: 1300px;
 }
 
 #container_featured {
