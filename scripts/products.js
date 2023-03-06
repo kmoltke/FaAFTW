@@ -46,7 +46,7 @@ function renderProduct(vinyls, productId) {
     button.innerHTML = "Add to Cart";
     button.className = "cardButton";
     // button.onClick = `addToBasket(${productId})`;
-    button.setAttribute("onclick", `addToBasket(${element.id});`);
+    button.setAttribute("onclick", `addToBasket(${productId});`);
 
     const descriptionElement = document.createElement("p");
     descriptionElement.innerHTML = `${
