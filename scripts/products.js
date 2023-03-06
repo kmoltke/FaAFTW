@@ -45,6 +45,8 @@ function renderProduct(vinyls, productId) {
     const button = document.createElement("button");
     button.innerHTML = "Add to Cart";
     button.className = "cardButton";
+    // button.onClick = `addToBasket(${productId})`;
+    button.setAttribute("onclick", `addToBasket(${element.id});`);
 
     const descriptionElement = document.createElement("p");
     descriptionElement.innerHTML = `${
@@ -180,7 +182,9 @@ function renderCard(element) {
   const button = document.createElement("button");
   button.innerHTML = "Add to Cart";
   button.className = "cardButton";
-
+  // button.onClick = `addToBasket(${element.id})`;
+  // button.onclick = `addToBasket(${element.id});`;
+  button.setAttribute("onclick", `addToBasket(${element.id});`);
   const imageElement = document.createElement("a");
   imageElement.href = "product-description.html?id=" + element.id;
   const image = document.createElement("img");
