@@ -13,7 +13,7 @@ function renderBasketCard(vinyls, productId) {
 
     const image = document.createElement("img");
 
-
+    const removeButton = document.createElement("button");
 
     const albumElement = document.createElement("a");
     albumElement.className = "productTitle";
