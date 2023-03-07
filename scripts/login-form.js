@@ -31,8 +31,8 @@ rememberMeCheckbox.addEventListener('change', (e) => {
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  //TODO: integrate login information with rest of pages
-  console.log(loginInformation)
-
+  localStorage.setItem('userInfo', JSON.stringify(loginInformation))
+  alert('You have logged in successfully, you will be redirected shortly..')
+  window.location.replace('/index.html')
   loginForm.reset()
 })
