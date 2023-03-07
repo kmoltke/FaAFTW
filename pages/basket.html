@@ -33,10 +33,10 @@
             <div id="logoel2">the vinyl countdown</div>
         </a>
         <div id="navbar-right">
-            <a href="#home" onclick="scrollIntoHome()">Home</a>
-            <a href="#browse" onclick="scrollIntoBrowse()">Browse</a>
-            <a href="#login">Login</a>
-            <a href="#cart">Cart</a>
+            <a href="../index.html">Home</a>
+            <a href="../index.html#browseContainer">Browse</a>
+            <a href="login-form.html">Login</a>
+            <a href="basket.html">Cart</a>
         </div>
     </div>
     <!-- navbar end -->
@@ -133,8 +133,9 @@
 </section>
 
 <!-- scripts -->
-<script src="../scripts/products.js"></script>
+<!--<script src="../scripts/products.js"></script>-->
 <script src="../scripts/navbar.js"></script>
+<script src="../scripts/basket.js"></script>
 <script>
     let data = null;
 
@@ -145,14 +146,6 @@
     };
 
     navbar();
-
-    function scrollIntoBrowse() {
-        const element = document.getElementById("browseContainer");
-        element.scrollIntoView();
-    }
-    function scrollIntoHome() {
-        window.scrollTo(0, 0);
-    }
 </script>
 
 <!-- Bootstrap JS -->

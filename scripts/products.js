@@ -17,7 +17,7 @@ async function loadProductDataAsync() {
 //function used to render the product in product-description html page
 function renderProduct(vinyls, productId) {
   const product = vinyls.find((x) => x.id === productId);
-  console.log(product);
+  // console.log(product);
   if (product) {
     const productImage = document.getElementById("productImage");
     const productOverview = document.getElementById("productOverview");
