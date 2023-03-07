@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register/Login</title>
+    <link rel="stylesheet" href="../styles/navbar.css" />
     <!-- Latest compiled and minified CSS -->
     <link
       rel="stylesheet"
@@ -15,8 +16,34 @@
     <link rel="stylesheet" href="../styles/login-form.css" />
   </head>
   <body>
+    <header>
+      <!-- navbar start-->
+      <div id="navbar">
+        <a href="#default" id="logo">
+          <img
+            id="logoel1"
+            src="../images\logo\332096491_571562201699624_6671416270433743475_n.png"
+            alt=""
+          />
+          <div id="logoel2">the vinyl countdown</div>
+        </a>
+        <div id="navbar-right">
+          <a href="#home" onclick="scrollIntoHome()">Home</a>
+          <a href="#browse" onclick="scrollIntoBrowse()">Browse</a>
+          <a href="./pages/login-form.html" id="login-link">Login</a>
+          <a href="" id="logout-link">Logout</a>
+          <a href="#cart" id="cart-link">Cart</a>
+        </div>
+      </div>
+      <!-- navbar end -->
+    </header>
+
     <div class="d-flex justify-content-center">
-      <form action="" class="p-3 login-form" id="loginForm">
+      <form
+        action="http://127.0.0.1:5500/index.html"
+        class="p-3 login-form"
+        id="loginForm"
+      >
         <div class="form-group">
           <label for="fullNameInput">Full Name</label>
           <input type="text" class="form-control" id="fullNameInput" />
@@ -29,7 +56,9 @@
           <label for="passwordInput">Password</label>
           <input type="password" class="form-control" id="passwordInput" />
         </div>
-        <button type="submit" class="btn btn-primary w-100">Submit</button>
+        <button type="submit" class="btn btn-primary w-100 login-button">
+          Submit
+        </button>
         <div class="form-check">
           <input
             class="form-check-input"
@@ -42,6 +71,8 @@
         </div>
       </form>
     </div>
+    <script src="../scripts/index.js"></script>
     <script src="../scripts/login-form.js"></script>
+    <script src="../scripts/navbar.js"></script>
   </body>
 </html>

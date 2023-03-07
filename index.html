@@ -135,27 +135,28 @@
     <!-- main content end -->
 
     <!-- scripts -->
-    <script src="scripts/basket.js"></script>
+    <script src="scripts/index.js"></script>
     <script src="scripts/products.js"></script>
+    <script src="scripts/basket.js"></script>
     <script src="scripts/navbar.js"></script>
     <script>
-      let data = null;
+      let data = null
 
       document.body.onload = async () => {
-        const vinyls = await loadProductDataAsync();
-        DisplayFeatured(vinyls);
-        renderPage(vinyls);
-        data = vinyls;
-      };
+        const vinyls = await loadProductDataAsync()
+        DisplayFeatured(vinyls)
+        renderPage(vinyls)
+        data = vinyls
+      }
 
-      navbar();
+      navbar()
 
       function scrollIntoBrowse() {
-        const element = document.getElementById("browseContainer");
-        element.scrollIntoView();
+        const element = document.getElementById('browseContainer')
+        element.scrollIntoView()
       }
       function scrollIntoHome() {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
       }
     </script>
 
