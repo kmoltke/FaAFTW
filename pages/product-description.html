@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles/product-description.css" />
-    <link rel="stylesheet" href="styles/navbar.css" />
-    <link rel="stylesheet" href="styles/template.css" />
+    <link rel="stylesheet" href="../styles/product-description.css" />
+    <link rel="stylesheet" href="../styles/navbar.css" />
+    <link rel="stylesheet" href="../styles/template.css" />
   </head>
   <body>
     <header>
@@ -25,8 +25,9 @@
         <div id="navbar-right">
           <a href="index.html">Home</a>
           <a href="index.html#browseContainer">Browse</a>
-          <a href="pages/login-form.html">Login</a>
-          <a href="pages/basket.html">Cart</a>
+          <a href="login-form.html" id="login-link">Login</a>
+          <a href="" id="logout-link">Logout</a>
+          <a href="basket.html" id="cart-link">Cart</a>
         </div>
       </div>
       <!-- navbar end -->
@@ -46,8 +47,9 @@
       </section>
     </main>
 
-    <script src="scripts/products.js"></script>
-    <script src="scripts/basket.js"></script>
+    <script src="../scripts/products.js"></script>
+    <script src="../scripts/basket.js"></script>
+    <script src="../scripts/user-info.js"></script>
     <script>
       document.body.onload = async () => {
         const data = await loadProductDataAsync();

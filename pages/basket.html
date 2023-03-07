@@ -1,120 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>Basket</title>
     <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../styles/custom_bootstrap.css" />
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/navbar.css" />
     <link rel="stylesheet" href="../styles/template.css" />
-</head>
+  </head>
 
-<body>
-<header>
-    <!-- navbar start-->
-    <div id="navbar">
+  <body>
+    <header>
+      <!-- navbar start-->
+      <div id="navbar">
         <a href="#default" id="logo">
-            <img
-                    id="logoel1"
-                    src="../images/logo/332096491_571562201699624_6671416270433743475_n.png"
-                    alt=""
-            />
-            <div id="logoel2">the vinyl countdown</div>
+          <img
+            id="logoel1"
+            src="../images/logo/332096491_571562201699624_6671416270433743475_n.png"
+            alt=""
+          />
+          <div id="logoel2">the vinyl countdown</div>
         </a>
         <div id="navbar-right">
-            <a href="../index.html">Home</a>
-            <a href="../index.html#browseContainer">Browse</a>
-            <a href="login-form.html">Login</a>
-            <a href="basket.html">Cart</a>
+          <a href="index.html">Home</a>
+          <a href="index.html#browseContainer">Browse</a>
+          <a href="login-form.html" id="login-link">Login</a>
+          <a href="" id="logout-link">Logout</a>
+          <a href="basket.html" id="cart-link">Cart</a>
         </div>
-    </div>
-    <!-- navbar end -->
-</header>
+      </div>
+      <!-- navbar end -->
+    </header>
 
-<!-- shopping content starts-->
-<section class="h-100 h-custom" style="background-color: #d2c9ff; padding-top: 180px">
-    <div class="container py-5 h-100">
+    <!-- shopping content starts-->
+    <section
+      class="h-100 h-custom"
+      style="background-color: #d2c9ff; padding-top: 180px"
+    >
+      <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12">
-                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-                    <div class="card-body p-0">
-                        <div class="row g-0">
-                            <div class="col-lg-8">
-                                <div class="p-5">
-                                    <div class="d-flex justify-content-between align-items-center mb-5">
-                                        <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                                    </div>
-                                    <hr class="my-4">
-                                    <!-- Basket list gets rendered here: -->
-                                    <div id="basketList"></div>
-                                    <div class="pt-5">
-                                        <h6 class="mb-0"><a href="#!" class="text-body"><i
-                                                class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 bg-grey">
-                                <div class="p-5">
-                                    <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                                    <hr class="my-4">
-
-                                    <h5 class="text-uppercase mb-3">Shipping</h5>
-
-                                    <div class="mb-4 pb-2">
-                                        <select class="select">
-                                            <option value="1">Standard-Delivery DKK 60.00</option>
-                                            <option value="2"> </option>
-                                        </select>
-                                    </div>
-
-                                    <hr class="my-4">
-
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <h5 class="text-uppercase">Total price</h5>
-                                        <h5>DKK <span id="totalPrice">0</span>.00</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+          <div class="col-12">
+            <div
+              class="card card-registration card-registration-2"
+              style="border-radius: 15px"
+            >
+              <div class="card-body p-0">
+                <div class="row g-0">
+                  <div class="col-lg-8">
+                    <div class="p-5">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-5"
+                      >
+                        <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                      </div>
+                      <hr class="my-4" />
+                      <!-- Basket list gets rendered here: -->
+                      <div id="basketList"></div>
+                      <div class="pt-5">
+                        <h6 class="mb-0">
+                          <a href="#!" class="text-body"
+                            ><i class="fas fa-long-arrow-alt-left me-2"></i>Back
+                            to shop</a
+                          >
+                        </h6>
+                      </div>
                     </div>
+                  </div>
+                  <div class="col-lg-4 bg-grey">
+                    <div class="p-5">
+                      <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                      <hr class="my-4" />
+
+                      <h5 class="text-uppercase mb-3">Shipping</h5>
+
+                      <div class="mb-4 pb-2">
+                        <select class="select">
+                          <option value="1">Standard-Delivery DKK 60.00</option>
+                          <option value="2"></option>
+                        </select>
+                      </div>
+
+                      <hr class="my-4" />
+
+                      <div class="d-flex justify-content-between mb-5">
+                        <h5 class="text-uppercase">Total price</h5>
+                        <h5>DKK <span id="totalPrice">0</span>.00</h5>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- scripts -->
-<script src="../scripts/navbar.js"></script>
-<script src="../scripts/basket.js"></script>
-<script>
-    let data = null;
+    <!-- scripts -->
+    <script src="../scripts/navbar.js"></script>
+    <script src="../scripts/basket.js"></script>
+    <script src="../scripts/user-info.js"></script>
+    <script>
+      let data = null;
 
-    document.body.onload = async () => {
+      document.body.onload = async () => {
         const vinyls = await loadProductDataAsync();
         renderBasketList(vinyls);
         saveData(vinyls);
         data = vinyls;
-    };
+      };
 
-    navbar();
-</script>
+      navbar();
+    </script>
 
-<!-- Bootstrap JS -->
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"
-></script>
-</body>
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
