@@ -37,7 +37,7 @@ function renderBasketCard(product) {
         `<h6 class="text-muted">${product.artist}</h6>` +
         `<h6 class="text-black mb-0">${product.album}</h6></div>` +
         `<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">` +
-        `<h6 class="mb-0">${product.price}</h6></div>` +
+        `<h6 class="mb-0">DKK ${product.price}</h6></div>` +
         `<div class="col-md-1 col-lg-1 col-xl-1 text-end">` +
         `<button onclick="removeItem(${product.id});" class="text-muted">X</button></div></div>` +
         `<hr class="my-4">`;
@@ -45,21 +45,28 @@ function renderBasketCard(product) {
 
 //TODO: implement renderEmptyList
 function renderEmptyList() {
-    console.log("The basket is empty");
+    return `<h3>Your cart is empty...</h3>`;
+}
+
+function renderTotalPrice(price) {
+    document.getElementById("totalPrice").innerHTML = price;
 }
 
 function renderBasketList(vinyls) {
-    if (localStorage.getItem("basket") === 'undefined') {
-        renderEmptyList();
+    let htmlBasket = document.getElementById("basketList");
+    if (localStorage.getItem("basket") === '{}') {
+        htmlBasket.innerHTML = renderEmptyList();
     } else {
         let b = JSON.parse(localStorage.getItem("basket"));
-        let htmlBasket = document.getElementById("basketList");
+        let totalPrice = 0;
         Object.keys(b).forEach((prodId) => {
             const product = vinyls.find((v) => v.id === parseInt(prodId));
             if (product) {
                 htmlBasket.innerHTML += renderBasketCard(product);
+                totalPrice += product.price;
                 console.log(product.album);
             }
         });
+        renderTotalPrice(totalPrice);
     }
 }
