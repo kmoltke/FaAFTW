@@ -34,7 +34,7 @@
         <div id="navbar-right">
           <a href="#home" onclick="scrollIntoHome()">Home</a>
           <a href="#browse" onclick="scrollIntoBrowse()">Browse</a>
-          <a href="#login">Login</a>
+          <a href="./pages/login-form.html">Login</a>
           <a href="#cart">Cart</a>
         </div>
       </div>
@@ -138,23 +138,23 @@
     <script src="scripts/products.js"></script>
     <script src="scripts/navbar.js"></script>
     <script>
-      let data = null;
+      let data = null
 
       document.body.onload = async () => {
-        const vinyls = await loadProductDataAsync();
-        DisplayFeatured(vinyls);
-        renderPage(vinyls);
-        data = vinyls;
-      };
+        const vinyls = await loadProductDataAsync()
+        DisplayFeatured(vinyls)
+        renderPage(vinyls)
+        data = vinyls
+      }
 
-      navbar();
+      navbar()
 
       function scrollIntoBrowse() {
-        const element = document.getElementById("browseContainer");
-        element.scrollIntoView();
+        const element = document.getElementById('browseContainer')
+        element.scrollIntoView()
       }
       function scrollIntoHome() {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
       }
     </script>
 
