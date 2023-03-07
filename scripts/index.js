@@ -6,6 +6,20 @@ logoutLink.style.display = 'none'
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
+document.body.onload = async () => {
+  const vinyls = await loadProductDataAsync()
+  DisplayFeatured(vinyls)
+  renderPage(vinyls)
+}
+
+function scrollIntoBrowse() {
+  const element = document.getElementById('browseContainer')
+  element.scrollIntoView()
+}
+function scrollIntoHome() {
+  window.scrollTo(0, 0)
+}
+
 if (userInfo) {
   console.log(userInfo)
   logoutLink.style.display = 'block'
