@@ -16,8 +16,10 @@ async function loadProductDataAsync() {
 
 //function used to render the product in product-description html page
 function renderProduct(vinyls, productId) {
-  const product = vinyls.find((x) => x.id === productId)
-  console.log(product)
+
+  const product = vinyls.find((x) => x.id === productId);
+  // console.log(product);
+  
   if (product) {
     const productImage = document.getElementById('productImage')
     const productOverview = document.getElementById('productOverview')
@@ -42,9 +44,11 @@ function renderProduct(vinyls, productId) {
     priceElement.className = 'productPrice'
     priceElement.innerHTML = `${product.price},-`
 
-    const button = document.createElement('button')
-    button.innerHTML = 'Add to Cart'
-    button.className = 'cardButton'
+
+    const button = document.createElement("button");
+    button.innerHTML = "Add to Cart";
+    button.className = "cardButton";
+    button.setAttribute("onclick", `addToBasket(${productId});`);
 
     const descriptionElement = document.createElement('p')
     descriptionElement.innerHTML = `${
@@ -175,15 +179,17 @@ function renderCard(element) {
   priceElement.className = 'productPrice'
   priceElement.innerHTML = `${element.price},-`
 
-  const button = document.createElement('button')
-  button.innerHTML = 'Add to Cart'
-  button.className = 'cardButton'
+  const button = document.createElement("button");
+  button.innerHTML = "Add to Cart";
+  button.className = "cardButton";
+  button.setAttribute("onclick", `addToBasket(${element.id});`);
+  
+  const imageElement = document.createElement("a");
+  imageElement.href = "product-description.html?id=" + element.id;
+  const image = document.createElement("img");
+  image.className = "image";
+  image.src = element.image ?? "images/no-image.jpg";
 
-  const imageElement = document.createElement('a')
-  imageElement.href = 'product-description.html?id=' + element.id
-  const image = document.createElement('img')
-  image.className = 'image'
-  image.src = element.image ?? 'images/no-image.jpg'
 
   imageElement.appendChild(image)
 
