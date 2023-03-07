@@ -52,6 +52,10 @@ function renderTotalPrice(price) {
     document.getElementById("totalPrice").innerHTML = price;
 }
 
+/**
+ * RenderBasketList takes the json vinyls and builds the shopping cart
+ * @param vinyls
+ */
 function renderBasketList(vinyls) {
     let htmlBasket = document.getElementById("basketList");
     if (localStorage.getItem("basket") === '{}') {
