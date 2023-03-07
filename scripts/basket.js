@@ -1,27 +1,43 @@
+// GLOBAL VARIABLES:
 let vinyls = null;
 
-function saveData(data) {
-    vinyls = data;
-    console.log("data saved");
-}
-
-
+/**
+ * Fetch vinyl json data
+ * @returns {Promise<any>}
+ */
 async function loadProductDataAsync() {
     const response = await fetch("../vinyls.json");
     return response.json();
 }
 
+/**
+ * Save vinyl json data
+ * @param data
+ */
+function saveData(data) {
+    vinyls = data;
+    console.log("data saved");
+}
+
+/**
+ * Adds a vinyl to the shopping cart
+ * @param itemId
+ */
 function addToBasket(itemId) {
     let basket = localStorage.getItem("basket") === 'undefined' ? {} : JSON.parse(localStorage.getItem("basket"));
-
     basket[itemId] = true;
     localStorage.setItem("basket", JSON.stringify(basket));
     console.log(`Added item ${itemId}`);
 }
 
+/**
+ * Removes an item from the basket
+ * @param itemId
+ */
 function removeItem(itemId) {
     let basket = localStorage.getItem("basket") === 'undefined' ? console.log("Basket is empty") : JSON.parse(localStorage.getItem("basket"));
     delete basket[itemId];
+    // update localStorage
     localStorage.setItem("basket", JSON.stringify(basket));
     // reset basketList
     document.getElementById("basketList").innerHTML = "";
@@ -29,6 +45,11 @@ function removeItem(itemId) {
     renderBasketList(vinyls);
 }
 
+/**
+ * Renders each shopping cart element
+ * @param product
+ * @returns html
+ */
 function renderBasketCard(product) {
     return '<div class="row mb-4 d-flex justify-content-between align-items-center">' +
         `<div class="col-md-2 col-lg-2 col-xl-2">` +
@@ -43,11 +64,19 @@ function renderBasketCard(product) {
         `<hr class="my-4">`;
 }
 
-//TODO: implement renderEmptyList
+/**
+ * Default message when the shopping cart is empty
+ * @returns html
+ */
 function renderEmptyList() {
     return `<h3>Your cart is empty...</h3>`;
 }
 
+/**
+ * Renders the total shopping cart price
+ * BTW: Maybe the most overkill function declaration, but I like it
+ * @param price
+ */
 function renderTotalPrice(price) {
     document.getElementById("totalPrice").innerHTML = price;
 }
@@ -58,8 +87,12 @@ function renderTotalPrice(price) {
  */
 function renderBasketList(vinyls) {
     let htmlBasket = document.getElementById("basketList");
+
+    // Render empty list:
     if (localStorage.getItem("basket") === '{}') {
         htmlBasket.innerHTML = renderEmptyList();
+    // Go through the set of vinyl id's in the basket from local storage
+    // and render each basket element
     } else {
         let b = JSON.parse(localStorage.getItem("basket"));
         let totalPrice = 0;
