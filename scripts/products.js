@@ -10,59 +10,59 @@
 // global variables
 
 async function loadProductDataAsync() {
-  const response = await fetch("./vinyls.json");
-  return response.json();
+  const response = await fetch('./vinyls.json')
+  return response.json()
 }
 
 //function used to render the product in product-description html page
 function renderProduct(vinyls, productId) {
-  const product = vinyls.find((x) => x.id === productId);
-  console.log(product);
+  const product = vinyls.find((x) => x.id === productId)
+  console.log(product)
   if (product) {
-    const productImage = document.getElementById("productImage");
-    const productOverview = document.getElementById("productOverview");
-    const productDetails = document.getElementById("productDetails");
+    const productImage = document.getElementById('productImage')
+    const productOverview = document.getElementById('productOverview')
+    const productDetails = document.getElementById('productDetails')
 
     //create elements
-    const imageElement = document.createElement("a");
-    const image = document.createElement("img");
-    image.className = "image";
-    image.src = product.image ?? "images/no-image.jpg";
-    imageElement.appendChild(image);
+    const imageElement = document.createElement('a')
+    const image = document.createElement('img')
+    image.className = 'image'
+    image.src = product.image ?? 'images/no-image.jpg'
+    imageElement.appendChild(image)
 
-    const albumElement = document.createElement("h1");
-    albumElement.className = "productTitle";
-    albumElement.innerHTML = `${product.album}`;
+    const albumElement = document.createElement('h1')
+    albumElement.className = 'productTitle'
+    albumElement.innerHTML = `${product.album}`
 
-    const artistElement = document.createElement("h3");
-    artistElement.className = "productArtist";
-    artistElement.innerHTML = `${product.artist}`;
+    const artistElement = document.createElement('h3')
+    artistElement.className = 'productArtist'
+    artistElement.innerHTML = `${product.artist}`
 
-    const priceElement = document.createElement("p");
-    priceElement.className = "productPrice";
-    priceElement.innerHTML = `${product.price},-`;
+    const priceElement = document.createElement('p')
+    priceElement.className = 'productPrice'
+    priceElement.innerHTML = `${product.price},-`
 
-    const button = document.createElement("button");
-    button.innerHTML = "Add to Cart";
-    button.className = "cardButton";
+    const button = document.createElement('button')
+    button.innerHTML = 'Add to Cart'
+    button.className = 'cardButton'
 
-    const descriptionElement = document.createElement("p");
+    const descriptionElement = document.createElement('p')
     descriptionElement.innerHTML = `${
-      product.description ?? "no description available"
-    }`;
+      product.description ?? 'no description available'
+    }`
 
     // details elements
-    const yearElement = document.createElement("p");
-    yearElement.innerHTML = `Year: ${product.year}`;
+    const yearElement = document.createElement('p')
+    yearElement.innerHTML = `Year: ${product.year}`
 
-    const genreElement = document.createElement("p");
-    genreElement.innerHTML = `Genre: ${product.genre}`;
+    const genreElement = document.createElement('p')
+    genreElement.innerHTML = `Genre: ${product.genre}`
 
-    const typeElement = document.createElement("p");
-    typeElement.innerHTML = `Type: ${product.type}`;
+    const typeElement = document.createElement('p')
+    typeElement.innerHTML = `Type: ${product.type}`
 
-    const labelElement = document.createElement("p");
-    labelElement.innerHTML = `Label: ${product.label}`;
+    const labelElement = document.createElement('p')
+    labelElement.innerHTML = `Label: ${product.label}`
 
     //append elements to html containers
     productOverview.append(
@@ -71,166 +71,164 @@ function renderProduct(vinyls, productId) {
       priceElement,
       button,
       descriptionElement
-    );
+    )
 
-    productImage.appendChild(imageElement);
+    productImage.appendChild(imageElement)
 
-    productDetails.append(yearElement, genreElement, typeElement, labelElement);
+    productDetails.append(yearElement, genreElement, typeElement, labelElement)
   } else {
-    const productOuter = document.getElementById("dataContainer");
-    const priceElement = document.createElement("p");
-    priceElement.innerHTML = `cannot be found`;
-    productOuter.appendChild(priceElement);
+    const productOuter = document.getElementById('dataContainer')
+    const priceElement = document.createElement('p')
+    priceElement.innerHTML = `cannot be found`
+    productOuter.appendChild(priceElement)
   }
 }
 
 //categories: all, genre(rock,pop,r&b,jazz), lpformat(vinyl lp, double vinyl lp)
 function filterBy(vinyls, category, subcategory) {
-  const searchParams = new URLSearchParams(window.location.search);
-  searchParams.set("category", `${category}:` + subcategory);
-  const queryString = searchParams.toString();
-  window.history.replaceState(null, null, "?" + queryString);
+  const searchParams = new URLSearchParams(window.location.search)
+  searchParams.set('category', `${category}:` + subcategory)
+  const queryString = searchParams.toString()
+  window.history.replaceState(null, null, '?' + queryString)
 
   const filteredProducts = vinyls.filter(
     (element) => element[category] === subcategory
-  );
-  renderList(filteredProducts);
-  console.log(filteredProducts);
+  )
+  renderList(filteredProducts)
+  console.log(filteredProducts)
 }
 
 function DisplayFeatured(vinyls) {
-  const filteredProducts = vinyls.filter(
-    (element) => element.featured === true
-  );
-  const carousel = document.getElementById("carousel-inner");
-  const carouselCont = document.getElementById("carouselExampleCaptions");
+  const filteredProducts = vinyls.filter((element) => element.featured === true)
+  const carousel = document.getElementById('carousel-inner')
+  const carouselCont = document.getElementById('carouselExampleCaptions')
 
   function setBg() {
     const activeSlide = document.querySelector(
-      ".carousel .carousel-item.active"
-    );
+      '.carousel .carousel-item.active'
+    )
     // console.log(activeSlide.dataset.color);
-    carouselCont.style.backgroundColor = activeSlide.dataset.color;
+    carouselCont.style.backgroundColor = activeSlide.dataset.color
   }
 
-  carousel.innerHTML = "";
+  carousel.innerHTML = ''
   for (let index = 0; index < filteredProducts.length; index++) {
-    const element = filteredProducts[index];
-    let html;
+    const element = filteredProducts[index]
+    let html
     if (index === 0) {
-      html = `<div class="carousel-item active" data-color="${element.featuredColor}">`;
+      html = `<div class="carousel-item active" data-color="${element.featuredColor}">`
     } else {
-      html = `<div class="carousel-item" data-color="${element.featuredColor}">`;
+      html = `<div class="carousel-item" data-color="${element.featuredColor}">`
     }
     html +=
       '<div class="carousel-caption d-block">' +
-      "<h2>" +
+      '<h2>' +
       `<a href="product-description.html?id=${element.id}"> ${element.album} - ${element.artist} →</a> ` +
-      "</h2>" +
-      "</div>" +
+      '</h2>' +
+      '</div>' +
       `<img class="d-block w-100" src=${
-        element.image ?? "images/no-image.jpg"
+        element.image ?? 'images/no-image.jpg'
       } alt="Second slide" /> ` +
-      "</div>";
+      '</div>'
 
-    carousel.innerHTML += html;
+    carousel.innerHTML += html
   }
 
-  carouselCont.addEventListener("slid.bs.carousel", setBg);
-  setBg();
+  carouselCont.addEventListener('slid.bs.carousel', setBg)
+  setBg()
 
-  console.log(filteredProducts);
+  console.log(filteredProducts)
 }
 
 function clearCategoryFilter() {
-  window.history.replaceState(null, null, window.location.pathname);
-  renderList(data);
+  window.history.replaceState(null, null, window.location.pathname)
+  renderList(data)
 }
 
 function renderPage(vinyls) {
-  const selectedCategory = queryParams().category;
+  const selectedCategory = queryParams().category
   if (selectedCategory) {
-    const [categoryType, categoryValue] = selectedCategory.split(":");
-    filterBy(vinyls, categoryType, categoryValue);
+    const [categoryType, categoryValue] = selectedCategory.split(':')
+    filterBy(vinyls, categoryType, categoryValue)
   } else {
-    renderList(vinyls);
+    renderList(vinyls)
   }
 }
 
 function renderCard(element) {
-  const productCard = document.createElement("div");
-  productCard.className = "productCard";
+  const productCard = document.createElement('div')
+  productCard.className = 'productCard'
 
-  const productDetailsContainer = document.createElement("div");
-  productDetailsContainer.className = "productDetails";
+  const productDetailsContainer = document.createElement('div')
+  productDetailsContainer.className = 'productDetails'
 
-  const albumElement = document.createElement("a");
-  albumElement.className = "productTitle";
-  albumElement.href = "product-description.html?id=" + element.id;
-  albumElement.innerHTML = `${element.album}`;
+  const albumElement = document.createElement('a')
+  albumElement.className = 'productTitle'
+  albumElement.href = 'product-description.html?id=' + element.id
+  albumElement.innerHTML = `${element.album}`
 
-  const artistElement = document.createElement("p");
-  artistElement.className = "productArtist";
-  artistElement.innerHTML = `${element.artist}`;
+  const artistElement = document.createElement('p')
+  artistElement.className = 'productArtist'
+  artistElement.innerHTML = `${element.artist}`
 
-  const priceElement = document.createElement("p");
-  priceElement.className = "productPrice";
-  priceElement.innerHTML = `${element.price},-`;
+  const priceElement = document.createElement('p')
+  priceElement.className = 'productPrice'
+  priceElement.innerHTML = `${element.price},-`
 
-  const button = document.createElement("button");
-  button.innerHTML = "Add to Cart";
-  button.className = "cardButton";
+  const button = document.createElement('button')
+  button.innerHTML = 'Add to Cart'
+  button.className = 'cardButton'
 
-  const imageElement = document.createElement("a");
-  imageElement.href = "product-description.html?id=" + element.id;
-  const image = document.createElement("img");
-  image.className = "image";
-  image.src = element.image ?? "images/no-image.jpg";
+  const imageElement = document.createElement('a')
+  imageElement.href = 'product-description.html?id=' + element.id
+  const image = document.createElement('img')
+  image.className = 'image'
+  image.src = element.image ?? 'images/no-image.jpg'
 
-  imageElement.appendChild(image);
+  imageElement.appendChild(image)
 
-  productDetailsContainer.appendChild(albumElement);
-  productDetailsContainer.appendChild(artistElement);
+  productDetailsContainer.appendChild(albumElement)
+  productDetailsContainer.appendChild(artistElement)
 
   productCard.append(
     imageElement,
     productDetailsContainer,
     priceElement,
     button
-  );
-  return productCard;
+  )
+  return productCard
 }
 
 //fnction used for index.html to render all products based on provided list(vinyls)
 function renderList(vinyls) {
-  const productList = document.getElementById("productList");
-  productList.innerHTML = "";
+  const productList = document.getElementById('productList')
+  productList.innerHTML = ''
   vinyls.forEach((element) => {
-    const productCard = renderCard(element);
-    productList.appendChild(productCard);
-  });
+    const productCard = renderCard(element)
+    productList.appendChild(productCard)
+  })
 
   // hack to make the size of the cards the same if elements listed are smaller than 4
-  const missing = 5 - vinyls.length;
+  const missing = 5 - vinyls.length
   if (missing > 0) {
     for (let i = 0; i < missing; i++) {
-      productList.appendChild(document.createElement("div"));
+      productList.appendChild(document.createElement('div'))
     }
   }
 }
 
 // source: https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
 function queryParams() {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  return Object.fromEntries(urlSearchParams.entries());
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  return Object.fromEntries(urlSearchParams.entries())
 }
 
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
 function myFunction() {
-  var x = document.getElementById("navbar-right");
-  if (x.className === "navbar-right") {
-    x.className += " responsive";
+  var x = document.getElementById('navbar-right')
+  if (x.className === 'navbar-right') {
+    x.className += ' responsive'
   } else {
-    x.className = "navbar-right";
+    x.className = 'navbar-right'
   }
 }
