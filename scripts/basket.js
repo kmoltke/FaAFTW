@@ -69,6 +69,7 @@ function renderBasketCard(product) {
  * @returns html
  */
 function renderEmptyList() {
+    renderTotalPrice(0);
     return `<h3>Your cart is empty...</h3>`;
 }
 
