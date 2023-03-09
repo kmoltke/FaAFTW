@@ -6,16 +6,21 @@ let vinyls = null;
  * @returns {Promise<any>}
  */
 async function loadProductDataAsync() {
-    const response = await fetch("../vinyls.json");
-    return response.json();
+  const response = await fetch("../vinyls.json");
+  return response.json();
 }
 
 function getBasket() {
-    if (localStorage.getItem("basket") == undefined || localStorage.getItem("basket") === '{}' || localStorage.getItem("basket") === 'null') {
-        return {};
-    } else {
-        return JSON.parse(localStorage.getItem("basket"));
-    }
+
+  if (
+    localStorage.getItem("basket") === "undefined" ||
+    localStorage.getItem("basket") === "{}" ||
+    localStorage.getItem("basket") === "null"
+  ) {
+    return {};
+  } else {
+    return JSON.parse(localStorage.getItem("basket"));
+  }
 }
 
 /**
@@ -23,8 +28,8 @@ function getBasket() {
  * @param data
  */
 function saveData(data) {
-    vinyls = data;
-    console.log("data saved");
+  vinyls = data;
+  console.log("data saved");
 }
 
 /**
@@ -32,11 +37,11 @@ function saveData(data) {
  * @param itemId
  */
 function addToBasket(itemId) {
-    // let basket = localStorage.getItem("basket") === 'undefined' ? {} : JSON.parse(localStorage.getItem("basket"));
-    let basket = getBasket();
-    basket[itemId] = true;
-    localStorage.setItem("basket", JSON.stringify(basket));
-    console.log(`Added item ${itemId}`);
+  // let basket = localStorage.getItem("basket") === 'undefined' ? {} : JSON.parse(localStorage.getItem("basket"));
+  let basket = getBasket();
+  basket[itemId] = true;
+  localStorage.setItem("basket", JSON.stringify(basket));
+  console.log(`Added item ${itemId}`);
 }
 
 /**
@@ -44,15 +49,15 @@ function addToBasket(itemId) {
  * @param itemId
  */
 function removeItem(itemId) {
-    // let basket = localStorage.getItem("basket") === 'undefined' ? console.log("Basket is empty") : JSON.parse(localStorage.getItem("basket"));
-    let basket = getBasket();
-    delete basket[itemId];
-    // update localStorage
-    localStorage.setItem("basket", JSON.stringify(basket));
-    // reset basketList
-    document.getElementById("basketList").innerHTML = "";
-    // rerender
-    renderBasketList(vinyls);
+  // let basket = localStorage.getItem("basket") === 'undefined' ? console.log("Basket is empty") : JSON.parse(localStorage.getItem("basket"));
+  let basket = getBasket();
+  delete basket[itemId];
+  // update localStorage
+  localStorage.setItem("basket", JSON.stringify(basket));
+  // reset basketList
+  document.getElementById("basketList").innerHTML = "";
+  // rerender
+  renderBasketList(vinyls);
 }
 
 /**
@@ -61,17 +66,19 @@ function removeItem(itemId) {
  * @returns string
  */
 function renderBasketCard(product) {
-    return '<div class="row mb-4 d-flex justify-content-between align-items-center">' +
-        `<div class="col-md-2 col-lg-2 col-xl-2">` +
-        `<img src="../${product.image}" class="img-fluid rounded-3"></div>` +
-        `<div class="col-md-3 col-lg-3 col-xl-3">` +
-        `<h6 class="text-muted">${product.artist}</h6>` +
-        `<h6 class="text-black mb-0">${product.album}</h6></div>` +
-        `<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">` +
-        `<h6 class="mb-0">DKK ${product.price}</h6></div>` +
-        `<div class="col-md-1 col-lg-1 col-xl-1 text-end">` +
-        `<button onclick="removeItem(${product.id});" class="text-muted">X</button></div></div>` +
-        `<hr class="my-4">`;
+  return (
+    '<div class="row mb-4 d-flex justify-content-between align-items-center">' +
+    `<div class="col-md-2 col-lg-2 col-xl-2">` +
+    `<img src="../${product.image}" class="img-fluid rounded-3"></div>` +
+    `<div class="col-md-3 col-lg-3 col-xl-3">` +
+    `<h6 class="text-muted">${product.artist}</h6>` +
+    `<h6 class="text-black mb-0">${product.album}</h6></div>` +
+    `<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">` +
+    `<h6 class="mb-0">DKK ${product.price}</h6></div>` +
+    `<div class="col-md-1 col-lg-1 col-xl-1 text-end">` +
+    `<button onclick="removeItem(${product.id});" class="text-muted">X</button></div></div>` +
+    `<hr class="my-4">`
+  );
 }
 
 /**
@@ -79,8 +86,8 @@ function renderBasketCard(product) {
  * @returns string
  */
 function renderEmptyList() {
-    renderTotalPrice(0);
-    return "<h3>Your cart is empty...</h3>";
+  renderTotalPrice(0);
+  return "<h3>Your cart is empty...</h3>";
 }
 
 /**
@@ -89,7 +96,7 @@ function renderEmptyList() {
  * @param price
  */
 function renderTotalPrice(price) {
-    document.getElementById("totalPrice").innerHTML = price;
+  document.getElementById("totalPrice").innerHTML = price;
 }
 
 /**
@@ -97,26 +104,30 @@ function renderTotalPrice(price) {
  * @param vinyls
  */
 function renderBasketList(vinyls) {
-    let htmlBasket = document.getElementById("basketList");
+  let htmlBasket = document.getElementById("basketList");
 
-    // Render empty list:
-    // if (getBasket() === {}) {
-    if (localStorage.getItem("basket") == undefined || localStorage.getItem("basket") === '{}' || localStorage.getItem("basket") === 'null') {
-        console.log("EMPTY BASKET");
-        htmlBasket.innerHTML = renderEmptyList();
+  // Render empty list:
+  // if (getBasket() === {}) {
+  if (
+    localStorage.getItem("basket") === "undefined" ||
+    localStorage.getItem("basket") === "{}" ||
+    localStorage.getItem("basket") === "null"
+  ) {
+    console.log("EMPTY BASKET");
+    htmlBasket.innerHTML = renderEmptyList();
     // Go through the set of vinyl id's in the basket from local storage
     // and render each basket element
-    } else {
-        let b = getBasket();
-        let totalPrice = 0;
-        Object.keys(b).forEach((prodId) => {
-            const product = vinyls.find((v) => v.id === parseInt(prodId));
-            if (product) {
-                htmlBasket.innerHTML += renderBasketCard(product);
-                totalPrice += product.price;
-                console.log(product.album);
-            }
-        });
-        renderTotalPrice(totalPrice);
-    }
+  } else {
+    let b = getBasket();
+    let totalPrice = 0;
+    Object.keys(b).forEach((prodId) => {
+      const product = vinyls.find((v) => v.id === parseInt(prodId));
+      if (product) {
+        htmlBasket.innerHTML += renderBasketCard(product);
+        totalPrice += product.price;
+        console.log(product.album);
+      }
+    });
+    renderTotalPrice(totalPrice);
+  }
 }

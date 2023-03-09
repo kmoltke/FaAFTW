@@ -20,6 +20,7 @@
   margin-left: 15px;
 }
 .productOverview p {
+  margin-top: 1em;
   line-height: 150%;
 }
 .productDetails {

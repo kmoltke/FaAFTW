@@ -45,8 +45,16 @@ function renderProduct(vinyls, productId) {
 
     const button = document.createElement("button");
     button.innerHTML = "Add to Cart";
-    button.className = "cardButton";
+
     button.setAttribute("onclick", `addToBasket(${productId});`);
+    button.className = "cardButton btn btn-primary";
+    button.id = "liveAlertBtn";
+    button.addEventListener("click", () => {
+      alert(
+        `Product "${product.album} - ${product.artist}" added to cart`,
+        "dark"
+      );
+    });
 
     const descriptionElement = document.createElement("p");
     descriptionElement.innerHTML = `${
@@ -130,9 +138,11 @@ function DisplayFeatured(vinyls) {
       `<a href="product-description.html?id=${element.id}"> ${element.album} - ${element.artist} →</a> ` +
       "</h2>" +
       "</div>" +
-      `<img class="d-block w-100" src=${
+      `<a href="product-description.html?id=${
+        element.id
+      }"> <img class="d-block w-100" src=${
         element.image ?? "../images/no-image.jpg"
-      } alt="Second slide" /> ` +
+      } alt="Second slide" /> </a>` +
       "</div>";
 
     carousel.innerHTML += html;
@@ -181,8 +191,15 @@ function renderCard(element) {
 
   const button = document.createElement("button");
   button.innerHTML = "Add to Cart";
-  button.className = "cardButton";
+  button.className = "cardButton btn btn-primary";
+  button.id = "liveAlertBtn";
   button.setAttribute("onclick", `addToBasket(${element.id});`);
+  button.addEventListener("click", () => {
+    alert(
+      `Product "${element.album} - ${element.artist}" added to cart`,
+      "dark"
+    );
+  });
 
   const imageElement = document.createElement("a");
   imageElement.href = "product-description.html?id=" + element.id;
@@ -227,3 +244,38 @@ function queryParams() {
   const urlSearchParams = new URLSearchParams(window.location.search);
   return Object.fromEntries(urlSearchParams.entries());
 }
+
+const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+
+const alert = (message, type) => {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible show fade run-animation" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#my-alert" aria-label="Close"></button>',
+    "</div>",
+  ].join("");
+
+  alertPlaceholder.append(wrapper);
+  const element = document.querySelector(".run-animation");
+
+  let timer;
+
+  function invoke() {
+    timer = setTimeout(() => {
+      alertPlaceholder.removeChild(wrapper);
+    }, 3000);
+  }
+
+  invoke();
+  element.addEventListener("mouseover", () => {
+    window.clearTimeout(timer);
+  });
+  element.addEventListener("mouseout", () => {
+    window.clearTimeout(timer);
+    invoke();
+    element.classList.remove("run-animation");
+    void element.offsetWidth;
+    element.classList.add("run-animation");
+  });
+};
