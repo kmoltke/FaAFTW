@@ -8,7 +8,7 @@ const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
 if (userInfo) {
   console.log(userInfo);
-  logoutLink.style.display = "block";
+  logoutLink.style.display = "";
   loginLink.style.display = "none";
 
   const splitName = userInfo.user.split(" ");
