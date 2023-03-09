@@ -10,6 +10,14 @@ async function loadProductDataAsync() {
     return response.json();
 }
 
+function getBasket() {
+    if (localStorage.getItem("basket") === 'undefined' || localStorage.getItem("basket") === '{}') {
+        return {};
+    } else {
+        return JSON.parse(localStorage.getItem("basket"));
+    }
+}
+
 /**
  * Save vinyl json data
  * @param data
@@ -24,7 +32,8 @@ function saveData(data) {
  * @param itemId
  */
 function addToBasket(itemId) {
-    let basket = localStorage.getItem("basket") === 'undefined' ? {} : JSON.parse(localStorage.getItem("basket"));
+    // let basket = localStorage.getItem("basket") === 'undefined' ? {} : JSON.parse(localStorage.getItem("basket"));
+    let basket = getBasket();
     basket[itemId] = true;
     localStorage.setItem("basket", JSON.stringify(basket));
     console.log(`Added item ${itemId}`);
@@ -35,7 +44,8 @@ function addToBasket(itemId) {
  * @param itemId
  */
 function removeItem(itemId) {
-    let basket = localStorage.getItem("basket") === 'undefined' ? console.log("Basket is empty") : JSON.parse(localStorage.getItem("basket"));
+    // let basket = localStorage.getItem("basket") === 'undefined' ? console.log("Basket is empty") : JSON.parse(localStorage.getItem("basket"));
+    let basket = getBasket();
     delete basket[itemId];
     // update localStorage
     localStorage.setItem("basket", JSON.stringify(basket));
@@ -48,7 +58,7 @@ function removeItem(itemId) {
 /**
  * Renders each shopping cart element
  * @param product
- * @returns html
+ * @returns string
  */
 function renderBasketCard(product) {
     return '<div class="row mb-4 d-flex justify-content-between align-items-center">' +
@@ -66,11 +76,11 @@ function renderBasketCard(product) {
 
 /**
  * Default message when the shopping cart is empty
- * @returns html
+ * @returns string
  */
 function renderEmptyList() {
     renderTotalPrice(0);
-    return `<h3>Your cart is empty...</h3>`;
+    return "<h3>Your cart is empty...</h3>";
 }
 
 /**
@@ -90,12 +100,14 @@ function renderBasketList(vinyls) {
     let htmlBasket = document.getElementById("basketList");
 
     // Render empty list:
-    if (localStorage.getItem("basket") === '{}') {
+    // if (getBasket() === {}) {
+    if (localStorage.getItem("basket") === 'undefined' || localStorage.getItem("basket") === '{}') {
+        console.log("EMPTY BASKET");
         htmlBasket.innerHTML = renderEmptyList();
     // Go through the set of vinyl id's in the basket from local storage
     // and render each basket element
     } else {
-        let b = JSON.parse(localStorage.getItem("basket"));
+        let b = getBasket();
         let totalPrice = 0;
         Object.keys(b).forEach((prodId) => {
             const product = vinyls.find((v) => v.id === parseInt(prodId));
