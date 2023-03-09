@@ -1,0 +1,29 @@
+#liveAlertPlaceholder {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  transition: 0.2s;
+}
+
+.alert {
+  position: relative;
+  opacity: 0;
+}
+
+.run-animation {
+  animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}
+
+.run-animation:hover {
+  opacity: 1;
+  animation-play-state: paused;
+}
