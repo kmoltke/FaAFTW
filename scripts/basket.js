@@ -11,7 +11,7 @@ async function loadProductDataAsync() {
 }
 
 function getBasket() {
-    if (localStorage.getItem("basket") === 'undefined' || localStorage.getItem("basket") === '{}') {
+    if (localStorage.getItem("basket") === 'undefined' || localStorage.getItem("basket") === '{}' || localStorage.getItem("basket") === 'null') {
         return {};
     } else {
         return JSON.parse(localStorage.getItem("basket"));
@@ -101,7 +101,7 @@ function renderBasketList(vinyls) {
 
     // Render empty list:
     // if (getBasket() === {}) {
-    if (localStorage.getItem("basket") === 'undefined' || localStorage.getItem("basket") === '{}') {
+    if (localStorage.getItem("basket") === 'undefined' || localStorage.getItem("basket") === '{}' || localStorage.getItem("basket") === 'null') {
         console.log("EMPTY BASKET");
         htmlBasket.innerHTML = renderEmptyList();
     // Go through the set of vinyl id's in the basket from local storage
