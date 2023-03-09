@@ -11,6 +11,7 @@ async function loadProductDataAsync() {
 }
 
 function getBasket() {
+
   if (
     localStorage.getItem("basket") === "undefined" ||
     localStorage.getItem("basket") === "{}" ||
