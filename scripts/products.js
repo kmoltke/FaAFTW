@@ -1,30 +1,26 @@
-/* function loadProductData() {
-  fetch('./data.json')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        return data; // this wont work
-    });
-} */
 
-// global variables
-
+/**
+ * Asynchronously fetches product data from json file
+ * @returns {Promise<any>}}
+ */
 async function loadProductDataAsync() {
   const response = await fetch("../vinyls.json");
   return response.json();
 }
 
-//function used to render the product in product-description html page
+/**
+ * Renders the product from the product-description html page
+ * @returns {Promise<any>}}
+ */
 function renderProduct(vinyls, productId) {
   const product = vinyls.find((x) => x.id === productId);
-  // console.log(product);
 
   if (product) {
     const productImage = document.getElementById("productImage");
     const productOverview = document.getElementById("productOverview");
     const productDetails = document.getElementById("productDetails");
 
-    //create elements
+    // creates the elements
     const imageElement = document.createElement("a");
     const image = document.createElement("img");
     image.className = "image";
@@ -61,7 +57,7 @@ function renderProduct(vinyls, productId) {
       product.description ?? "no description available"
     }`;
 
-    // details elements
+    // Creates details for the elements
     const yearElement = document.createElement("p");
     yearElement.innerHTML = `Year: ${product.year}`;
 
@@ -74,7 +70,7 @@ function renderProduct(vinyls, productId) {
     const labelElement = document.createElement("p");
     labelElement.innerHTML = `Label: ${product.label}`;
 
-    //append elements to html containers
+    // Append elements to html containers
     productOverview.append(
       albumElement,
       artistElement,
@@ -94,7 +90,12 @@ function renderProduct(vinyls, productId) {
   }
 }
 
-//categories: all, genre(rock,pop,r&b,jazz), lpformat(vinyl lp, double vinyl lp)
+/**
+ * filters a list of vinyls, updates the URL and renders the filtered list
+ * @param vinyls
+ * @param category
+ * @param subcategory
+ */
 function filterBy(vinyls, category, subcategory) {
   const searchParams = new URLSearchParams(window.location.search);
   searchParams.set("category", `${category}:` + subcategory);
@@ -108,6 +109,10 @@ function filterBy(vinyls, category, subcategory) {
   console.log(filteredProducts);
 }
 
+/**
+ * Displays feautured vinyls in carousel and sets background color based on current slide
+ * @param vinyls
+ */
 function DisplayFeatured(vinyls) {
   const filteredProducts = vinyls.filter(
     (element) => element.featured === true
@@ -119,7 +124,6 @@ function DisplayFeatured(vinyls) {
     const activeSlide = document.querySelector(
       ".carousel .carousel-item.active"
     );
-    // console.log(activeSlide.dataset.color);
     carouselCont.style.backgroundColor = activeSlide.dataset.color;
   }
 
@@ -154,11 +158,18 @@ function DisplayFeatured(vinyls) {
   console.log(filteredProducts);
 }
 
+/**
+ * Clears the category filter applied to the product list
+ */
 function clearCategoryFilter() {
   window.history.replaceState(null, null, window.location.pathname);
   renderList(data);
 }
 
+/**
+ * Renders a webpage dispalying a list of vinyl records from the json file
+ * @param vinyls
+ */
 function renderPage(vinyls) {
   const selectedCategory = queryParams().category;
   if (selectedCategory) {
@@ -169,6 +180,10 @@ function renderPage(vinyls) {
   }
 }
 
+/**
+ * Renders the shopping card with the given information about the vinyl
+ * @param element
+ */
 function renderCard(element) {
   const productCard = document.createElement("div");
   productCard.className = "productCard";
@@ -221,7 +236,10 @@ function renderCard(element) {
   return productCard;
 }
 
-//fnction used for index.html to render all products based on provided list(vinyls)
+/**
+ * Renders all products based on the provided list of vinyls 
+ * @param vinyls
+ */
 function renderList(vinyls) {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
@@ -229,7 +247,6 @@ function renderList(vinyls) {
     const productCard = renderCard(element);
     productList.appendChild(productCard);
   });
-
   // hack to make the size of the cards the same if elements listed are smaller than 4
   const missing = 5 - vinyls.length;
   if (missing > 0) {
@@ -238,8 +255,10 @@ function renderList(vinyls) {
     }
   }
 }
-
-// source: https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+/**
+ * Parses the query parameters from the current window URL and returns them as an object
+ * @returns {Object} An object containing the parsed query parameters.
+ */
 function queryParams() {
   const urlSearchParams = new URLSearchParams(window.location.search);
   return Object.fromEntries(urlSearchParams.entries());
@@ -261,6 +280,9 @@ const alert = (message, type) => {
 
   let timer;
 
+  /* 
+  * Sets a timer that removes 'add to basket' pop up
+  */
   function invoke() {
     timer = setTimeout(() => {
       alertPlaceholder.removeChild(wrapper);

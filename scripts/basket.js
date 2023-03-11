@@ -10,6 +10,10 @@ async function loadProductDataAsync() {
     return response.json();
 }
 
+/**
+ * Fetch vinyl json data
+ * @returns {Promise<any>}
+ */
 function getBasket() {
     if (localStorage.getItem("basket") == undefined || localStorage.getItem("basket") === '{}' || localStorage.getItem("basket") === 'null') {
         return {};
