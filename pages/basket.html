@@ -121,24 +121,14 @@
     <script src="../scripts/basket.js"></script>
     <script src="../scripts/user-info.js"></script>
     <script>
-            let data = null
+      let data = null
 
-            document.body.onload = async () => {
-      <<<<<<< HEAD
-              const vinyls = await loadProductDataAsync()
-              renderBasketList(vinyls)
-              saveData(vinyls)
-              data = vinyls
-            }
-
-            navbar()
-      =======
-              const vinyls = await loadProductDataAsync();
-              renderBasketList(vinyls);
-              saveData(vinyls);
-              data = vinyls;
-            };
-      >>>>>>> fd9e8ed0ce21e68867a6368679c722fda277dcc6
+      document.body.onload = async () => {
+        const vinyls = await loadProductDataAsync()
+        renderBasketList(vinyls)
+        saveData(vinyls)
+        data = vinyls
+      }
     </script>
 
     <!-- Bootstrap JS -->
