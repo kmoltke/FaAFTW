@@ -1,4 +1,3 @@
-
 /**
  * Asynchronously fetches product data from json file
  * @returns {Promise<any>}}
@@ -154,8 +153,6 @@ function DisplayFeatured(vinyls) {
 
   carouselCont.addEventListener("slid.bs.carousel", setBg);
   setBg();
-
-  console.log(filteredProducts);
 }
 
 /**
@@ -237,7 +234,7 @@ function renderCard(element) {
 }
 
 /**
- * Renders all products based on the provided list of vinyls 
+ * Renders all products based on the provided list of vinyls
  * @param vinyls
  */
 function renderList(vinyls) {
@@ -280,9 +277,9 @@ const alert = (message, type) => {
 
   let timer;
 
-  /* 
-  * Sets a timer that removes 'add to basket' pop up
-  */
+  /*
+   * Sets a timer that removes 'add to basket' pop up
+   */
   function invoke() {
     timer = setTimeout(() => {
       alertPlaceholder.removeChild(wrapper);
