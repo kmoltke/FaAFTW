@@ -13,12 +13,16 @@
     />
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="../styles/login-form.css" />
   </head>
   <body>
     <header>
       <!-- navbar start-->
-      <div id="navbar">
+      <div class="navbar" id="navbar">
         <a href="#default" id="logo">
           <img
             id="logoel1"
@@ -27,11 +31,12 @@
           />
           <div id="logoel2">the vinyl countdown</div>
         </a>
-        <div id="navbar-right">
-          <a href="index.html" onclick="scrollIntoHome()">Home</a>
-          <a href="index.html#browseContainer" onclick="scrollIntoBrowse()"
-            >Browse</a
-          >
+        <div id="navbar-right" class="navbar-right">
+          <a href="javascript:void(0);" class="icon" onclick="burgerfunc()">
+            <i class="fa fa-bars"></i>
+          </a>
+          <a href="index.html">Home</a>
+          <a href="index.html#browseContainer">Browse</a>
           <a href="login-form.html" id="login-link">Login</a>
           <a href="" id="logout-link">Logout</a>
           <a href="basket.html" id="cart-link">Cart</a>

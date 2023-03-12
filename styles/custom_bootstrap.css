@@ -77,3 +77,18 @@
   top: 424px;
   bottom: 424px;
 }
+
+.py-5 {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+
+.text-muted {
+  border-color: white;
+  background-color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
