@@ -3,7 +3,13 @@
     "genre": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"],
     "decades": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
   },
-  "baskets": [],
+  "baskets": [
+    {
+      "id": 1,
+      "products": [{ "productId": 1, "price": 30 }],
+      "total": 30
+      }
+  ],
   "vinyls": [
     {
       "id": 1,
