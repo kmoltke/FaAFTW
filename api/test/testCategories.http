@@ -1,0 +1,13 @@
+
+// get all categories
+GET http://localhost:5000/categories HTTP/1.1 
+
+
+#################################################
+
+
+// get a specific category
+GET http://localhost:5000/categories/genre HTTP/1.1 
+
+
+#################################################

@@ -3,7 +3,7 @@ import { getAll, getByName } from './categories.model'
 
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
-    const { categoriesData } = await getAll()
+    const categoriesData = await getAll()
     res.send(categoriesData).status(200)
   } catch (error) {
     res.status(404).send(error.message)
