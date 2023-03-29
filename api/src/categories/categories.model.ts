@@ -7,7 +7,7 @@ const getData = async () => {
 export const getAll = async () => {
   try {
     const data = await getData()
-    const { categories } = JSON.parse(data)
+    const { categories } = JSON.parse(data.toString())
 
     return categories
   } catch (err) {
@@ -18,7 +18,7 @@ export const getAll = async () => {
 export const getByName = async (categoryName: string) => {
   try {
     const data = await getData()
-    const { categories } = JSON.parse(data)
+    const { categories } = JSON.parse(data.toString())
     return categories[categoryName]
   } catch (err) {
     throw new Error('')
