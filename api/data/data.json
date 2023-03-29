@@ -1,4 +1,22 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "Username1"
+    },
+    {
+      "id": 2,
+      "name": "Username2"
+    },
+    {
+      "id": 3,
+      "name": "Username3"
+    },
+    {
+      "id": 4,
+      "name": "Username4"
+    }
+    ],
   "categories": {
     "genre": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"],
     "decades": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]

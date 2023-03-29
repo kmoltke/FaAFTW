@@ -6,6 +6,7 @@ export const getBasket = async (req: Request, res: Response) => {
     const basketData = await getAll()
     res.send(basketData).status(200)
   } catch (error) {
+    // @ts-ignore
     res.status(404).send(error.message)
   }
 }

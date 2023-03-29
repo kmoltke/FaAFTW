@@ -7,6 +7,7 @@ const getData = async () => {
 export async function getAll() {
   try {
     const data = await getData()
+    // @ts-ignore
     const { vinyls } = JSON.parse(data)
 
     return vinyls
@@ -18,7 +19,9 @@ export async function getAll() {
 export async function getById(id: number) {
   try {
     const data = await getData()
+    // @ts-ignore
     const { vinyls } = JSON.parse(data)
+    // @ts-ignore
     return vinyls.filter((vinyl) => vinyl.id === id)
   } catch (error) {}
 }

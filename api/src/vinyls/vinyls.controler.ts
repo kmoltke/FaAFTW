@@ -6,6 +6,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
     const vinylsData = await getAll()
     res.send(vinylsData).status(200)
   } catch (error) {
+    // @ts-ignore
     res.status(404).send(error.message)
   }
 }
