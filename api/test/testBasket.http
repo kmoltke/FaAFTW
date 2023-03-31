@@ -2,5 +2,10 @@
 // get all baskets
 GET http://localhost:5000/baskets HTTP/1.1
 
+###
 
-#################################################
+// Create basket
+POST http://localhost:5000/baskets HTTP/1.1
+content-type: application/json
+
+{"userID": 2, "products": [{"productID": 1, "price": 50}], "total": 50}

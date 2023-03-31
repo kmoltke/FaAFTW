@@ -23,7 +23,7 @@
   },
   "baskets": [
     {
-      "id": 1,
+      "UserId": 1,
       "products": [{ "productId": 1, "price": 30 }],
       "total": 30
       }

@@ -1,7 +1,8 @@
 import express from 'express'
-import { getBasket } from './baskets.controler'
+import { getBasket, postBasket } from './baskets.controler'
 
 export const basketRouter = express.Router()
 
 basketRouter.get('/baskets', getBasket)
 
+basketRouter.post('/baskets', postBasket)
