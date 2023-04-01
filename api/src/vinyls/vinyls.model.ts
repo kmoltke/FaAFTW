@@ -1,5 +1,19 @@
 import * as fs from 'fs/promises'
 
+export interface vinyl {
+  id: number
+  artist: string
+  album: string
+  decade: string
+  year: number
+  genre: string
+  price: number
+  type: string
+  label: string
+  image: string
+  description: string
+}
+
 const getData = async () => {
   return await fs.readFile('./data/data.json')
 }

@@ -1,5 +1,11 @@
 import * as fs from 'fs/promises'
 
+export interface category {
+  id: number
+  genre: string[]
+  decades: string[]
+}
+
 const getData = async () => {
   return await fs.readFile('./data/data.json')
 }

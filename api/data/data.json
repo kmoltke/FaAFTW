@@ -16,17 +16,62 @@
       "id": 4,
       "name": "Username4"
     }
-    ],
-  "categories": {
-    "genre": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"],
-    "decades": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
-  },
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "genre": [
+        "Rock",
+        "Electronic",
+        "Pop",
+        "R&B",
+        "Heavy metal"
+      ]
+    },
+    {
+      "id": 2,
+      "decades": [
+        "60s",
+        "70s",
+        "80s",
+        "90s",
+        "2000s",
+        "2010s",
+        "2020s"
+      ]
+    }
+  ],
   "baskets": [
     {
-      "UserId": 1,
-      "products": [{ "productId": 1, "price": 30 }],
+      "id": 1,
+      "products": [
+        {
+          "productID": 1,
+          "price": 30
+        }
+      ],
       "total": 30
-      }
+    },
+    {
+      "id": 2,
+      "products": [
+        {
+          "productID": 3,
+          "price": 40
+        }
+      ],
+      "total": 40
+    },
+    {
+      "id": 2,
+      "products": [
+        {
+          "productID": 1,
+          "price": 50
+        }
+      ],
+      "total": 50
+    }
   ],
   "vinyls": [
     {
