@@ -99,12 +99,12 @@ export class ModelManager<T extends { id: number }> {
     }
 
     // test function for item ID
-    // findItem(Id: number): number {
-    //     // if (this.itemArray === undefined) throw new Error()
-    //     return this.itemArray.findIndex(
-    //         (currItem) => currItem.id === Id
-    //     );
-    // }
+    findItem(arr: Array<user|category|basket|vinyl>, Id: number): number {
+        // if (this.itemArray === undefined) throw new Error()
+        return arr.findIndex(
+            (currItem) => currItem.id === Id
+        );
+    }
 
     // get by id
     // async getByID(itemId: number) {
@@ -132,10 +132,15 @@ export class ModelManager<T extends { id: number }> {
     // }
 
     async add(newItem: user | category | basket | vinyl) {
-        let itemArr: Array<user | category | basket | vinyl> | undefined = await this.getItemArray(this.managerType)
+        // let itemArr: Array<user | category | basket | vinyl> | undefined = await this.getItemArray(this.managerType)
+        let itemArr: Array<user | category | basket | vinyl> = await this.getItemArray(this.managerType)
+
         console.log(typeof itemArr)
         if (!Array.isArray(itemArr)) {
             throw new Error("Item array is not an array")
+        }
+        if (this.findItem(itemArr, newItem.id) !== -1) {
+            throw new Error("Item already exists")
         }
         let newArray = itemArr as Array<user | category | basket | vinyl>
         newArray.push(newItem)
