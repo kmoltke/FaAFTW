@@ -4,11 +4,7 @@
     "decades": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
   },
   "baskets": [
-    {
-      "id": 1,
-      "products": [{ "productId": 1, "price": 30 }],
-      "total": 30
-      }
+    { "id": 1, "products": [{ "productId": 1, "price": 30 }], "total": 30 }
   ],
   "vinyls": [
     {
@@ -249,6 +245,19 @@
       "description": "After 10 albums, the last five of which have gone top 10 or better, six Grammy awards, and sold-out tours around the world, The Black Keys are back: the duo, called ‘America’s Most Trusted Band’ by Stephen Colbert, and ‘One of the best rock’n’roll bands on the planet’ by Uncut, releases its eleventh studio album, Dropout Boogie, via Nonesuch Records. The first single, ‘Wild Child’, is available now along with a video directed by the band’s longtime collaborator Bryan Schlam. Dropout Boogie features collaborations with Billy F. Gibbons (ZZ Top), Greg Cartwright (Reigning Sound), and Angelo Petraglia (Kings of Leon).",
       "featured": true,
       "featuredColor": "#21216d"
+    },
+    {
+      "id": 99,
+      "artist": "Test",
+      "album": "Test",
+      "decade": "Test",
+      "year": 9999,
+      "genre": "Test",
+      "price": 999,
+      "type": "Test",
+      "label": "Test",
+      "image": "Test",
+      "description": "Test"
     }
   ]
 }
