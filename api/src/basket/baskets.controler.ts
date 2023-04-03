@@ -7,7 +7,6 @@ export const getAllBaskets = async (req: Request, res: Response) => {
     try {
         const modelManager = new ModelManager(managerType.baskets)
         const baskets = await modelManager.getAll()
-        // res.send(basketData).status(200)
         res.json(baskets)
     } catch (error) {
         // @ts-ignore
@@ -20,10 +19,21 @@ export async function postBasket(req: Request, res: Response) {
         const modelManager = new ModelManager(managerType.baskets)
         let newBasket = req.body
         await modelManager.add(newBasket)
-        res.end()
+        res.end("item created successfully")
     } catch (err) {
         // @ts-ignore
         res.status(400).send(err.message)
+    }
+}
+
+export async function removeBasket(req: Request, res: Response) {
+    try {
+        let modelMgr = new ModelManager(managerType.baskets);
+        let id = parseInt(req.params.id)
+        await modelMgr.remove(id);
+        res.end("Basket successfully removed");
+    } catch (error:any) {
+        res.status(400).send(error.message);
     }
 }
 

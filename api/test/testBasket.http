@@ -8,5 +8,13 @@ GET http://localhost:5000/baskets HTTP/1.1
 POST http://localhost:5000/baskets HTTP/1.1
 content-type: application/json
 
-{"id": 5, "products": [{"productID": 1, "price": 50}], "total": 50}
+{"id": 12, "products": [{"productID": 1, "price": 50}], "total": 50}
+###
+
+// Update basket
+
+
+// Remove basket
+DELETE http://localhost:5000/baskets/12
+
 ###

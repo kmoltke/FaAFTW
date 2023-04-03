@@ -2,7 +2,6 @@ import * as fs from 'fs/promises'
 
 const DATAFILE: string = './data/data.json'
 
-// TODO: rethink this maybe
 export interface basketProduct {
   productID: number
   price: number
@@ -13,6 +12,9 @@ export interface basket {
   products: basketProduct[]
   total: number
 }
+
+
+
 //
 // const getData = async () => {
 //   return await fs.readFile(DATAFILE)
