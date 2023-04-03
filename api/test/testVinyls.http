@@ -1,13 +1,32 @@
 
 // get all vinyls
-GET http://localhost:5000/products HTTP/1.1
+GET http://localhost:5000/products
 
 
 #################################################
 
 
 // get a specific vinyl based on id 
-GET http://localhost:5000/products/4 HTTP/1.1
+GET http://localhost:5000/products/4
 
 
 #################################################
+
+// Get vinyls by category
+// rock:
+GET http://localhost:5000/products?genre=Rock
+
+###
+
+// Decades:
+GET http://localhost:5000/products?decades=70s
+
+###
+
+// Both:
+GET http://localhost:5000/products?genre=Rock&decades=70s
+
+###
+
+// None:
+GET http://localhost:5000/products?genre=Rock&decades=2010s

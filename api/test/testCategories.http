@@ -1,5 +1,3 @@
-// Get vinyls by category
-// rock:
-GET http://localhost:5000/categories/genre/rock
+GET http://localhost:5000/categories
 
 ###

@@ -56,13 +56,16 @@ export class ModelManager<T extends { id: number }> {
     }
 
     // update existing item
+    //TODO: push only the product
     async update(itemId: number, newItem: user | category | basket | vinyl) {
-        let itemArray = await this.getItemArray(this.managerType)
+        let itemArray: Array<user|category|basket|vinyl> = await this.getItemArray(this.managerType)
         let index = this.findItem(itemArray, itemId)
         if (index === -1)
             throw new Error(`Item with ID:${itemId} doesn't exist`)
         else {
-            itemArray[index] = newItem;
+            itemArray.push(newItem)
+
+            // itemArray[index] = newItem;
             await this.save(itemArray);
         }
     }
@@ -110,17 +113,29 @@ export class ModelManager<T extends { id: number }> {
         }
     }
 
-    async getByCategory(category: string, sub: string) {
-        let allVinyls = await this.getItemArray(managerType.vinyls)
-
-        return (allVinyls as vinyl[]).filter(function (v) {
-            type dataKey = keyof typeof v
-            let key: dataKey
-            key = category as dataKey
-            let value = (v[key] as string).toLowerCase()
-            return (value == sub);
-        })
+    getImportants(vinyls: vinyl[]) {
+        return vinyls.map((v) => ({
+            album: v.album,
+            artist: v.artist,
+            price: v.price
+        }))
     }
+
+    // async getByCategory(category: string, sub: string) {
+    //     let allVinyls = await this.getItemArray(managerType.vinyls)
+    //
+    //     let filtered = (allVinyls as vinyl[]).filter(function (v) {
+    //         type dataKey = keyof typeof v
+    //         let key: dataKey
+    //         key = category as dataKey
+    //         let value = (v[key] as string).toLowerCase()
+    //         return (value == sub);
+    //     })
+    //
+    //     return this.getImportants(filtered)
+    //
+    //
+    // }
 
     /***
      * Get the whole json object from the datafile
