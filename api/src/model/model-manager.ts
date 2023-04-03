@@ -57,10 +57,10 @@ export class ModelManager<T extends { id: number }> {
 
     // update existing item
     async update(itemId: number, newItem: user | category | basket | vinyl) {
-        let itemArray = await this.getItemArray(this.managerType);
-        let index = this.findItem(itemArray, itemId); // findIndex
+        let itemArray = await this.getItemArray(this.managerType)
+        let index = this.findItem(itemArray, itemId)
         if (index === -1)
-            throw new Error(`Item with ID:${itemId} doesn't exist`);
+            throw new Error(`Item with ID:${itemId} doesn't exist`)
         else {
             itemArray[index] = newItem;
             await this.save(itemArray);
@@ -69,15 +69,16 @@ export class ModelManager<T extends { id: number }> {
 
     // delete existing item
     async remove(itemId: number) {
-        let itemArray = await this.getItemArray(this.managerType);
-        let index = this.findItem(itemArray, itemId); // findIndex
+        let itemArray = await this.getItemArray(this.managerType)
+        let index = this.findItem(itemArray, itemId)
         if (index === -1)
-            throw new Error(`Item with ID:${itemId} doesn't exist`);
+            throw new Error(`Item with ID:${itemId} doesn't exist`)
         else {
             itemArray.splice(index, 1); // remove item from array
             await this.save(itemArray);
         }
     }
+
 
     /***
      * Get the array of item from the json data file
@@ -107,6 +108,18 @@ export class ModelManager<T extends { id: number }> {
             default:
                 throw new Error("undefined!")
         }
+    }
+
+    async getByCategory(category: string, sub: string) {
+        let allVinyls = await this.getItemArray(managerType.vinyls)
+
+        return (allVinyls as vinyl[]).filter(function (v) {
+            type dataKey = keyof typeof v
+            let key: dataKey
+            key = category as dataKey
+            let value = (v[key] as string).toLowerCase()
+            return (value == sub);
+        })
     }
 
     /***

@@ -1,4 +1,3 @@
-import * as fs from 'fs/promises'
 
 export interface vinyl {
   id: number
@@ -13,6 +12,11 @@ export interface vinyl {
   image: string
   description: string
 }
+
+export async function getByCategory(category: string) {
+
+}
+
 //
 // const getData = async () => {
 //   return await fs.readFile('./data/data.json')

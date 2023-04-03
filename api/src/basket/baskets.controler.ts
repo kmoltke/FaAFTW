@@ -5,11 +5,10 @@ import {managerType, ModelManager} from "../model/model-manager";
 export const getAllBaskets = async (req: Request, res: Response) => {
     try {
         const modelManager = new ModelManager(managerType.baskets)
-        const baskets = await modelManager.getAll()
+        const baskets = await modelManager.getItemArray(managerType.baskets)
         res.json(baskets)
-    } catch (error) {
-        // @ts-ignore
-        res.status(404).send(error.message)
+    } catch (error:any) {
+        res.status(400).send(error.message)
     }
 }
 
@@ -17,6 +16,11 @@ export async function getBasket(req: Request, res: Response) {
     try {
         const modelManager = new ModelManager(managerType.baskets)
         let id = parseInt(req.params.id)
+        // ***
+        // Experiment to extract type from the url in order to refactor the controllers by the type
+        let path = req.path
+        let type = path.slice(1, path.indexOf("/", 2))
+        // ***
         let basket = await modelManager.getByID(id)
         res.json(basket)
     } catch (err:any) {
@@ -29,7 +33,7 @@ export async function postBasket(req: Request, res: Response) {
         const modelManager = new ModelManager(managerType.baskets)
         let newBasket = req.body
         await modelManager.add(newBasket)
-        res.end("item created successfully")
+        res.end("Item created successfully")
     } catch (err:any) {
         res.status(400).send(err.message)
     }
