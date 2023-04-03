@@ -1,12 +1,12 @@
-import * as fs from 'fs/promises'
+import * as fs from "fs/promises"
 
 export interface category {
   id: number
-  genre: string[]
-  decades: string[]
+  categoryType: string
+  subcategories: string[]
 }
 
-const getData = async () => {
+/* const getData = async () => {
   return await fs.readFile('./data/data.json')
 }
 
@@ -29,4 +29,4 @@ export const getByName = async (categoryName: string) => {
   } catch (err) {
     throw new Error('')
   }
-}
+} */
