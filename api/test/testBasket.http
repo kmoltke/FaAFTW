@@ -1,29 +1,32 @@
 
-// get all baskets
-GET http://localhost:5000/baskets HTTP/1.1
+//Ellie version start
 
-###
-
-// Get basket by ID
-GET http://localhost:5000/baskets/10
-
-###
-
-// Create basket
-POST http://localhost:5000/baskets HTTP/1.1
+//add products in a basket for a specific user
+PUT http://localhost:5000/users/1680705564259/basket/products
 content-type: application/json
 
-{"id": 12, "products": [{"productID": 1, "price": 50}], "total": 50}
+{"id": 4, "quantity":1, "price": 120}
 ###
 
-// Update basket
-PUT http://localhost:5000/baskets/11
+//remove a product for a specific user
+DELETE http://localhost:5000/users/3/basket/products/15
 content-type: application/json
-
-{"id": 11, "products": [{"productID": 1, "price": 50}], "total": 50}
 ###
 
-// Remove basket
-DELETE http://localhost:5000/baskets/12
-
+//create a basket for a specific user
+POST http://localhost:5000/users/1680705564259/basket 
+content-type: application/json
 ###
+
+//get the basket contents for a specific user
+GET http://localhost:5000/users/3/basket 
+content-type: application/json
+###
+
+//delete the entire basket for a specific user
+DELETE http://localhost:5000/users/3/basket 
+content-type: application/json
+###
+
+
+//Ellie version end

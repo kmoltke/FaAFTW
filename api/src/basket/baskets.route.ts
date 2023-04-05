@@ -1,16 +1,23 @@
-import express from 'express'
-import {getAllBaskets, getBasket, postBasket, removeBasket, updateBasket} from './baskets.controler'
+import express from "express"
+import {
+  addBasketProduct,
+  getBasket,
+  postBasket,
+  removeBasket,
+  removeBasketProduct,
+} from "./baskets.controler"
 
 export const basketRouter = express.Router()
 
-basketRouter.use(express.json())
+basketRouter.post("/users/:userId/basket", postBasket) //Create a shopping basket for a specific user.
 
-basketRouter.get('/baskets', getAllBaskets)
+basketRouter.get("/users/:userId/basket", getBasket) //get basket for a specific user
 
-basketRouter.get('/baskets/:id', getBasket)
+basketRouter.put("/users/:userId/basket/products", addBasketProduct) //Put a product in the basket for a specific user.
 
-basketRouter.post('/baskets', postBasket)
+basketRouter.delete(
+  "/users/:userId/basket/products/:productId",
+  removeBasketProduct
+) //remove a product from the basket for a specific user.
 
-basketRouter.put('/baskets/:id', updateBasket)
-
-basketRouter.delete('/baskets/:id', removeBasket)
+basketRouter.delete("/users/:userId/basket", removeBasket)

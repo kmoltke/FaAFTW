@@ -1,19 +1,23 @@
-import * as fs from 'fs/promises'
+import * as fs from "fs/promises"
 
-const DATAFILE: string = './data/data.json'
+const DATAFILE: string = "./data/data.json"
 
 export interface basketProduct {
-  productID: number
+  id: number
+  quantity: number // eleb: added quantity
   price: number
 }
 
 export interface basket {
   id: number
+  BasketId: number
   products: basketProduct[]
   total: number
 }
 
-
+export function isBasketProduct(x: any): x is basketProduct {
+  return x && "productID" in x
+}
 
 //
 // const getData = async () => {
