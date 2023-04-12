@@ -13,6 +13,10 @@ app.use(categoriesRouter)
 app.use(basketsRouter)
 app.use(userRouter)
 
+app.use('*', (req, res) => {
+  res.status(404).send('Page not found')
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`)
 })
