@@ -30,7 +30,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
   }
 }
 
-export async function getVinyl(req: Request, res: Response) {
+export const getVinyl = async (req: Request, res: Response) => {
   try {
     let id = parseInt(req.params.id)
     let vinyl = await vinylsModelManager.getByID(id)
@@ -40,7 +40,7 @@ export async function getVinyl(req: Request, res: Response) {
   }
 }
 
-function getImportants(vinyls: Vinyl[]) {
+const getImportants = (vinyls: Vinyl[]) => {
   return vinyls.map((v) => ({
     album: v.album,
     artist: v.artist,

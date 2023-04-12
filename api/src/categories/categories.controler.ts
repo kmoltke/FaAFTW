@@ -5,7 +5,7 @@ import { Category } from './categories.model'
 const CATEGORY_FILE = './data/baskets.json'
 const categoriesModelManager = new ModelManager<Category>(CATEGORY_FILE)
 
-export async function getCategories(req: Request, res: Response) {
+export const getCategories = async (req: Request, res: Response) => {
   try {
     const categories = await categoriesModelManager.getAll()
     const result = categories.map((obj) => obj.categoryType)
@@ -15,7 +15,7 @@ export async function getCategories(req: Request, res: Response) {
   }
 }
 
-export async function getSubcategories(req: Request, res: Response) {
+export const getSubcategories = async (req: Request, res: Response) => {
   try {
     const categories = await categoriesModelManager.getAll()
     const category = req.params.category

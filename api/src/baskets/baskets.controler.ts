@@ -18,7 +18,7 @@ export const getAllBaskets = async (req: Request, res: Response) => {
   }
 }
 
-export async function getBasket(req: Request, res: Response) {
+export const getBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     const basket = await basketModelManager.getByID(userId)
@@ -28,7 +28,7 @@ export async function getBasket(req: Request, res: Response) {
   }
 }
 
-export async function addEmptyBasket(req: Request, res: Response) {
+export const addEmptyBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     userModelManager.getByID(userId)
@@ -45,7 +45,7 @@ export async function addEmptyBasket(req: Request, res: Response) {
   }
 }
 
-export async function removeBasket(req: Request, res: Response) {
+export const removeBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     await basketModelManager.remove(userId)
@@ -55,7 +55,7 @@ export async function removeBasket(req: Request, res: Response) {
   }
 }
 
-export async function addProductToBasket(req: Request, res: Response) {
+export const addProductToBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     const product = req.body // product is sent as part of the body
@@ -93,7 +93,7 @@ export async function addProductToBasket(req: Request, res: Response) {
   }
 }
 
-export async function removeProductFromBasket(req: Request, res: Response) {
+export const removeProductFromBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     const productId = parseInt(req.params.productId)

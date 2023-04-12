@@ -5,7 +5,7 @@ import { User } from './users.model'
 const USERS_FILE = './data/users.json'
 const usersModelManager = new ModelManager<User>(USERS_FILE)
 
-export async function createUser(req: Request, res: Response) {
+export const createUser = async (req: Request, res: Response) => {
   try {
     let { email, fname, lname, password } = req.body
     const allUsers = await usersModelManager.getAll()
@@ -37,10 +37,10 @@ export async function createUser(req: Request, res: Response) {
  * @returns index of the first elemment with the following property
  */
 
-function findItemByProperty(
+const findItemByProperty = (
   arr: Array<User>,
   propertyName: keyof User,
   property: string | number
-): number {
+): number => {
   return arr.findIndex((currItem) => currItem[propertyName] === property)
 }
