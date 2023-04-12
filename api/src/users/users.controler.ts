@@ -9,11 +9,7 @@ export async function createUser(req: Request, res: Response) {
   try {
     let { email, fname, lname, password } = req.body
     const allUsers = await usersModelManager.getAll()
-    const userIndex = await usersModelManager.findItemByProperty(
-      allUsers,
-      'email',
-      email
-    )
+    const userIndex = await findItemByProperty(allUsers, 'email', email)
 
     if (userIndex !== -1) {
       throw new Error('user with this email already exists')
@@ -31,4 +27,20 @@ export async function createUser(req: Request, res: Response) {
   } catch (error: any) {
     res.status(400).send(error.message)
   }
+}
+
+/**
+ * search for any provided property and property value
+ * @param arr
+ * @param propertyName
+ * @param property
+ * @returns index of the first elemment with the following property
+ */
+
+function findItemByProperty(
+  arr: Array<User>,
+  propertyName: keyof User,
+  property: string | number
+): number {
+  return arr.findIndex((currItem) => currItem[propertyName] === property)
 }

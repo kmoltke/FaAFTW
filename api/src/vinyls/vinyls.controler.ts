@@ -22,7 +22,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
     if (allVinyls.length === 0) {
       res.end('No vinyls with provided categories')
     } else {
-      let importants = vinylsModelManager.getImportants(allVinyls)
+      let importants = getImportants(allVinyls)
       res.json(importants)
     }
   } catch (error: any) {
@@ -38,4 +38,12 @@ export async function getVinyl(req: Request, res: Response) {
   } catch (err: any) {
     res.status(400).send(err.message)
   }
+}
+
+function getImportants(vinyls: Vinyl[]) {
+  return vinyls.map((v) => ({
+    album: v.album,
+    artist: v.artist,
+    price: v.price,
+  }))
 }

@@ -1,7 +1,4 @@
 import * as fs from 'fs/promises'
-import { BasketProduct } from '../baskets/baskets.model'
-
-import { Vinyl } from '../vinyls/vinyls.model'
 
 export class ModelManager<T extends { id: number }> {
   filePath: string
@@ -86,41 +83,5 @@ export class ModelManager<T extends { id: number }> {
       itemArray.splice(index, 1) // remove item from array
       await this.save(itemArray)
     }
-  }
-
-  getImportants(vinyls: Vinyl[]) {
-    return vinyls.map((v) => ({
-      album: v.album,
-      artist: v.artist,
-      price: v.price,
-    }))
-  }
-
-  /**
-   * Gets total price from all products in the basket
-   * @param basketProducts
-   * @returns the total price of all products in the basket
-   */
-  getTotalPrice(basketProducts: BasketProduct[]) {
-    return basketProducts
-      .map((obj: BasketProduct) => obj.price)
-      .reduce(function (acc: number, curr: number) {
-        return acc + curr
-      }, 0)
-  }
-
-  /**
-   * search for any provided property and property value
-   * @param arr
-   * @param propertyName
-   * @param property
-   * @returns index of the first elemment with the following property
-   */
-  findItemByProperty(
-    arr: Array<T>,
-    propertyName: string,
-    property: any
-  ): number {
-    return arr.findIndex((currItem: any) => currItem[propertyName] === property)
   }
 }
