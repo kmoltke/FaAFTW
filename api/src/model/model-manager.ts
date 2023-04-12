@@ -1,41 +1,73 @@
 import * as fs from 'fs/promises'
-import {
-  basket,
-  basketProduct,
-  isBasketProduct,
-} from '../baskets/baskets.model'
-import { category } from '../categories/categories.model'
-import { user } from '../users/users.model'
-import { vinyl } from '../vinyls/vinyls.model'
+import { Basket, BasketProduct } from '../baskets/baskets.model'
+import { Category } from '../categories/categories.model'
+import { User } from '../users/users.model'
+import { Vinyl } from '../vinyls/vinyls.model'
 
-export enum managerType {
-  users,
-  categories,
-  baskets,
-  vinyls,
-  basketProducts,
+// export enum managerType {
+//   users,
+//   categories,
+//   baskets,
+//   vinyls,
+//   basketProducts,
+// }
+
+// interface data {
+//   users: User[]
+//   categories: Category[]
+//   baskets: Basket[]
+//   vinyls: Vinyl[]
+//   basketProducts: BasketProduct[]
+// }
+
+enum ModelTypes {
+  User,
+  Category,
+  Basket,
+  Vinyl,
+  BasketProduct,
 }
 
-interface data {
-  users: user[]
-  categories: category[]
-  baskets: basket[]
-  vinyls: vinyl[]
-  basketProducts: basketProduct[]
-}
+export class ModelManager<ModelTypes> {
+  filePath: string
 
-export class ModelManager<T extends { id: number }> {
-  private FILEPATH: string = './data/data.json'
+  constructor(filePath: string) {
+    this.filePath = filePath
+  }
 
-  private managerType: managerType
+  /***
+   * Get the whole json object from the datafile
+   * @returns items - json object
+   */
+  async getAll() {
+    try {
+      let itemsTxt = await fs.readFile(this.filePath, 'utf8')
+      let items = JSON.parse(itemsTxt)
+      return items
+    } catch (err: any) {
+      throw err
+    }
+  }
 
-  constructor(managerType: managerType) {
-    this.managerType = managerType
+  async save(items: Array<ModelTypes>) {
+    // format and write to datafile:
+    let itemsTxt = JSON.stringify(items, null, 2)
+    await fs.writeFile(this.filePath, itemsTxt)
+  }
+
+  /***
+   * Search for an id in an array
+   * @param arr
+   * @param Id
+   * @returns index of element in arr
+   */
+  findItem(arr: Array<any>, Id: number): number {
+    return arr.findIndex((currItem) => currItem.id === Id)
   }
 
   // get by id
   async getByID(itemId: number) {
-    let itemArray = await this.getItemArray(this.managerType)
+    let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
     if (index === -1) {
       throw new Error(`Item with ID: ${itemId} doesn't exist`)
@@ -47,9 +79,8 @@ export class ModelManager<T extends { id: number }> {
    * @param newItem json object of which to add
    * @throws an error if item already exists
    */
-  async add(newItem: user | category | basket | vinyl) {
-    let itemArr: Array<user | category | basket | vinyl> =
-      await this.getItemArray(this.managerType)
+  async add(newItem: any) {
+    let itemArr: Array<ModelTypes> = await this.getAll()
 
     // If item already exists:
     if (this.findItem(itemArr, newItem.id) !== -1) {
@@ -61,9 +92,8 @@ export class ModelManager<T extends { id: number }> {
   }
 
   // update existing item
-  async update(itemId: number, newItem: user | category | basket | vinyl) {
-    let itemArray: Array<user | category | basket | vinyl> =
-      await this.getItemArray(this.managerType)
+  async update(itemId: number, newItem: ModelTypes) {
+    let itemArray: Array<ModelTypes> = await this.getAll()
     let index = this.findItem(itemArray, itemId)
     if (index === -1) throw new Error(`Item with ID:${itemId} doesn't exist`)
     else {
@@ -74,7 +104,7 @@ export class ModelManager<T extends { id: number }> {
 
   // delete existing item
   async remove(itemId: number) {
-    let itemArray = await this.getItemArray(this.managerType)
+    let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
     if (index === -1) throw new Error(`Item with ID:${itemId} doesn't exist`)
     else {
@@ -88,8 +118,8 @@ export class ModelManager<T extends { id: number }> {
    * @param basketId the id of the basket
    * @param newItem json object to add
    */
-  async addBasketProduct(userId: number, newItem: basketProduct) {
-    let itemArray: any = await this.getItemArray(this.managerType)
+  async addBasketProduct(userId: number, newItem: BasketProduct) {
+    let itemArray: any = await this.getAll()
     // find basket
     let basketIndex = this.findItem(itemArray, userId)
     if (basketIndex === -1)
@@ -118,7 +148,7 @@ export class ModelManager<T extends { id: number }> {
     productId: number,
     quantity?: number
   ) {
-    let itemArray: any = await this.getItemArray(this.managerType)
+    let itemArray: any = await this.getAll()
     // find basket
     let basketIndex = this.findItem(itemArray, userId)
     if (basketIndex === -1)
@@ -140,37 +170,7 @@ export class ModelManager<T extends { id: number }> {
     }
   }
 
-  /***
-   * Get the array of item from the json data file
-   * @param managerType - the item type
-   * @returns items[key] - array of items
-   */
-  async getItemArray(managerType: managerType) {
-    let items: data = await this.getAll()
-    type dataKey = keyof typeof items
-    let key: dataKey
-
-    switch (managerType) {
-      case 0:
-        key = 'users' as dataKey
-        return items[key]
-
-      case 1:
-        // return items["categories"] as category[]
-        key = 'categories' as dataKey
-        return items[key]
-      case 2:
-        key = 'baskets' as dataKey
-        return items[key]
-      case 3:
-        key = 'vinyls' as dataKey
-        return items[key]
-      default:
-        throw new Error('undefined!')
-    }
-  }
-
-  getImportants(vinyls: vinyl[]) {
+  getImportants(vinyls: Vinyl[]) {
     return vinyls.map((v) => ({
       album: v.album,
       artist: v.artist,
@@ -183,85 +183,12 @@ export class ModelManager<T extends { id: number }> {
    * @param basketProducts
    * @returns the total price of all products in the basket
    */
-  getTotalPrice(basketProducts: basketProduct[]) {
+  getTotalPrice(basketProducts: BasketProduct[]) {
     return basketProducts
-      .map((obj: basketProduct) => obj.price)
+      .map((obj: BasketProduct) => obj.price)
       .reduce(function (acc: number, curr: number) {
         return acc + curr
       }, 0)
-  }
-
-  // async getByCategory(category: string, sub: string) {
-  //     let allVinyls = await this.getItemArray(managerType.vinyls)
-  //
-  //     let filtered = (allVinyls as vinyl[]).filter(function (v) {
-  //         type dataKey = keyof typeof v
-  //         let key: dataKey
-  //         key = category as dataKey
-  //         let value = (v[key] as string).toLowerCase()
-  //         return (value == sub);
-  //     })
-  //
-  //     return this.getImportants(filtered)
-  //
-  //
-  // }
-
-  /***
-   * Get the whole json object from the datafile
-   * @returns items - json object
-   */
-  async getAll() {
-    try {
-      let itemsTxt = fs.readFile(this.FILEPATH, 'utf8')
-      let items: data = JSON.parse(await itemsTxt)
-      return items
-    } catch (err: any) {
-      throw err
-    }
-  }
-
-  /***
-   * Saves a new itemArray to the json datafile
-   * @param newItemArray
-   */
-  async save(newItemArray: any) {
-    let items = await this.getAll()
-
-    // Replace the property of the item with the new item array:
-    switch (this.managerType) {
-      case 0:
-        items.users = newItemArray
-        break
-      case 1:
-        items.categories = newItemArray
-        break
-      case 2:
-        items.baskets = newItemArray
-        break
-      case 3:
-        items.vinyls = newItemArray
-        break
-      default:
-        throw new Error('Error!')
-    }
-
-    // format and write to datafile:
-    let itemsTxt = JSON.stringify(items, null, 2)
-    await fs.writeFile(this.FILEPATH, itemsTxt)
-  }
-
-  /***
-   * Search for an id in an array
-   * @param arr
-   * @param Id
-   * @returns index of element in arr
-   */
-  findItem(
-    arr: Array<user | category | basket | vinyl | basketProduct>,
-    Id: number
-  ): number {
-    return arr.findIndex((currItem) => currItem.id === Id)
   }
 
   /**
@@ -272,7 +199,7 @@ export class ModelManager<T extends { id: number }> {
    * @returns index of the first elemment with the following property
    */
   findItemByProperty(
-    arr: Array<user | category | basket | vinyl | basketProduct>,
+    arr: Array<ModelTypes>,
     propertyName: string,
     property: any
   ): number {

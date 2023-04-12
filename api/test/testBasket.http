@@ -19,7 +19,7 @@ content-type: application/json
 ###
 
 //get the basket contents for a specific user
-GET http://localhost:5000/users/3/basket 
+GET http://localhost:5000/users/1680705564259/basket 
 content-type: application/json
 ###
 

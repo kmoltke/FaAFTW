@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "email": "Johndoe@gmail.com",
+    "fname": "John",
+    "lname": "Doe",
+    "password": "12345"
+  },
+  {
+    "id": 1680705564259,
+    "email": "testytester@gmail.com",
+    "fname": "testy",
+    "lname": "tester",
+    "password": "fsfjs"
+  },
+  {
+    "id": 1680706024196,
+    "email": "testytester2@gmail.com",
+    "fname": "testy",
+    "lname": "tester2",
+    "password": "fsfjs"
+  },
+  {
+    "id": 1680706770096,
+    "email": "testytester3@gmail.com",
+    "fname": "testy",
+    "lname": "tester2",
+    "password": "fsfjs"
+  }
+]
