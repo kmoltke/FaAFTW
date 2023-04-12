@@ -1,17 +1,15 @@
 import { Request, Response } from 'express'
-import { managerType, ModelManager } from '../model/model-manager'
-import { vinyl } from './vinyls.model'
+import { ModelManager } from '../model/model-manager'
+import { Vinyl } from './vinyls.model'
 
-//TODO: refactor all functions to either normal functions or arrow functions
+const VINYLS_FILE = './data/vinyls.json'
+const vinylsModelManager = new ModelManager<Vinyl>(VINYLS_FILE)
+
 export const getAllVinyls = async (req: Request, res: Response) => {
   try {
-    const modelManager = new ModelManager(managerType.vinyls)
+    let allVinyls = await vinylsModelManager.getAll()
 
-    let allVinyls = (await modelManager.getItemArray(
-      managerType.vinyls
-    )) as vinyl[]
-
-    let { genre, decades } = req.query
+    const { genre, decades } = req.query
 
     if (genre) {
       allVinyls = allVinyls.filter((v) => v.genre === genre)
@@ -24,7 +22,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
     if (allVinyls.length === 0) {
       res.end('No vinyls with provided categories')
     } else {
-      let importants = modelManager.getImportants(allVinyls)
+      let importants = vinylsModelManager.getImportants(allVinyls)
       res.json(importants)
     }
   } catch (error: any) {
@@ -34,19 +32,10 @@ export const getAllVinyls = async (req: Request, res: Response) => {
 
 export async function getVinyl(req: Request, res: Response) {
   try {
-    const modelManager = new ModelManager(managerType.vinyls)
     let id = parseInt(req.params.id)
-    let vinyl = await modelManager.getByID(id)
+    let vinyl = await vinylsModelManager.getByID(id)
     res.json(vinyl)
   } catch (err: any) {
     res.status(400).send(err.message)
   }
 }
-
-// export const addVinyl = async (req: Request, res: Response) => {
-//   try {
-//     const newVinyl = req.body
-//     customerModel.add(newVinyl)
-//     res.send(newVinyl).status(201)
-//   } catch (error) {}
-// }

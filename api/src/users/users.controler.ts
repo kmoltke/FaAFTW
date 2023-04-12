@@ -1,19 +1,22 @@
-import { Request, Response } from "express"
-import { managerType, ModelManager } from "../model/model-manager"
+import { Request, Response } from 'express'
+import { ModelManager } from '../model/model-manager'
+import { User } from './users.model'
+
+const USERS_FILE = './data/users.json'
+const usersModelManager = new ModelManager<User>(USERS_FILE)
 
 export async function createUser(req: Request, res: Response) {
   try {
-    const modelManager = new ModelManager(managerType.users)
     let { email, fname, lname, password } = req.body
-    const allUsers = await modelManager.getItemArray(managerType.users)
-    const userIndex = await modelManager.findItemByProperty(
+    const allUsers = await usersModelManager.getAll()
+    const userIndex = await usersModelManager.findItemByProperty(
       allUsers,
-      "email",
+      'email',
       email
     )
 
     if (userIndex !== -1) {
-      throw new Error("user with this email already exists")
+      throw new Error('user with this email already exists')
     } else {
       const newUser = {
         id: Date.now(),
@@ -22,8 +25,8 @@ export async function createUser(req: Request, res: Response) {
         lname,
         password,
       }
-      await modelManager.add(newUser)
-      res.end("User created successfully")
+      await usersModelManager.add(newUser)
+      res.end('User created successfully')
     }
   } catch (error: any) {
     res.status(400).send(error.message)

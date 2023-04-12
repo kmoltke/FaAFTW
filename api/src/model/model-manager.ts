@@ -1,34 +1,9 @@
 import * as fs from 'fs/promises'
-import { Basket, BasketProduct } from '../baskets/baskets.model'
-import { Category } from '../categories/categories.model'
-import { User } from '../users/users.model'
+import { BasketProduct } from '../baskets/baskets.model'
+
 import { Vinyl } from '../vinyls/vinyls.model'
 
-// export enum managerType {
-//   users,
-//   categories,
-//   baskets,
-//   vinyls,
-//   basketProducts,
-// }
-
-// interface data {
-//   users: User[]
-//   categories: Category[]
-//   baskets: Basket[]
-//   vinyls: Vinyl[]
-//   basketProducts: BasketProduct[]
-// }
-
-enum ModelTypes {
-  User,
-  Category,
-  Basket,
-  Vinyl,
-  BasketProduct,
-}
-
-export class ModelManager<ModelTypes> {
+export class ModelManager<T extends { id: number }> {
   filePath: string
 
   constructor(filePath: string) {
@@ -39,7 +14,7 @@ export class ModelManager<ModelTypes> {
    * Get the whole json object from the datafile
    * @returns items - json object
    */
-  async getAll() {
+  async getAll(): Promise<T[]> {
     try {
       let itemsTxt = await fs.readFile(this.filePath, 'utf8')
       let items = JSON.parse(itemsTxt)
@@ -49,7 +24,7 @@ export class ModelManager<ModelTypes> {
     }
   }
 
-  async save(items: Array<ModelTypes>) {
+  async save(items: T[]) {
     // format and write to datafile:
     let itemsTxt = JSON.stringify(items, null, 2)
     await fs.writeFile(this.filePath, itemsTxt)
@@ -61,14 +36,14 @@ export class ModelManager<ModelTypes> {
    * @param Id
    * @returns index of element in arr
    */
-  findItem(arr: Array<any>, Id: number): number {
+  findItem(arr: T[], Id: number) {
     return arr.findIndex((currItem) => currItem.id === Id)
   }
 
   // get by id
   async getByID(itemId: number) {
-    let itemArray = await this.getAll()
-    let index = this.findItem(itemArray, itemId)
+    const itemArray = await this.getAll()
+    const index = this.findItem(itemArray, itemId)
     if (index === -1) {
       throw new Error(`Item with ID: ${itemId} doesn't exist`)
     } else return itemArray[index]
@@ -79,8 +54,8 @@ export class ModelManager<ModelTypes> {
    * @param newItem json object of which to add
    * @throws an error if item already exists
    */
-  async add(newItem: any) {
-    let itemArr: Array<ModelTypes> = await this.getAll()
+  async add(newItem: T) {
+    const itemArr = await this.getAll()
 
     // If item already exists:
     if (this.findItem(itemArr, newItem.id) !== -1) {
@@ -92,8 +67,8 @@ export class ModelManager<ModelTypes> {
   }
 
   // update existing item
-  async update(itemId: number, newItem: ModelTypes) {
-    let itemArray: Array<ModelTypes> = await this.getAll()
+  async update(itemId: number, newItem: T) {
+    let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
     if (index === -1) throw new Error(`Item with ID:${itemId} doesn't exist`)
     else {
@@ -109,63 +84,6 @@ export class ModelManager<ModelTypes> {
     if (index === -1) throw new Error(`Item with ID:${itemId} doesn't exist`)
     else {
       itemArray.splice(index, 1) // remove item from array
-      await this.save(itemArray)
-    }
-  }
-
-  /**
-   * adds or updates a product in the basket with the following id
-   * @param basketId the id of the basket
-   * @param newItem json object to add
-   */
-  async addBasketProduct(userId: number, newItem: BasketProduct) {
-    let itemArray: any = await this.getAll()
-    // find basket
-    let basketIndex = this.findItem(itemArray, userId)
-    if (basketIndex === -1)
-      throw new Error(`Basket for user ID:${userId} doesn't exist`)
-    else {
-      //find the products
-      let productsArray = itemArray[basketIndex].products
-      const productIndex = this.findItem(productsArray, newItem.id)
-      console.log(productIndex)
-      // if product does not already exist in the basket, add a new one
-      if (productIndex === -1) {
-        productsArray.push(newItem)
-      } else {
-        //else update its quantity and price
-        productsArray[productIndex].quantity += newItem.quantity
-        productsArray[productIndex].price += newItem.price * newItem.quantity
-      }
-      //assign the new total to the "total" property of the basket
-      itemArray[basketIndex].total = this.getTotalPrice(productsArray)
-      await this.save(itemArray)
-    }
-  }
-
-  async removeBasketProduct(
-    userId: number,
-    productId: number,
-    quantity?: number
-  ) {
-    let itemArray: any = await this.getAll()
-    // find basket
-    let basketIndex = this.findItem(itemArray, userId)
-    if (basketIndex === -1)
-      throw new Error(`Item with ID:${userId} doesn't exist`)
-    else {
-      //find the products in the basket
-      const productsArray = itemArray[basketIndex].products
-      const productIndex = this.findItem(productsArray, productId)
-      if (productIndex === -1)
-        throw new Error(`Item with ID:${productId} doesn't exist`)
-      else {
-        if (quantity === undefined) {
-          productsArray.splice(productIndex, 1)
-        } else {
-        }
-      }
-      itemArray[basketIndex].total = this.getTotalPrice(productsArray)
       await this.save(itemArray)
     }
   }
@@ -199,7 +117,7 @@ export class ModelManager<ModelTypes> {
    * @returns index of the first elemment with the following property
    */
   findItemByProperty(
-    arr: Array<ModelTypes>,
+    arr: Array<T>,
     propertyName: string,
     property: any
   ): number {

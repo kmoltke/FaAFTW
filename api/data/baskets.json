@@ -21,10 +21,22 @@
       },
       {
         "id": 4,
+        "quantity": 2,
+        "price": 240
+      }
+    ],
+    "total": 960
+  },
+  {
+    "id": 1,
+    "BasketId": 1681303656017,
+    "products": [
+      {
+        "id": 4,
         "quantity": 1,
         "price": 120
       }
     ],
-    "total": 840
+    "total": 120
   }
 ]

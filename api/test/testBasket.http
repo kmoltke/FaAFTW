@@ -2,14 +2,14 @@
 //Ellie version start
 
 //add products in a basket for a specific user
-PUT http://localhost:5000/users/1680705564259/basket/products
+PUT http://localhost:5000/users/1/basket/products
 content-type: application/json
 
-{"id": 4, "quantity":1, "price": 120}
+{"id": 1, "quantity":1, "price": 200}
 ###
 
-//remove a product for a specific user
-DELETE http://localhost:5000/users/3/basket/products/15
+//remove a product line for a specific user
+DELETE http://localhost:5000/users/1/basket/products/1
 content-type: application/json
 ###
 
