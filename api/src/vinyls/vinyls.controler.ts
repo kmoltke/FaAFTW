@@ -20,7 +20,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
     }
 
     if (allVinyls.length === 0) {
-      res.end('No vinyls with provided categories')
+      res.status(204).send('No vinyls with provided categories')
     } else {
       let importants = getImportants(allVinyls)
       res.json(importants)
