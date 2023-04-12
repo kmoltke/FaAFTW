@@ -1,4 +1,3 @@
-
 export interface vinyl {
   id: number
   artist: string
@@ -13,9 +12,7 @@ export interface vinyl {
   description: string
 }
 
-export async function getByCategory(category: string) {
-
-}
+export async function getByCategory(category: string) {}
 
 //
 // const getData = async () => {

@@ -1,7 +1,8 @@
-import { Request, Response } from "express"
-import { managerType, ModelManager } from "../model/model-manager"
-import { vinyl } from "./vinyls.model"
+import { Request, Response } from 'express'
+import { managerType, ModelManager } from '../model/model-manager'
+import { vinyl } from './vinyls.model'
 
+//TODO: refactor all functions to either normal functions or arrow functions
 export const getAllVinyls = async (req: Request, res: Response) => {
   try {
     const modelManager = new ModelManager(managerType.vinyls)
@@ -21,7 +22,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
     }
 
     if (allVinyls.length === 0) {
-      res.end("No vinyls with provided categories")
+      res.end('No vinyls with provided categories')
     } else {
       let importants = modelManager.getImportants(allVinyls)
       res.json(importants)
@@ -40,4 +41,12 @@ export async function getVinyl(req: Request, res: Response) {
   } catch (err: any) {
     res.status(400).send(err.message)
   }
+}
+
+export const addVinyl = async (req: Request, res: Response) => {
+  try {
+    const newVinyl = req.body
+    customerModel.add(newVinyl)
+    res.send(newVinyl).status(201)
+  } catch (error) {}
 }
