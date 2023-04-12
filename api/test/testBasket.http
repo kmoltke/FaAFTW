@@ -14,7 +14,7 @@ content-type: application/json
 ###
 
 //create a basket for a specific user
-POST http://localhost:5000/users/1680705564259/basket 
+POST http://localhost:5000/users/1/basket 
 content-type: application/json
 ###
 

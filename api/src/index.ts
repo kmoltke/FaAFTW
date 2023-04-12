@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { basketsRouter } from './basket/baskets.route'
+import { basketsRouter } from './baskets/baskets.route'
 import { categoriesRouter } from './categories/categories.route'
 import { vinylsRouter } from './vinyls/vinyls.route'
 import { userRouter } from './users/users.route'

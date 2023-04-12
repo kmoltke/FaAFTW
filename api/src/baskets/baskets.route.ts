@@ -1,8 +1,23 @@
 import express from 'express'
-import { getBaskets, getBasketById } from './baskets.controler'
+import {
+  addBasketProduct,
+  getBasket,
+  postBasket,
+  removeBasket,
+  removeBasketProduct,
+} from './baskets.controler'
 
 export const basketsRouter = express.Router()
 
-basketsRouter.get('/baskets', getBaskets)
-basketsRouter.get('/baskets/:id', getBasketById)
-// basketRouter.put('basket/:id',) // add an item to the shopping basket
+basketsRouter.post('/users/:userId/basket', postBasket) //Create a shopping basket for a specific user.
+
+basketsRouter.get('/users/:userId/basket', getBasket) //get basket for a specific user
+
+basketsRouter.put('/users/:userId/basket/products', addBasketProduct) //Put a product in the basket for a specific user.
+
+basketsRouter.delete(
+  '/users/:userId/basket/products/:productId',
+  removeBasketProduct
+) //remove a product from the basket for a specific user.
+
+basketsRouter.delete('/users/:userId/basket', removeBasket)

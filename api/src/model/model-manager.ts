@@ -1,8 +1,12 @@
-import * as fs from "fs/promises"
-import { basket, basketProduct, isBasketProduct } from "../basket/baskets.model"
-import { category } from "../categories/categories.model"
-import { user } from "../users/users.model"
-import { vinyl } from "../vinyls/vinyls.model"
+import * as fs from 'fs/promises'
+import {
+  basket,
+  basketProduct,
+  isBasketProduct,
+} from '../baskets/baskets.model'
+import { category } from '../categories/categories.model'
+import { user } from '../users/users.model'
+import { vinyl } from '../vinyls/vinyls.model'
 
 export enum managerType {
   users,
@@ -21,7 +25,7 @@ interface data {
 }
 
 export class ModelManager<T extends { id: number }> {
-  private FILEPATH: string = "./data/data.json"
+  private FILEPATH: string = './data/data.json'
 
   private managerType: managerType
 
@@ -148,21 +152,21 @@ export class ModelManager<T extends { id: number }> {
 
     switch (managerType) {
       case 0:
-        key = "users" as dataKey
+        key = 'users' as dataKey
         return items[key]
 
       case 1:
         // return items["categories"] as category[]
-        key = "categories" as dataKey
+        key = 'categories' as dataKey
         return items[key]
       case 2:
-        key = "baskets" as dataKey
+        key = 'baskets' as dataKey
         return items[key]
       case 3:
-        key = "vinyls" as dataKey
+        key = 'vinyls' as dataKey
         return items[key]
       default:
-        throw new Error("undefined!")
+        throw new Error('undefined!')
     }
   }
 
@@ -209,7 +213,7 @@ export class ModelManager<T extends { id: number }> {
    */
   async getAll() {
     try {
-      let itemsTxt = fs.readFile(this.FILEPATH, "utf8")
+      let itemsTxt = fs.readFile(this.FILEPATH, 'utf8')
       let items: data = JSON.parse(await itemsTxt)
       return items
     } catch (err: any) {
@@ -239,7 +243,7 @@ export class ModelManager<T extends { id: number }> {
         items.vinyls = newItemArray
         break
       default:
-        throw new Error("Error!")
+        throw new Error('Error!')
     }
 
     // format and write to datafile:

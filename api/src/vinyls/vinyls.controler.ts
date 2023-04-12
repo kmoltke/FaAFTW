@@ -43,10 +43,10 @@ export async function getVinyl(req: Request, res: Response) {
   }
 }
 
-export const addVinyl = async (req: Request, res: Response) => {
-  try {
-    const newVinyl = req.body
-    customerModel.add(newVinyl)
-    res.send(newVinyl).status(201)
-  } catch (error) {}
-}
+// export const addVinyl = async (req: Request, res: Response) => {
+//   try {
+//     const newVinyl = req.body
+//     customerModel.add(newVinyl)
+//     res.send(newVinyl).status(201)
+//   } catch (error) {}
+// }
