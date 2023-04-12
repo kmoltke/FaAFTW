@@ -33,12 +33,26 @@
     {
       "id": 1,
       "categoryType": "genre",
-      "subcategories": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"]
+      "subcategories": [
+        "Rock",
+        "Electronic",
+        "Pop",
+        "R&B",
+        "Heavy metal"
+      ]
     },
     {
       "id": 2,
       "categoryType": "decades",
-      "subcategories": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
+      "subcategories": [
+        "60s",
+        "70s",
+        "80s",
+        "90s",
+        "2000s",
+        "2010s",
+        "2020s"
+      ]
     }
   ],
   "baskets": [
@@ -61,9 +75,14 @@
           "id": 5,
           "quantity": 1,
           "price": 120
+        },
+        {
+          "id": 4,
+          "quantity": 1,
+          "price": 120
         }
       ],
-      "total": 720
+      "total": 840
     }
   ],
   "vinyls": [
