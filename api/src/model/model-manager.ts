@@ -243,7 +243,7 @@ export class ModelManager<T extends { id: number }> {
     }
 
     // format and write to datafile:
-    let itemsTxt = JSON.stringify(items)
+    let itemsTxt = JSON.stringify(items, null, 2)
     await fs.writeFile(this.FILEPATH, itemsTxt)
   }
 
