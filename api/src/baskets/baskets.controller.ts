@@ -1,24 +1,24 @@
-import { Request, Response } from 'express'
-import { ModelManager } from '../model/model-manager'
-import { Basket, BasketProduct } from './baskets.model'
-import { User } from '../users/users.model'
+import { Request, Response } from "express"
+import { ModelManager } from "../model/model-manager"
+import { Basket, BasketProduct } from "./baskets.model"
+import { User } from "../users/users.model"
 
-const BASKETS_FILE = './data/baskets.json'
-const USERS_FILE = './data/users.json'
+const BASKETS_FILE = "./data/baskets.json"
+const USERS_FILE = "./data/users.json"
 const basketModelManager = new ModelManager<Basket>(BASKETS_FILE)
 const basketProductModelManager = new ModelManager<BasketProduct>(BASKETS_FILE)
 const userModelManager = new ModelManager<User>(USERS_FILE)
 
 export const getAllBaskets = async (req: Request, res: Response) => {
   try {
-    const baskets = (await basketModelManager.getAll()) as Basket[]
+    const baskets = await basketModelManager.getAll()
     res.json(baskets)
   } catch (error: any) {
     res.status(400).send(error.message)
   }
 }
 
-export const getBasket = async (req: Request, res: Response) => {
+export const getBasketById = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     const basket = await basketModelManager.getByID(userId)
@@ -40,7 +40,7 @@ export const addEmptyBasket = async (req: Request, res: Response) => {
       total: 0,
     }
     await basketModelManager.add(newBasket)
-    res.status(201).send('Basket created successfully')
+    res.status(201).send("Basket created successfully")
   } catch (error: any) {
     res.status(400).send(error.message)
   }
@@ -50,7 +50,7 @@ export const removeBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     await basketModelManager.remove(userId)
-    res.end('Basket successfully removed')
+    res.end("Basket successfully removed")
   } catch (error: any) {
     res.status(400).send(error.message)
   }

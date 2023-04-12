@@ -1,6 +1,6 @@
 export interface BasketProduct {
   id: number
-  quantity: number // eleb: added quantity
+  quantity: number
   price: number
 }
 

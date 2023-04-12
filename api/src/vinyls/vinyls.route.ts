@@ -1,7 +1,7 @@
-import express from 'express'
-import { getAllVinyls, getVinyl } from './vinyls.controler'
+import express from "express"
+import { getAllVinyls, getVinylById } from "./vinyls.controller"
 
 export const vinylsRouter = express.Router()
 
-vinylsRouter.get('/products', getAllVinyls)
-vinylsRouter.get('/products/:id', getVinyl)
+vinylsRouter.get("/products", getAllVinyls)
+vinylsRouter.get("/products/:id", getVinylById)
