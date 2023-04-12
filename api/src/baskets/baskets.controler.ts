@@ -31,7 +31,8 @@ export const getBasket = async (req: Request, res: Response) => {
 export const addEmptyBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
-    userModelManager.getByID(userId)
+    await userModelManager.getByID(userId)
+
     const newBasket = {
       id: userId,
       BasketId: Date.now(),
@@ -39,7 +40,7 @@ export const addEmptyBasket = async (req: Request, res: Response) => {
       total: 0,
     }
     await basketModelManager.add(newBasket)
-    res.end('Basket created successfully')
+    res.status(201).send('Basket created successfully')
   } catch (error: any) {
     res.status(400).send(error.message)
   }

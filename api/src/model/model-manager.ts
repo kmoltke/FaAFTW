@@ -43,7 +43,9 @@ export class ModelManager<T extends { id: number }> {
     const index = this.findItem(itemArray, itemId)
     if (index === -1) {
       throw new Error(`Item with ID: ${itemId} doesn't exist`)
-    } else return itemArray[index]
+    } else {
+      return itemArray[index]
+    }
   }
 
   /***
