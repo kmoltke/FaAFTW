@@ -1,27 +1,49 @@
-import { ErrorRequestHandler, Request, Response } from 'express'
-import { getAll, getById } from './vinyls.model'
-import * as customerModel from './vinyls.model'
+import { Request, Response } from 'express'
+import { ModelManager } from '../model/model-manager'
+import { Vinyl } from './vinyls.model'
 
-//TODO: refactor all functions to either normal functions or arrow functions
+const VINYLS_FILE = './data/vinyls.json'
+const vinylsModelManager = new ModelManager<Vinyl>(VINYLS_FILE)
+
 export const getAllVinyls = async (req: Request, res: Response) => {
   try {
-    const vinylsData = await getAll()
-    res.send(vinylsData).status(200)
-  } catch (error) {}
+    let allVinyls = await vinylsModelManager.getAll()
+
+    const { genre, decades } = req.query
+
+    if (genre) {
+      allVinyls = allVinyls.filter((v) => v.genre === genre)
+    }
+
+    if (decades) {
+      allVinyls = allVinyls.filter((v) => v.decade === decades)
+    }
+
+    if (allVinyls.length === 0) {
+      res.end('No vinyls with provided categories')
+    } else {
+      let importants = getImportants(allVinyls)
+      res.json(importants)
+    }
+  } catch (error: any) {
+    res.status(400).send(error.message)
+  }
 }
 
-export const getVinylById = async (req: Request, res: Response) => {
+export const getVinyl = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params
-    const vinylData = await getById(+id)
-    res.send(vinylData).status(200)
-  } catch (error) {}
+    let id = parseInt(req.params.id)
+    let vinyl = await vinylsModelManager.getByID(id)
+    res.json(vinyl)
+  } catch (err: any) {
+    res.status(400).send(err.message)
+  }
 }
 
-export const addVinyl = async (req: Request, res: Response) => {
-  try {
-    const newVinyl = req.body
-    customerModel.add(newVinyl)
-    res.send(newVinyl).status(201)
-  } catch (error) {}
+const getImportants = (vinyls: Vinyl[]) => {
+  return vinyls.map((v) => ({
+    album: v.album,
+    artist: v.artist,
+    price: v.price,
+  }))
 }

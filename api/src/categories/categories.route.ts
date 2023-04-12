@@ -1,7 +1,7 @@
-import express from 'express'
-import { getAllCategories, getCategory } from './categories.controler'
+import express from "express";
+import { getCategories, getSubcategories } from "./categories.controler";
 
-export const categoriesRouter = express.Router()
+export const categoriesRouter = express.Router();
 
-categoriesRouter.get('/categories', getAllCategories)
-categoriesRouter.get('/categories/:category', getCategory)
+categoriesRouter.get("/categories", getCategories);
+categoriesRouter.get("/categories/:category", getSubcategories);

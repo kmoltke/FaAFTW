@@ -1,19 +1,31 @@
 import { Request, Response } from 'express'
-import { getAll, getByName } from './categories.model'
+import { ModelManager } from '../model/model-manager'
+import { Category } from './categories.model'
 
-export const getAllCategories = async (req: Request, res: Response) => {
+const CATEGORY_FILE = './data/baskets.json'
+const categoriesModelManager = new ModelManager<Category>(CATEGORY_FILE)
+
+export const getCategories = async (req: Request, res: Response) => {
   try {
-    const categoriesData = await getAll()
-    res.send(categoriesData).status(200)
-  } catch (error) {
-    res.status(404).send(error.message)
+    const categories = await categoriesModelManager.getAll()
+    const result = categories.map((obj) => obj.categoryType)
+    res.json(result)
+  } catch (e: any) {
+    res.status(400).send(e.message)
   }
 }
 
-export const getCategory = async (req: Request, res: Response) => {
+export const getSubcategories = async (req: Request, res: Response) => {
   try {
-    const { category } = req.params
-    const categoryData = await getByName(category)
-    res.send(categoryData).status(200)
-  } catch {}
+    const categories = await categoriesModelManager.getAll()
+    const category = req.params.category
+    const result = categories.find((obj) => obj.categoryType === category)
+    if (result === undefined) {
+      throw new Error('This category does not exist')
+    } else {
+      res.json(result.subcategories)
+    }
+  } catch (e: any) {
+    res.status(400).send(e.message)
+  }
 }

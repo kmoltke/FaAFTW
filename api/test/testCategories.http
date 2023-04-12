@@ -1,13 +1,15 @@
 
-// get all categories
-GET http://localhost:5000/categories HTTP/1.1 
+//should return all categories(only the names)
+GET http://localhost:5000/categories
 
+###
 
-#################################################
+//should return all subcategories
+GET http://localhost:5000/categories/genre
 
+###
 
-// get a specific category
-GET http://localhost:5000/categories/genre HTTP/1.1 
+// should return invalid category
+GET http://localhost:5000/categories/decade
 
-
-#################################################
+###

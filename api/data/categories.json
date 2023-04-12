@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "categoryType": "genre",
+    "subcategories": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"]
+  },
+  {
+    "id": 2,
+    "categoryType": "decades",
+    "subcategories": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
+  }
+]

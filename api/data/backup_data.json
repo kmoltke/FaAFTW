@@ -1,9 +1,76 @@
 {
-  "categories": {
-    "genre": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"],
-    "decades": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
-  },
-  "baskets": [],
+  "users": [
+    {
+      "id": 1,
+      "email": "Johndoe@gmail.com",
+      "fname": "John",
+      "lname": "Doe",
+      "password": "12345"
+    },
+    {
+      "id": 1680705564259,
+      "email": "testytester@gmail.com",
+      "fname": "testy",
+      "lname": "tester",
+      "password": "fsfjs"
+    },
+    {
+      "id": 1680706024196,
+      "email": "testytester2@gmail.com",
+      "fname": "testy",
+      "lname": "tester2",
+      "password": "fsfjs"
+    },
+    {
+      "id": 1680706770096,
+      "email": "testytester3@gmail.com",
+      "fname": "testy",
+      "lname": "tester2",
+      "password": "fsfjs"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "categoryType": "genre",
+      "subcategories": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"]
+    },
+    {
+      "id": 2,
+      "categoryType": "decades",
+      "subcategories": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
+    }
+  ],
+  "baskets": [
+    {
+      "id": 1680706770096,
+      "BasketId": 1680704188082,
+      "products": [],
+      "total": 0
+    },
+    {
+      "id": 1680705564259,
+      "BasketId": 1680706818189,
+      "products": [
+        {
+          "id": 2,
+          "quantity": 4,
+          "price": 600
+        },
+        {
+          "id": 5,
+          "quantity": 1,
+          "price": 120
+        },
+        {
+          "id": 4,
+          "quantity": 1,
+          "price": 120
+        }
+      ],
+      "total": 840
+    }
+  ],
   "vinyls": [
     {
       "id": 1,
