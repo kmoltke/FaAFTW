@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { ModelManager } from '../model/model-manager'
 import { Category } from './categories.model'
 
-const CATEGORY_FILE = './data/baskets.json'
+const CATEGORY_FILE = './data/categories.json'
 const categoriesModelManager = new ModelManager<Category>(CATEGORY_FILE)
 
 export const getCategories = async (req: Request, res: Response) => {
@@ -11,7 +11,7 @@ export const getCategories = async (req: Request, res: Response) => {
     const result = categories.map((obj) => obj.categoryType)
     res.json(result)
   } catch (e: any) {
-    res.status(400).send(e.message)
+    res.status(404).send(e.message)
   }
 }
 
