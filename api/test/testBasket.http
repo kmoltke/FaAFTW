@@ -1,31 +1,36 @@
 
 //Ellie version start
 
-//add products in a basket for a specific user
+// Add products in a basket for a specific user
 PUT http://localhost:5000/users/1/basket/products
 content-type: application/json
 
 {"id": 1, "quantity":1, "price": 200}
+
 ###
 
-//remove a product line for a specific user
+// Remove a product line for a specific user
 DELETE http://localhost:5000/users/1/basket/products/1
 content-type: application/json
+
 ###
 
-//create a basket for a specific user
+// Create a basket for a specific user
 POST http://localhost:5000/users/2/basket 
 content-type: application/json
+
 ###
 
-//get the basket contents for a specific user
+// Get basket content for a specific user
 GET http://localhost:5000/users/99/basket 
 content-type: application/json
+
 ###
 
-//delete the entire basket for a specific user
+// Delete the entire basket for a specific user
 DELETE http://localhost:5000/users/3/basket 
 content-type: application/json
+
 ###
 
 
