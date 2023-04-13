@@ -1,32 +1,40 @@
 
-// get all vinyls
+// Get all vinyls
 GET http://localhost:5000/products
 
+###
 
-#################################################
-
-
-// get a specific vinyl based on id 
+// Get a specific vinyl based on id 
 GET http://localhost:5000/products/4
 
 
-#################################################
+###
 
-// Get vinyls by category
-// rock:
+// Get vinyls by category -> genre -> 'rock'
 GET http://localhost:5000/products?genre=Rock
 
 ###
 
-// Decades:
+// Get vinyls by category -> artist -> 'Metallica'
+GET http://localhost:5000/products?artist=Metallica
+
+###
+
+
+// Get vinyls by category -> decades -> '70s'
 GET http://localhost:5000/products?decades=70s
 
 ###
 
-// Both:
+// Get vinyls by using two categories -> genre + decades
 GET http://localhost:5000/products?genre=Rock&decades=70s
 
 ###
 
+// Get vinyls by using three categories -> genre + decades + artist
+GET http://localhost:5000/products?genre=Rock&decades=70s&artist=Led Zeppelin
+
+###
+
 // None:
-GET http://localhost:5000/products?genre=Rock&decades=2010s
+GET http://localhost:5000/products?genre=Rock&decades=2010s&artist=The Beatles
