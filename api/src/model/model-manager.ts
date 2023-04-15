@@ -1,5 +1,6 @@
 import * as fs from "fs/promises"
 import { stringify } from "querystring"
+import { HttpError } from "../utils/http-errors"
 
 export class ModelManager<T extends { id: number }> {
   filePath: string
@@ -46,7 +47,7 @@ export class ModelManager<T extends { id: number }> {
     const itemArray = await this.getAll()
     const index = this.findItem(itemArray, itemId)
     if (index === -1) {
-      throw new Error(`${this.type} with ID: ${itemId} doesn't exist`)
+      throw new HttpError(404, `${this.type} with ID: ${itemId} doesn't exist`)
     } else {
       return itemArray[index]
     }
@@ -62,7 +63,10 @@ export class ModelManager<T extends { id: number }> {
 
     // If item already exists:
     if (this.findItem(itemArr, newItem.id) !== -1) {
-      throw new Error(`${this.type} with ID: ${newItem.id} already exists`)
+      throw new HttpError(
+        400,
+        `${this.type} with ID: ${newItem.id} already exists`
+      )
     }
     // push to itemArray and save
     itemArr.push(newItem)
@@ -74,7 +78,7 @@ export class ModelManager<T extends { id: number }> {
     let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
     if (index === -1)
-      throw new Error(`${this.type} with ID:${itemId} doesn't exist`)
+      throw new HttpError(404, `${this.type} with ID:${itemId} doesn't exist`)
     else {
       itemArray[index] = newItem
       await this.save(itemArray)
@@ -86,7 +90,7 @@ export class ModelManager<T extends { id: number }> {
     let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
     if (index === -1)
-      throw new Error(`${this.type} with ID:${itemId} doesn't exist`)
+      throw new HttpError(404, `${this.type} with ID:${itemId} doesn't exist`)
     else {
       itemArray.splice(index, 1) // remove item from array
       await this.save(itemArray)

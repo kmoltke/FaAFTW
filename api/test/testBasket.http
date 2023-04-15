@@ -30,4 +30,9 @@ content-type: application/json
 
 ###
 
+// Get basket content for a specific user (invalid user)
+GET http://localhost:5000/users/99/basket 
+content-type: application/json
+
+###
 

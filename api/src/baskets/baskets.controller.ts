@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { ModelManager } from "../model/model-manager"
 import { Basket, BasketProduct } from "./baskets.model"
 import { User } from "../users/users.model"
+import { HttpError } from "../utils/http-errors"
 
 const BASKETS_FILE = "./data/baskets.json"
 const USERS_FILE = "./data/users.json"
@@ -14,7 +15,11 @@ export const getAllBaskets = async (req: Request, res: Response) => {
     const baskets = await basketModelManager.getAll()
     res.json(baskets)
   } catch (error: any) {
-    res.status(400).send(error.message)
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
@@ -23,8 +28,12 @@ export const getBasketById = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.userId)
     const basket = await basketModelManager.getByID(userId)
     res.json(basket)
-  } catch (err: any) {
-    res.status(400).send(err.message)
+  } catch (error: any) {
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
@@ -42,7 +51,11 @@ export const addEmptyBasket = async (req: Request, res: Response) => {
     await basketModelManager.add(newBasket)
     res.status(201).send("Basket created successfully")
   } catch (error: any) {
-    res.status(400).send(error.message)
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
@@ -50,9 +63,13 @@ export const removeBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     await basketModelManager.remove(userId)
-    res.end("Basket successfully removed")
+    res.send("Basket successfully removed")
   } catch (error: any) {
-    res.status(400).send(error.message)
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
@@ -65,7 +82,7 @@ export const addProductToBasket = async (req: Request, res: Response) => {
     // find basket
     const basketIndex = basketModelManager.findItem(basketsArray, userId)
     if (basketIndex === -1)
-      throw new Error(`Basket for user ID:${userId} doesn't exist`)
+      throw new HttpError(404, `Basket for user "${userId}" doesn't exist`)
     else {
       //find the products
       const productsArray = basketsArray[basketIndex].products
@@ -88,9 +105,13 @@ export const addProductToBasket = async (req: Request, res: Response) => {
       await basketModelManager.save(basketsArray)
     }
 
-    res.end(`Basket for user "${userId}" was successfully updated.`)
+    res.send(`Basket for user "${userId}" was successfully updated.`)
   } catch (error: any) {
-    res.status(400).send(error.message)
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
@@ -103,7 +124,7 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
     // find basket
     const basketIndex = basketModelManager.findItem(basketsArray, userId)
     if (basketIndex === -1)
-      throw new Error(`Item with ID:${userId} doesn't exist`)
+      throw new HttpError(404, `Basket with ID:${userId} doesn't exist`)
     else {
       //find the products in the basket
       const productsArray = basketsArray[basketIndex].products
@@ -112,7 +133,10 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
         productId
       )
       if (productIndex === -1)
-        throw new Error(`Item with ID:${productId} doesn't exist`)
+        throw new HttpError(
+          404,
+          `Product with ID:${productId} doesn't exist in the basket for user "${userId}"`
+        )
       else {
         basketsArray[basketIndex].total -= productsArray[productIndex].price
         productsArray.splice(productIndex, 1)
@@ -120,8 +144,12 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
       await basketModelManager.save(basketsArray)
     }
 
-    res.end(`Basket for user id "${userId}" was successfully updated.`)
+    res.send(`Basket for user "${userId}" was successfully updated.`)
   } catch (error: any) {
-    res.status(400).send(error.message)
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }

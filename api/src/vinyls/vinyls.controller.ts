@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { ModelManager } from "../model/model-manager"
 import { Vinyl } from "./vinyls.model"
+import { HttpError } from "../utils/http-errors"
 
 const VINYLS_FILE = "./data/vinyls.json"
 const vinylsModelManager = new ModelManager<Vinyl>(VINYLS_FILE)
@@ -30,7 +31,11 @@ export const getAllVinyls = async (req: Request, res: Response) => {
       res.json(importants)
     }
   } catch (error: any) {
-    res.status(400).send(error.message)
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
@@ -39,8 +44,12 @@ export const getVinylById = async (req: Request, res: Response) => {
     let id = parseInt(req.params.id)
     let vinyl = await vinylsModelManager.getByID(id)
     res.json(vinyl)
-  } catch (err: any) {
-    res.status(400).send(err.message)
+  } catch (error: any) {
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
   }
 }
 
