@@ -1,6 +1,3 @@
-
-//Ellie version start
-
 // Add products in a basket for a specific user
 PUT http://localhost:5000/users/1/basket/products
 content-type: application/json
@@ -16,13 +13,13 @@ content-type: application/json
 ###
 
 // Create a basket for a specific user
-POST http://localhost:5000/users/2/basket 
+POST http://localhost:5000/users/1680706024196/basket 
 content-type: application/json
 
 ###
 
 // Get basket content for a specific user
-GET http://localhost:5000/users/99/basket 
+GET http://localhost:5000/users/1680705564259/basket 
 content-type: application/json
 
 ###
@@ -34,4 +31,3 @@ content-type: application/json
 ###
 
 
-//Ellie version end

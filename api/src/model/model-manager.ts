@@ -1,10 +1,14 @@
-import * as fs from 'fs/promises'
+import * as fs from "fs/promises"
+import { stringify } from "querystring"
 
 export class ModelManager<T extends { id: number }> {
   filePath: string
+  type: String
 
   constructor(filePath: string) {
     this.filePath = filePath
+    const plural = filePath.replace(/.+\/([a-z]+).json/, "$1")
+    this.type = plural[0].toUpperCase() + plural.slice(1, plural.length - 1)
   }
 
   /***
@@ -13,7 +17,7 @@ export class ModelManager<T extends { id: number }> {
    */
   async getAll(): Promise<T[]> {
     try {
-      let itemsTxt = await fs.readFile(this.filePath, 'utf8')
+      let itemsTxt = await fs.readFile(this.filePath, "utf8")
       let items = JSON.parse(itemsTxt)
       return items
     } catch (err: any) {
@@ -42,7 +46,7 @@ export class ModelManager<T extends { id: number }> {
     const itemArray = await this.getAll()
     const index = this.findItem(itemArray, itemId)
     if (index === -1) {
-      throw new Error(`Item with ID: ${itemId} doesn't exist`)
+      throw new Error(`${this.type} with ID: ${itemId} doesn't exist`)
     } else {
       return itemArray[index]
     }
@@ -58,7 +62,7 @@ export class ModelManager<T extends { id: number }> {
 
     // If item already exists:
     if (this.findItem(itemArr, newItem.id) !== -1) {
-      throw new Error(`Item with ID: ${newItem.id} already exists`)
+      throw new Error(`${this.type} with ID: ${newItem.id} already exists`)
     }
     // push to itemArray and save
     itemArr.push(newItem)
@@ -69,7 +73,8 @@ export class ModelManager<T extends { id: number }> {
   async update(itemId: number, newItem: T) {
     let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
-    if (index === -1) throw new Error(`Item with ID:${itemId} doesn't exist`)
+    if (index === -1)
+      throw new Error(`${this.type} with ID:${itemId} doesn't exist`)
     else {
       itemArray[index] = newItem
       await this.save(itemArray)
@@ -80,7 +85,8 @@ export class ModelManager<T extends { id: number }> {
   async remove(itemId: number) {
     let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)
-    if (index === -1) throw new Error(`Item with ID:${itemId} doesn't exist`)
+    if (index === -1)
+      throw new Error(`${this.type} with ID:${itemId} doesn't exist`)
     else {
       itemArray.splice(index, 1) // remove item from array
       await this.save(itemArray)
