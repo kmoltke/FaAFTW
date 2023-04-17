@@ -6,6 +6,12 @@ import { HttpError } from "../utils/http-errors"
 const VINYLS_FILE = "./data/vinyls.json"
 const vinylsModelManager = new ModelManager<Vinyl>(VINYLS_FILE)
 
+/**
+ * Gets most important information (e.i. album, artist & price) for all vinyls in the catalogue.
+ * If a query parameter with a category is provided, the getAllVinyls will filter by the specific category.
+ * @param req - optional category in query parameter
+ * @param res
+ */
 export const getAllVinyls = async (req: Request, res: Response) => {
   try {
     let allVinyls = await vinylsModelManager.getAll()
@@ -39,6 +45,12 @@ export const getAllVinyls = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Gets all information for a specific vinyl
+ * @param req
+ * @param res
+ * @throws HttpError if vinyl does not exist
+ */
 export const getVinylById = async (req: Request, res: Response) => {
   try {
     let id = parseInt(req.params.id)
@@ -53,6 +65,10 @@ export const getVinylById = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Helper function to return only specified important information.
+ * @param vinyls
+ */
 const getImportants = (vinyls: Vinyl[]) => {
   return vinyls.map((v) => ({
     album: v.album,

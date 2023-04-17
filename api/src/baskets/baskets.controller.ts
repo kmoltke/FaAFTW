@@ -10,6 +10,12 @@ const basketModelManager = new ModelManager<Basket>(BASKETS_FILE)
 const basketProductModelManager = new ModelManager<BasketProduct>(BASKETS_FILE)
 const userModelManager = new ModelManager<User>(USERS_FILE)
 
+/**
+ * Gets all baskets
+ * @param req
+ * @param res
+ * @throws HttpError
+ */
 export const getAllBaskets = async (req: Request, res: Response) => {
   try {
     const baskets = await basketModelManager.getAll()
@@ -23,9 +29,16 @@ export const getAllBaskets = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Gets basket by user ID
+ * @param req
+ * @param res
+ * @throws HttpError
+ */
 export const getBasketById = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
+    await userModelManager.getByID(userId)
     const basket = await basketModelManager.getByID(userId)
     res.json(basket)
   } catch (error: any) {
@@ -37,6 +50,12 @@ export const getBasketById = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Creates an empty basket for a user
+ * @param req
+ * @param res
+ * @throws HttpError
+ */
 export const addEmptyBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
@@ -59,9 +78,16 @@ export const addEmptyBasket = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Removes an entire basket for a specific user
+ * @param req
+ * @param res
+ * @throws HttpError
+ */
 export const removeBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
+    await userModelManager.getByID(userId)
     await basketModelManager.remove(userId)
     res.send("Basket successfully removed")
   } catch (error: any) {
@@ -73,9 +99,16 @@ export const removeBasket = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Adds a product to a specific basket
+ * @param req - contains product in json
+ * @param res
+ * @throws HttpError
+ */
 export const addProductToBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
+    await userModelManager.getByID(userId)  // Will throw user error if user does not exist
     const product = req.body // product is sent as part of the body
 
     const basketsArray = await basketModelManager.getAll()
@@ -115,9 +148,16 @@ export const addProductToBasket = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Removes a specific product from a specific basket.
+ * @param req
+ * @param res
+ * @throws HttpError
+ */
 export const removeProductFromBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
+    await userModelManager.getByID(userId)
     const productId = parseInt(req.params.productId)
 
     const basketsArray = await basketModelManager.getAll()

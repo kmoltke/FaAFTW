@@ -3,5 +3,5 @@ import { getCategories, getSubcategories } from "./categories.controller"
 
 export const categoriesRouter = express.Router()
 
-categoriesRouter.get("/categories", getCategories)
-categoriesRouter.get("/categories/:category", getSubcategories)
+categoriesRouter.get("/categories", getCategories)  //all categories
+categoriesRouter.get("/categories/:category", getSubcategories) //subcategories

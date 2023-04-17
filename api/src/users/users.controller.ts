@@ -6,6 +6,12 @@ import { HttpError } from "../utils/http-errors"
 const USERS_FILE = "./data/users.json"
 const usersModelManager = new ModelManager<User>(USERS_FILE)
 
+/**
+ * Creates a user
+ * @param req - User information
+ * @param res
+ * @throws HttpError if user with same email already exists
+ */
 export const createUser = async (req: Request, res: Response) => {
   try {
     let { email, fname, lname, password } = req.body
@@ -35,13 +41,12 @@ export const createUser = async (req: Request, res: Response) => {
 }
 
 /**
- * search for any provided property and property value
- * @param arr
+ * search for any provided property and property value in the User Data
+ * @param arr - Array to search
  * @param propertyName
  * @param property
- * @returns index of the first elemment with the following property
+ * @returns index of the first elemment with the following property. -1 if property does not exist
  */
-
 const findItemByProperty = (
   arr: Array<User>,
   propertyName: keyof User,

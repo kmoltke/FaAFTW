@@ -1,10 +1,12 @@
 import * as fs from "fs/promises"
-import { stringify } from "querystring"
-import { HttpError } from "../utils/http-errors"
+import {HttpError} from "../utils/http-errors"
 
+/**
+ * ModelManager is a generic class to store filepath and provide necessary functions for each controller type
+ */
 export class ModelManager<T extends { id: number }> {
-  filePath: string
-  type: String
+  filePath: string  // File path
+  type: String      // Specefies the manager type for error message purposes
 
   constructor(filePath: string) {
     this.filePath = filePath
@@ -12,37 +14,47 @@ export class ModelManager<T extends { id: number }> {
     this.type = plural[0].toUpperCase() + plural.slice(1, plural.length - 1)
   }
 
-  /***
+  /**
    * Get the whole json object from the datafile
    * @returns items - json object
+   * @throws HttpError - File does not exist
    */
   async getAll(): Promise<T[]> {
     try {
       let itemsTxt = await fs.readFile(this.filePath, "utf8")
-      let items = JSON.parse(itemsTxt)
-      return items
+      return JSON.parse(itemsTxt)
     } catch (err: any) {
-      throw err
+      throw new HttpError(404, `Server error: File does not exist`)
     }
   }
 
+  /**
+   * saves the array to the specific datafile
+   * @param items - itemArray
+   */
   async save(items: T[]) {
     // format and write to datafile:
     let itemsTxt = JSON.stringify(items, null, 2)
     await fs.writeFile(this.filePath, itemsTxt)
   }
 
-  /***
+  /**
    * Search for an id in an array
-   * @param arr
-   * @param Id
-   * @returns index of element in arr
+   * @param arr - Item Array to seach in
+   * @param Id - Id to search for
+   * @returns index of element in arr.
+   * -1 if element does not exist
    */
   findItem(arr: T[], Id: number) {
     return arr.findIndex((currItem) => currItem.id === Id)
   }
 
-  // get by id
+  /**
+   * Gets the item by a specific ID
+   * @param itemId
+   * @returns itemArray
+   * @throws HttpError
+   */
   async getByID(itemId: number) {
     const itemArray = await this.getAll()
     const index = this.findItem(itemArray, itemId)
@@ -53,10 +65,10 @@ export class ModelManager<T extends { id: number }> {
     }
   }
 
-  /***
+  /**
    * Adds a new item to the datafile
    * @param newItem json object of which to add
-   * @throws an error if item already exists
+   * @throws HttpError if Item ID does not exist
    */
   async add(newItem: T) {
     const itemArr = await this.getAll()
@@ -85,7 +97,11 @@ export class ModelManager<T extends { id: number }> {
     }
   }
 
-  // delete existing item
+  /**
+   * removes a specific item
+   * @param itemId
+   * @throws HttpError if item does not exist
+   */
   async remove(itemId: number) {
     let itemArray = await this.getAll()
     let index = this.findItem(itemArray, itemId)

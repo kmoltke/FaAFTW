@@ -9,15 +9,15 @@ import {
 
 export const basketsRouter = express.Router()
 
-basketsRouter.get("/users/:userId/basket", getBasketById) //get basket for a specific user
+basketsRouter.get("/users/:userId/basket", getBasketById) //get single basket
 
-basketsRouter.post("/users/:userId/basket", addEmptyBasket) //Create an empty shopping basket for a specific user.
+basketsRouter.post("/users/:userId/basket", addEmptyBasket) //Create empty basket
 
-basketsRouter.put("/users/:userId/basket/products", addProductToBasket) //Put a product in the basket for a specific user.
+basketsRouter.put("/users/:userId/basket/products", addProductToBasket) //Put product in basket
 
 basketsRouter.delete(
   "/users/:userId/basket/products/:productId",
   removeProductFromBasket
-) //remove a product from the basket for a specific user.
+) //remove product from basket
 
-basketsRouter.delete("/users/:userId/basket", removeBasket)
+basketsRouter.delete("/users/:userId/basket", removeBasket) //Remove an entire basket
