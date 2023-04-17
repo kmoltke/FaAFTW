@@ -3,5 +3,5 @@ import { getAllVinyls, getVinylById } from "./vinyls.controller"
 
 export const vinylsRouter = express.Router()
 
-vinylsRouter.get("/products", getAllVinyls)
-vinylsRouter.get("/products/:id", getVinylById)
+vinylsRouter.get("/products", getAllVinyls)     //get all vinyls or filter by category
+vinylsRouter.get("/products/:id", getVinylById) //get single vinyl

@@ -6,6 +6,12 @@ import { HttpError } from "../utils/http-errors"
 const CATEGORY_FILE = "./data/categories.json"
 const categoriesModelManager = new ModelManager<Category>(CATEGORY_FILE)
 
+/**
+ * Get all categories
+ * @param req
+ * @param res - All categories
+ * @throws HttpError
+ */
 export const getCategories = async (req: Request, res: Response) => {
   try {
     const categories = await categoriesModelManager.getAll()
@@ -20,6 +26,12 @@ export const getCategories = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Gets all subcategories by a specific category
+ * @param req
+ * @param res
+ * @throws HttpError if category does not exist
+ */
 export const getSubcategories = async (req: Request, res: Response) => {
   try {
     const categories = await categoriesModelManager.getAll()
