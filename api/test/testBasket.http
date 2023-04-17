@@ -7,6 +7,7 @@ content-type: application/json
 ###
 
 // Remove a product line for a specific user
+// Note: Do run basket test #1 before running this test
 DELETE http://localhost:5000/users/1680705564259/basket/products/1
 content-type: application/json
 
@@ -30,7 +31,8 @@ content-type: application/json
 
 ###
 
-// Get basket content for a specific user (should return user does not exist error)
+// Get basket content for a specific user
+// Note: this should return user does not exist error)
 GET http://localhost:5000/users/99/basket 
 content-type: application/json
 
