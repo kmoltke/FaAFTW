@@ -1,5 +1,5 @@
 // Add products in a basket for a specific user
-PUT http://localhost:5000/users/1/basket/products
+PUT http://localhost:5000/users/1680705564259/basket/products
 content-type: application/json
 
 {"id": 1, "quantity":1, "price": 200}
@@ -7,7 +7,7 @@ content-type: application/json
 ###
 
 // Remove a product line for a specific user
-DELETE http://localhost:5000/users/1/basket/products/1
+DELETE http://localhost:5000/users/1680705564259/basket/products/1
 content-type: application/json
 
 ###
@@ -25,12 +25,12 @@ content-type: application/json
 ###
 
 // Delete the entire basket for a specific user
-DELETE http://localhost:5000/users/3/basket 
+DELETE http://localhost:5000/users/1680705564259/basket
 content-type: application/json
 
 ###
 
-// Get basket content for a specific user (invalid user)
+// Get basket content for a specific user (should return user does not exist error)
 GET http://localhost:5000/users/99/basket 
 content-type: application/json
 

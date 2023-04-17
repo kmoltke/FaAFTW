@@ -1,5 +1,4 @@
 import * as fs from "fs/promises"
-import { stringify } from "querystring"
 import { HttpError } from "../utils/http-errors"
 
 export class ModelManager<T extends { id: number }> {
@@ -22,7 +21,7 @@ export class ModelManager<T extends { id: number }> {
       let items = JSON.parse(itemsTxt)
       return items
     } catch (err: any) {
-      throw err
+      throw new HttpError(404, `Server error: File does not exist`)
     }
   }
 

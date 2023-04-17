@@ -4,7 +4,7 @@ GET http://localhost:5000/categories
 
 ###
 
-// Get all subcategories
+// Get all subcategories from genre
 GET http://localhost:5000/categories/genre
 
 ###
