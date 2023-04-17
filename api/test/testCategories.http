@@ -1,0 +1,15 @@
+
+// Get all categories(only the names)
+GET http://localhost:5000/categories
+
+###
+
+// Get all subcategories from genre
+GET http://localhost:5000/categories/genre
+
+###
+
+// Get invalid category 
+GET http://localhost:5000/categories/year
+
+###

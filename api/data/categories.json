@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "categoryType": "genre",
+    "subcategories": ["Rock", "Electronic", "Pop", "R&B", "Heavy metal"]
+  },
+  {
+    "id": 2,
+    "categoryType": "decades",
+    "subcategories": ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s"]
+  },
+  {
+    "id": 3,
+    "categoryType": "artist",
+    "subcategories": ["The Beatles", "Led Zeppelin", "Pink Floyd", "The Rolling Stones", "Daft Punk", "Nirvana", "Fleetwood Mac", "Stevie Wonder", "Marvin Gaye", "Lana Del Rey", "Oasis", "Michael Jackson", "Roxy Music", "Metallica", "The War On Drugs", "The Minds of 99", "The Black Keys"]
+  }
+]
