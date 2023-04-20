@@ -1,0 +1,40 @@
+// Add products in a basket for a specific user
+PUT http://localhost:5000/users/1680705564259/basket/products
+content-type: application/json
+
+{"id": 1, "quantity":1, "price": 200}
+
+###
+
+// Remove a product line for a specific user
+// Note: Do run basket test #1 before running this test
+DELETE http://localhost:5000/users/1680705564259/basket/products/1
+content-type: application/json
+
+###
+
+// Create a basket for a specific user
+POST http://localhost:5000/users/1680706024196/basket 
+content-type: application/json
+
+###
+
+// Get basket content for a specific user
+GET http://localhost:5000/users/1680705564259/basket 
+content-type: application/json
+
+###
+
+// Delete the entire basket for a specific user
+DELETE http://localhost:5000/users/1680705564259/basket
+content-type: application/json
+
+###
+
+// Get basket content for a specific user
+// Note: this should return user does not exist error)
+GET http://localhost:5000/users/99/basket 
+content-type: application/json
+
+###
+
