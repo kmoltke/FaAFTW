@@ -16,6 +16,7 @@
   display: inline-block;
   margin-bottom: 2em;
 }
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -33,10 +34,12 @@
   min-width: 160px;
   border-width: 0px;
 }
+
 .dropdown button:hover {
   background-color: #f3efef;
   color: #000;
 }
+
 .dropbtn {
   background-color: black;
   color: white;

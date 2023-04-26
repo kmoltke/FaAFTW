@@ -1,5 +1,7 @@
-function Grid() {
-  return <>home</>
+function GridCard() {
+  return <>
+  
+  </>
 }
 
-export default Grid
+export default GridCard
