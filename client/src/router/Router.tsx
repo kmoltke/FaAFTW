@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import LoginPage from "../components/LoginPage"
-import CartPage from "../components/CartPage"
-import HomePage from "../components/HomePage"
-import Navbar from "../components/Navbar"
+import LoginPage from "../pages/LoginPage/LoginPage"
+import CartPage from "../pages/CartPage/CartPage"
+import HomePage from "../pages/HomePage/HomePage"
+import Navbar from "../components/Navbar/Navbar"
 
 function Router(props: any) {
   return (
     <BrowserRouter>
-    <Navbar />
+      <Navbar />
       <Routes>
         <Route path="/browse" Component={() => <div>browse</div>} />
         <Route path="/login" Component={LoginPage} />
