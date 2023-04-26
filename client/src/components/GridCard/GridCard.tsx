@@ -1,5 +1,5 @@
-import '../styles/index.css'
-import '../styles/template.css'
+import '../../styles/index.css'
+import '../../styles/template.css'
 
 function GridCard() {
   return (
@@ -15,11 +15,7 @@ function GridCard() {
           <p className="productArtist">Led Zeppelin</p>
         </div>
         <p className="productPrice">177,-</p>
-        <button
-          className="cardButton btn btn-primary"
-          id="liveAlertBtn"
-          // onclick="addToBasket(2);"
-        >
+        <button className="cardButton btn btn-primary" id="liveAlertBtn">
           Add to Cart
         </button>
       </div>
