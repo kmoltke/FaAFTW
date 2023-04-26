@@ -71,8 +71,10 @@ export const getVinylById = async (req: Request, res: Response) => {
  */
 const getImportants = (vinyls: Vinyl[]) => {
   return vinyls.map((v) => ({
+    id: v.id,
     album: v.album,
     artist: v.artist,
     price: v.price,
+    imageSrc: v.image,
   }))
 }

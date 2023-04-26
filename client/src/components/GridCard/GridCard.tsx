@@ -1,20 +1,31 @@
-import '../../styles/index.css'
-import '../../styles/template.css'
+import { NavLink } from "react-router-dom"
+import "./GridCard.css"
+import "../../styles/template.css"
 
-function GridCard() {
+type Props = {
+  id: number
+  title: string
+  artist: string
+  price: number
+  imageSrc?: string
+}
+
+function GridCard(props: Props) {
+  const noImg = "/images/no-image.jpg"
+  const img = props.imageSrc ?? noImg
+  const route = "/products/" + props.id
+
   return (
     <>
       <div className="productCard">
-        <a href="product-description.html?id=2">
-          <img className="image" src="../images/id2-1.jpg"></img>
-        </a>
+        <NavLink to={route}>
+          <img className="productImage" src={img}></img>
+        </NavLink>
         <div className="productDetails">
-          <a className="productTitle" href="product-description.html?id=2">
-            IV
-          </a>
-          <p className="productArtist">Led Zeppelin</p>
+          <a className="productTitle">{props.title}</a>
+          <p className="productArtist">{props.artist}</p>
         </div>
-        <p className="productPrice">177,-</p>
+        <p className="productPrice">{props.price},-</p>
         <button className="cardButton btn btn-primary" id="liveAlertBtn">
           Add to Cart
         </button>

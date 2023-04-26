@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import GridCard from "../../components/GridCard/GridCard"
+import Grid from "../../components/Grid/Grid"
 
 function HomePage() {
   const [products, setProducts] = useState([])
@@ -17,17 +19,7 @@ function HomePage() {
 
   return (
     <div>
-      <h1>
-        {products.map((product: any) => {
-          return (
-            <div>
-              <div>{product.album}</div>
-              <div>{product.artist}</div>
-              <div>{product.price}</div>
-            </div>
-          )
-        })}
-      </h1>
+      <Grid products={products}></Grid>
     </div>
   )
   //add carousel component

@@ -3,6 +3,7 @@ import LoginPage from "../pages/LoginPage/LoginPage"
 import CartPage from "../pages/CartPage/CartPage"
 import HomePage from "../pages/HomePage/HomePage"
 import Navbar from "../components/Navbar/Navbar"
+import ProductDescriptionPage from "../pages/ProductDescriptionPage/ProductDescriptionPage"
 
 function Router(props: any) {
   return (
@@ -13,6 +14,7 @@ function Router(props: any) {
         <Route path="/login" Component={LoginPage} />
         <Route path="/cart" Component={CartPage} />
         <Route path="/" Component={HomePage} />
+        <Route path="/products/:id" Component={ProductDescriptionPage} />
       </Routes>
     </BrowserRouter>
   )
