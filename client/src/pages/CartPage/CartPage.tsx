@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import BasketSummary from "../../components/BasketSummary/BasketSummary";
-import { Basket } from "../../../../api/src/baskets/baskets.model";
+import {Basket} from "../../../../api/src/baskets/baskets.model";
+import Cart from "../../components/Cart/Cart";
 
 function CartPage() {
     const emptyBasket: Basket = {
@@ -9,7 +10,8 @@ function CartPage() {
         BasketId: 0,
         products: [],
         total: 0
-    };
+    }
+
     const [basket, setProducts] = useState(emptyBasket)
 
     useEffect(() => {
@@ -30,6 +32,11 @@ function CartPage() {
                     <Col sm={8}>
                         <h3>Products</h3>
                         <hr/>
+                        <Cart id={basket.id}
+                              BasketId={basket.BasketId}
+                              products={basket.products}
+                              total={basket.total}>
+                        </Cart>
                     </Col>
                     <Col sm={4}>
                         <h3>Summary</h3>
