@@ -18,11 +18,13 @@ function GridCard(props: Props) {
   return (
     <>
       <div className="productCard">
-        <NavLink to={route}>
+        <NavLink to={"/products/" + props.id}>
           <img className="productImage" src={img}></img>
         </NavLink>
         <div className="productDetails">
-          <a className="productTitle">{props.title}</a>
+          <NavLink to={route} className="productTitle">
+            {props.title}
+          </NavLink>
           <p className="productArtist">{props.artist}</p>
         </div>
         <p className="productPrice">{props.price},-</p>

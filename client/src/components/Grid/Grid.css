@@ -1,7 +1,6 @@
 .grid {
   display: grid;
   max-width: 1275px;
-  column-gap: 50px;
   gap: 30px;
   --minWidth: 200px;
   grid-template-columns: repeat(
