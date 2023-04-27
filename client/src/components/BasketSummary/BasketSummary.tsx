@@ -9,8 +9,7 @@ function BasketSummary(summary: Summary) {
     return (
         <Container>
             <h4>Shipping</h4>
-            <DropdownButton id="dropdown-basic-button"
-                            title="Standard-Delivery DKK 60.00"
+            <DropdownButton title="Standard-Delivery DKK 60.00"
                             variant="secondary"
                             menuVariant="dark"
                             className="mt-2">
