@@ -40,27 +40,6 @@ function CartPage() {
             </Card>
         </Container>
     )
-
-    // return (
-    //     <Container>
-    //         <Row>
-    //             <Col sm={8}>
-    //                 <Card>
-    //                     <Card.Body>
-    //                         Hello
-    //                     </Card.Body>
-    //                 </Card>
-    //             </Col>
-    //             <Col sm={4}>
-    //                 <Card>
-    //                     <Card.Body>
-    //                         Summary
-    //                     </Card.Body>
-    //                 </Card>
-    //             </Col>
-    //         </Row>
-    //     </Container>
-    // )
 }
 
 
