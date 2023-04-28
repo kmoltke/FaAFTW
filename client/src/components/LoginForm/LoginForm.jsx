@@ -21,6 +21,12 @@ export const LoginForm = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     console.log({ name, email, password })
+
+    fetch('/localhost:5000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    })
   }
 
   return (
