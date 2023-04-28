@@ -7,24 +7,17 @@
     "password": "12345"
   },
   {
-    "id": 1680705564259,
-    "email": "testytester@gmail.com",
-    "fname": "testy",
-    "lname": "tester",
-    "password": "fsfjs"
+    "id": 1682707194518,
+    "email": "test from Postman",
+    "fname": "Test",
+    "lname": "Postman",
+    "password": "123"
   },
   {
-    "id": 1680706024196,
-    "email": "testytester2@gmail.com",
-    "fname": "testy",
-    "lname": "tester2",
-    "password": "fsfjs"
-  },
-  {
-    "id": 1680706770096,
-    "email": "testytester3@gmail.com",
-    "fname": "testy",
-    "lname": "tester2",
-    "password": "fsfjs"
+    "id": 1682707447794,
+    "email": "martinignaciolupa@gmail.com",
+    "fname": "Martin",
+    "lname": "Lupa",
+    "password": "123"
   }
 ]
