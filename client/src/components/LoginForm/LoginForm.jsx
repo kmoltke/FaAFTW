@@ -2,12 +2,16 @@ import { useState } from 'react'
 import './login-form.css'
 
 export const LoginForm = () => {
-  const [name, setName] = useState()
+  const [fName, setFName] = useState()
+  const [lName, setLName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
-  const handleNameInput = (e) => {
-    setName(e.target.value)
+  const handleFullNameInput = (e) => {
+    const [firstName, lastName] = e.target.value.split(' ')
+    console.log(e.target.value)
+    setFName(firstName)
+    setLName(lastName)
   }
 
   const handleEmailInput = (e) => {
@@ -20,12 +24,13 @@ export const LoginForm = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log({ name, email, password })
+
+    console.log({ fName, lName, email, password })
 
     fetch('/localhost:5000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ email, fName, lName, password }),
     })
   }
 
@@ -38,16 +43,16 @@ export const LoginForm = () => {
         id="loginForm"
       >
         <div className="form-group pb-3">
-          <label for="fullNameInput">Full Name</label>
+          <label htmlFor="fullNameInput">Full Name</label>
           <input
-            onChange={handleNameInput}
+            onChange={handleFullNameInput}
             type="text"
             className="form-control"
             id="fullNameInput"
           />
         </div>
         <div className="form-group pb-3">
-          <label for="emailInput">Email</label>
+          <label htmlFor="emailInput">Email</label>
           <input
             onChange={handleEmailInput}
             type="email"
@@ -56,7 +61,7 @@ export const LoginForm = () => {
           />
         </div>
         <div className="form-group pb-3">
-          <label for="passwordInput">Password</label>
+          <label htmlFor="passwordInput">Password</label>
           <input
             onChange={handlePasswordInput}
             type="password"
@@ -73,7 +78,7 @@ export const LoginForm = () => {
             type="checkbox"
             id="rememberMeCheckbox"
           />
-          <label className="form-check-label" for="rememberMeCheckbox">
+          <label className="form-check-label" htmlFor="rememberMeCheckbox">
             Remember me
           </label>
         </div>
