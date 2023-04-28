@@ -5,5 +5,19 @@
     "fname": "John",
     "lname": "Doe",
     "password": "12345"
+  },
+  {
+    "id": 1682707194518,
+    "email": "test from Postman",
+    "fname": "Test",
+    "lname": "Postman",
+    "password": "123"
+  },
+  {
+    "id": 1682707447794,
+    "email": "martinignaciolupa@gmail.com",
+    "fname": "Martin",
+    "lname": "Lupa",
+    "password": "123"
   }
 ]

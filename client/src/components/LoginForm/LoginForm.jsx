@@ -2,16 +2,17 @@ import { useState } from 'react'
 import './login-form.css'
 
 export const LoginForm = () => {
-  const [fName, setFName] = useState()
-  const [lName, setLName] = useState()
+  const [fname, setFName] = useState()
+  const [lname, setLName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
-  const handleFullNameInput = (e) => {
-    const [firstName, lastName] = e.target.value.split(' ')
-    console.log(e.target.value)
-    setFName(firstName)
-    setLName(lastName)
+  const handleFNameInput = (e) => {
+    setFName(e.target.value)
+  }
+
+  const handleLNameInput = (e) => {
+    setLName(e.target.value)
   }
 
   const handleEmailInput = (e) => {
@@ -25,13 +26,13 @@ export const LoginForm = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    console.log({ fName, lName, email, password })
+    console.log({ email, fname, lname, password })
 
-    fetch('/localhost:5000/users', {
+    fetch('http://localhost:5000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, fName, lName, password }),
-    })
+      body: JSON.stringify({ email, fname, lname, password }),
+    }).then((data) => console.log(data))
   }
 
   return (
@@ -43,12 +44,23 @@ export const LoginForm = () => {
         id="loginForm"
       >
         <div className="form-group pb-3">
-          <label htmlFor="fullNameInput">Full Name</label>
+          <label htmlFor="firstNameInput">First Name</label>
           <input
-            onChange={handleFullNameInput}
+            onChange={handleFNameInput}
             type="text"
+            value={fname}
             className="form-control"
-            id="fullNameInput"
+            id="firstNameInput"
+          />
+        </div>
+        <div className="form-group pb-3">
+          <label htmlFor="lastNameInput">Last Name</label>
+          <input
+            onChange={handleLNameInput}
+            type="text"
+            value={lname}
+            className="form-control"
+            id="lastNameInput"
           />
         </div>
         <div className="form-group pb-3">
@@ -56,6 +68,7 @@ export const LoginForm = () => {
           <input
             onChange={handleEmailInput}
             type="email"
+            value={email}
             className="form-control"
             id="emailInput"
           />
@@ -65,6 +78,7 @@ export const LoginForm = () => {
           <input
             onChange={handlePasswordInput}
             type="password"
+            value={password}
             className="form-control"
             id="passwordInput"
           />

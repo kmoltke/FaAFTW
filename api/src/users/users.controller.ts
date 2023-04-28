@@ -32,6 +32,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
     let { email, fname, lname, password } = req.body
+    console.log(email, fname, lname, password)
     const allUsers = await usersModelManager.getAll()
     const userIndex = await findItemByProperty(allUsers, 'email', email)
 
@@ -46,7 +47,7 @@ export const createUser = async (req: Request, res: Response) => {
         password,
       }
       await usersModelManager.add(newUser)
-      res.status(201).send('User created successfully')
+      res.status(201).send(newUser)
     }
   } catch (error: any) {
     if (error instanceof HttpError) {
