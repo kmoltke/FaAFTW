@@ -1,12 +1,12 @@
-import GridCard from '../GridCard/GridCard'
-import './Grid.css'
+import GridCard from "../GridCard/GridCard"
+import styles from "./Grid.module.css"
 
 function Grid(props: any) {
   const { products } = props
   console.log(products)
 
   return (
-    <div className="grid">
+    <div className={styles.grid}>
       {products.map((product: any) => {
         return (
           <GridCard

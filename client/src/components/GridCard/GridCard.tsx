@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import "./GridCard.css"
+import styles from "./GridCard.module.css"
 import "../../styles/template.css"
 
 type Props = {
@@ -17,15 +17,15 @@ function GridCard(props: Props) {
 
   return (
     <>
-      <div className="productCard">
+      <div className={styles.productCard}>
         <NavLink to={route}>
-          <img className="productImage" src={img}></img>
+          <img className={styles.productImage} src={img}></img>
         </NavLink>
-        <div className="productDetails">
-          <a className="productTitle">{props.title}</a>
-          <p className="productArtist">{props.artist}</p>
+        <div className={styles.productDetails}>
+          <a className={styles.productTitle}>{props.title}</a>
+          <p className={styles.productArtist}>{props.artist}</p>
         </div>
-        <p className="productPrice">{props.price},-</p>
+        <p className={styles.productPrice}>{props.price},-</p>
         <button className="cardButton btn btn-primary" id="liveAlertBtn">
           Add to Cart
         </button>
