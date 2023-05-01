@@ -6,3 +6,15 @@ content-type: application/json
 {"email": "jesper@gmail.com", "fname":"jesper", "lname": "programmer", "password": "java"}
 
 ###
+// Get a user by id
+GET  http://localhost:5000/users/1670705564259
+content-type: application/json
+
+###
+// Authenticate a user by email and password
+POST http://localhost:5000/users/login
+content-type: application/json
+
+{"email": "Johndoe@gmail.com", "password": "12345"}
+
+###
