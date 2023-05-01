@@ -1,0 +1,15 @@
+.Container {
+  display: flex;
+  text-align: center;
+  width: 400px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Button {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+  margin: 10px;
+}

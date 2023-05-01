@@ -1,38 +1,40 @@
-import { useState } from 'react'
-import './login-form.css'
+import { useState } from "react"
+import "./RegisterForm.css"
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const [fname, setFName] = useState()
   const [lname, setLName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [id, setId] = useState()
 
-  const handleFNameInput = (e) => {
+  const handleFNameInput = (e: any) => {
     setFName(e.target.value)
   }
 
-  const handleLNameInput = (e) => {
+  const handleLNameInput = (e: any) => {
     setLName(e.target.value)
   }
 
-  const handleEmailInput = (e) => {
+  const handleEmailInput = (e: any) => {
     setEmail(e.target.value)
   }
 
-  const handlePasswordInput = (e) => {
+  const handlePasswordInput = (e: any) => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: any) => {
     e.preventDefault()
 
-    console.log({ email, fname, lname, password })
-
-    fetch('http://localhost:5000/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, fname, lname, password }),
-    }).then((data) => console.log(data))
+    })
+      .then((data) => data.json())
+      .then((parsedData) => console.log(parsedData))
+    console.log(id)
   }
 
   return (

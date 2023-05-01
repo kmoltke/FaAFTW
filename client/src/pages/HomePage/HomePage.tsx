@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react'
-import GridCard from '../../components/GridCard/GridCard'
-import Grid from '../../components/Grid/Grid'
+import { useEffect, useState } from "react"
+import GridCard from "../../components/GridCard/GridCard"
+import Grid from "../../components/Grid/Grid"
 
 function HomePage() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:5000/products')
+    fetch("http://localhost:5000/products")
       .then((data) => data.json())
       .then((parsedData) => setProducts(parsedData))
   }, [])
-
-  console.log(products)
 
   return (
     <div>

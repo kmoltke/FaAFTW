@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
-import { ModelManager } from '../model/model-manager'
-import { User } from './users.model'
-import { HttpError } from '../utils/http-errors'
+import { Request, Response } from "express"
+import { ModelManager } from "../model/model-manager"
+import { User } from "./users.model"
+import { HttpError } from "../utils/http-errors"
 
-const USERS_FILE = './data/users.json'
+const USERS_FILE = "./data/users.json"
 const usersModelManager = new ModelManager<User>(USERS_FILE)
 
 /**
@@ -12,7 +12,7 @@ const usersModelManager = new ModelManager<User>(USERS_FILE)
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const allUsers = await usersModelManager.getAll()
-    console.log('all users:', allUsers)
+    console.log("all users:", allUsers)
     res.status(200).send(allUsers)
   } catch (error: any) {
     if (error instanceof HttpError) {
@@ -32,12 +32,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
     let { email, fname, lname, password } = req.body
-    console.log(email, fname, lname, password)
     const allUsers = await usersModelManager.getAll()
-    const userIndex = await findItemByProperty(allUsers, 'email', email)
+    const userIndex = await findItemByProperty(allUsers, "email", email)
 
     if (userIndex !== -1) {
-      throw new HttpError(400, 'user with this email already exists')
+      throw new HttpError(400, "user with this email already exists")
     } else {
       const newUser = {
         id: Date.now(),
@@ -45,10 +44,46 @@ export const createUser = async (req: Request, res: Response) => {
         fname,
         lname,
         password,
+        test: "test",
       }
       await usersModelManager.add(newUser)
       res.status(201).send(newUser)
     }
+  } catch (error: any) {
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
+  }
+}
+
+export const authenticateUser = async (req: Request, res: Response) => {
+  try {
+    //code start
+    const { email, password } = req.body
+    const users = await usersModelManager.getAll()
+    const user = users.find((u) => u.email === email && u.password === password)
+    if (user) {
+      res.json({ userId: user.id })
+    } else {
+      res.status(401).json({ message: "Invalid email or password" })
+    }
+  } catch (error: any) {
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).send(error.message)
+    } else {
+      res.status(500).send(error.message)
+    }
+  }
+}
+
+export const getUserById = async (req: Request, res: Response) => {
+  try {
+    //code start
+    let id = parseInt(req.params.id)
+    let user = await usersModelManager.getByID(id)
+    res.json(user)
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
