@@ -19,6 +19,8 @@
   width: 55%;
   margin-left: 15px;
 }
+
+/* not used */
 .productOverview p {
   margin-top: 1em;
   line-height: 150%;
@@ -49,6 +51,8 @@
   max-width: 500px;
   object-fit: cover;
 }
+
+/* not used */
 .productOverview button {
   border: none;
   outline: 0;
