@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import GridCard from "../../components/GridCard/GridCard"
 import Grid from "../../components/Grid/Grid"
+import "../../styles/template.css"
 
 function HomePage() {
   const [products, setProducts] = useState([])
