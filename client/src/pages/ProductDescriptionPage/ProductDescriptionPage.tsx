@@ -1,53 +1,67 @@
-import { useParams } from "react-router-dom"
-import "./ProductDescriptionPage.css"
-import vinyls from '../../../../api/data/vinyls.json';
+import "./ProductDescriptionPage.css";
+import "../../global.css";
+import { useParams } from "react-router-dom";
+import { Vinyl } from "../../../../api/src/vinyls/vinyls.model";
+import { useEffect, useState } from "react";
+import { Col, Row, Button } from "react-bootstrap";
 
-const addToCart = () => {
-  
+function ProductDescriptionPage() {
+  const { id } = useParams();
+  const [product, setProduct] = useState<Vinyl>();
+
+  useEffect(() => {
+    fetch("http://localhost:5000/products/" + id)
+      .then((data) => data.json())
+      .then((parsedData) => setProduct(parsedData));
+  }, []);
+
+  console.log(product);
+
+  return (
+    <main>
+      <section>
+        <h1> Product Description </h1>
+        <div className="productOuter" id="productOuter">
+          <div>
+            <img className="productImage" src={product?.image} />
+          </div>
+          <div className="productOverview" id="productOverview">
+            <h1 className="productTitle"> {product?.album}</h1>
+            <h3 className="productArtist"> {product?.artist}</h3>
+            <p className="productPrice"> {product?.price}</p>
+            <Button className="cardButton btn btn-primary">Add to Cart</Button>
+            <p> {product?.description}</p>
+          </div>
+        </div>
+        <div className="productDetails" id="productDetails">
+          <p> Year: {product?.year} </p>
+          <p> Genre: {product?.genre} </p>
+          <p> Type: {product?.type} </p>
+          <p> Label: {product?.label} </p>
+        </div>
+      </section>
+    </main>
+  );
 }
 
-type Vinyl = {
-  id: number
-  artist: string
-  album: string
-  decade: string
-  year: number
-  genre: string
-  price: number
-  type: string
-  label: string
-  image: string
-  description: string
-}
+export default ProductDescriptionPage;
 
-
-function ProductDescriptionPage(): JSX.Element {
-  const { id } = useParams() 
-  const path = "/products/" + id
-  const vinyl = vinyls.find((vinyl) => vinyl.id === id) as Vinyl 
-
-return (
-<div className="container">
-    <h1> Product description - {id} </h1>
-    <section>
-      <div className="productOuter" id="productOuter">
-        <div className="productImage"> {vinyl.image}</div>
-        <div className="productOverview" id="productOverview"></div>
-        <h1 className="productTitle"> {vinyl.album}</h1>
-        <h3 className="productArtist"> {vinyl.artist}</h3>
-        <p className="productPrice"> {vinyl.price}</p>
-        <button onClick={addToCart}> Add to Cart </button>
-      </div>
-      <div className="productDetails" id="productDetails"></div>
-      <p> Year: {vinyl.year} </p>
-      <p> Genre: {vinyl.genre} </p>
-      <p> Type: {vinyl.type} </p>
-      <p> Label: {vinyl.label} </p>
-    </section>
-  </div>
-)
+{
+  /* Button to go back to front page
 };
+const addToCart = "";
+<Button onClick={addToCart} className="cardButton btn btn-primary">
 
-export default ProductDescriptionPage
+      <div className="container">
 
 
+<h1 className="productTitle"> {product?.album}</h1>
+<h3 className="productArtist"> {product?.artist}</h3>
+<p className="productPrice"> {product?.price}</p>
+
+
+const history = useHistory();
+const handleReturnClick = () => {
+  history.push("/");
+*/
+}
