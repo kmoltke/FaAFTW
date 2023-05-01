@@ -64,7 +64,13 @@ export const authenticateUser = async (req: Request, res: Response) => {
     const users = await usersModelManager.getAll()
     const user = users.find((u) => u.email === email && u.password === password)
     if (user) {
-      res.json({ userId: user.id })
+      res.json({
+        user: {
+          id: user.id,
+          fname: user.fname,
+          lname: user.lname,
+        },
+      })
     } else {
       res.status(401).json({ message: "Invalid email or password" })
     }

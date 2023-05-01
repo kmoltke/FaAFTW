@@ -1,0 +1,22 @@
+.loginForm {
+  width: 400px;
+}
+
+.loginButton {
+  background-color: #212121;
+}
+
+.error {
+  color: #f23737;
+}
+
+.errorContainer {
+  margin-top: 1rem;
+  text-align: left;
+  padding: 20px 20px 20px 70px;
+  background-image: url(../../../public/images/error.png);
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 30px center;
+  background-color: #fae7ec;
+}

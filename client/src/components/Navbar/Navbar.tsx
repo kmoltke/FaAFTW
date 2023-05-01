@@ -1,33 +1,59 @@
 import { NavLink } from "react-router-dom"
+import { useUserContext } from "../../contexts/UserContext"
+import styles from "./Navbar.module.css"
+import { useState } from "react"
 
 function Navbar() {
+  const { user, updateUser } = useUserContext()
+  console.log(user)
+
+  const [responsive, setResponsive] = useState("")
+
   const burger = () => {
-    alert("it works")
+    responsive === "" ? setResponsive("responsive") : setResponsive("")
   }
 
   return (
     <>
       <header>
-        <div className="navbar" id="navbar">
-          <a href="#default" id="logo">
+        <div className={styles.navbar}>
+          <a href="#default" className={styles.logo}>
             <img
-              id="logoel1"
+              className={styles.logoel1}
               src="/images/logo/332096491_571562201699624_6671416270433743475_n.png"
               alt=""
             />
-            <div id="logoel2">the vinyl countdown</div>
+            <div className={styles.logoel2}>the vinyl countdown</div>
           </a>
-          <div id="navbar-right" className="navbar-right">
-            <a className="icon" onClick={burger}>
+          <div className={styles.navbarRight + responsive}>
+            <a className={styles.icon + responsive} onClick={burger}>
               <i className="fa fa-bars"></i>
             </a>
             <NavLink to={"/"}>Home</NavLink>
             <NavLink to={"/browse"}>Browse</NavLink>
-            <NavLink to={"/login"}>Login</NavLink>
-            <NavLink to={"/cart"}>Cart</NavLink>
-            {/* <a href="" id="logout-link">
-            Logout
-          </a> */}
+            {user ? (
+              <NavLink
+                to={"/"}
+                onClick={() => updateUser(undefined)}
+                className={styles.navItem}
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink to={"/login"} className={styles.navItem}>
+                Login
+              </NavLink>
+            )}
+            <NavLink to={"/cart"} className={styles.navItem}>
+              {user ? (
+                <>
+                  <span style={{ color: "#f23737" }}>{user.fname}</span>
+                  {"'s Cart"}
+                </>
+              ) : (
+                "Cart"
+              )}
+            </NavLink>
           </div>
         </div>
       </header>

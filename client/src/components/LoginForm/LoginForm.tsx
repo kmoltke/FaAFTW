@@ -1,9 +1,14 @@
-import { useState } from "react"
-import "./LoginForm.css"
+import { useContext, useState } from "react"
+import styles from "./LoginForm.module.css"
+import { useUserContext } from "../../contexts/UserContext"
+import { useNavigate } from "react-router"
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const navigate = useNavigate()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState<string>()
+  const { user, updateUser } = useUserContext()
 
   const handleEmailInput = (e: any) => {
     setEmail(e.target.value)
@@ -13,16 +18,26 @@ export const LoginForm = () => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e: any) => {
+  const handleFormSubmit = async (e: any) => {
     e.preventDefault()
 
-    console.log({ email, password })
-
-    fetch("http://localhost:5000/users/login", {
+    const response = await fetch("http://localhost:5000/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-    }).then((data) => console.log(data))
+    })
+
+    if (response.status !== 200) {
+      setError(
+        "Looks like either your email address or password were incorrect. Wanna try again?"
+      )
+      return
+    }
+
+    const data = await response.json()
+
+    updateUser(data.user)
+    navigate("/")
   }
 
   return (
@@ -30,7 +45,7 @@ export const LoginForm = () => {
       <form
         onSubmit={handleFormSubmit}
         // action="http://127.0.0.1:5500/index.html"
-        className="p-3 login-form"
+        className={`p-3 ${styles.loginForm}`}
         id="loginForm"
       >
         <div className="form-group pb-3">
@@ -56,16 +71,11 @@ export const LoginForm = () => {
         <button type="submit" className="btn btn-primary w-100 login-button">
           Submit
         </button>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="rememberMeCheckbox"
-          />
-          <label className="form-check-label" htmlFor="rememberMeCheckbox">
-            Remember me
-          </label>
-        </div>
+        {error && (
+          <div className={styles.errorContainer}>
+            <div className={styles.error}>{error}</div>
+          </div>
+        )}
       </form>
     </div>
   )
