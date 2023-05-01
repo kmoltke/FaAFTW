@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import BasketSummary from "../../components/BasketSummary/BasketSummary";
 import { Basket } from "../../../../api/src/baskets/baskets.model";
+import { BasketProduct} from "../../../../api/src/baskets/baskets.model";
 
 function CartPage() {
     const emptyBasket: Basket = {
@@ -9,7 +10,8 @@ function CartPage() {
         BasketId: 0,
         products: [],
         total: 0
-    };
+    }
+
     const [basket, setProducts] = useState(emptyBasket)
 
     useEffect(() => {

@@ -39,7 +39,7 @@ export const createUser = async (req: Request, res: Response) => {
     if (userIndex !== -1) {
       throw new HttpError(400, 'user with this email already exists')
     } else {
-      const newUser = {
+      const newUser: User = {
         id: Date.now(),
         email,
         fname,
@@ -47,7 +47,8 @@ export const createUser = async (req: Request, res: Response) => {
         password,
       }
       await usersModelManager.add(newUser)
-      res.status(201).send(newUser)
+      // res.status(201).send(newUser)
+      res.json(newUser).status(201).send(newUser)
     }
   } catch (error: any) {
     if (error instanceof HttpError) {
