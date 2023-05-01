@@ -1,40 +1,65 @@
-import { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import "./RegisterForm.css"
+import { User } from "../../../../api/src/users/users.model"
+import { Basket } from "../../../../api/src/baskets/baskets.model"
+import { UserContext } from "../../contexts/UserContext"
 
 export const RegisterForm = () => {
-  const [fname, setFName] = useState()
-  const [lname, setLName] = useState()
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
-  const [id, setId] = useState()
+  const userContext = useContext(UserContext)
+  if (!userContext) {
+    // quick test:
+    // console.log("User is not logged in")
+  }
 
-  const handleFNameInput = (e: any) => {
+  const [fname, setFName] = useState("")
+  const [lname, setLName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const emptyUser: User = {
+    id: 0,
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+  }
+
+  const [user, setUser] = useState(emptyUser)
+
+  const handleFNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFName(e.target.value)
   }
 
-  const handleLNameInput = (e: any) => {
+  const handleLNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLName(e.target.value)
   }
 
-  const handleEmailInput = (e: any) => {
+  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
-  const handlePasswordInput = (e: any) => {
+  const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e: any) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    fetch("http://localhost:5000/users", {
+    console.log({ email, fname, lname, password })
+
+    const data = await postData("http://localhost:5000/users")
+    console.log(data)
+    userContext?.updateUser((data as User).id)
+  }
+
+  //TODO: Make this post
+  const postData = async (url: string) => {
+    const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, fname, lname, password }),
-    })
-      .then((data) => data.json())
-      .then((parsedData) => console.log(parsedData))
-    console.log(id)
+    }).then((response) => response.json())
+    return response
   }
 
   return (
