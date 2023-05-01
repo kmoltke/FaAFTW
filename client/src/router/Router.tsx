@@ -1,9 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import LoginPage from "../pages/LoginPage/LoginPage"
-import CartPage from "../pages/CartPage/CartPage"
-import HomePage from "../pages/HomePage/HomePage"
-import Navbar from "../components/Navbar/Navbar"
-import ProductDescriptionPage from "../pages/ProductDescriptionPage/ProductDescriptionPage"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { LoginPage } from '../pages/LoginPage/LoginPage'
+import CartPage from '../pages/CartPage/CartPage'
+import HomePage from '../pages/HomePage/HomePage'
+import Navbar from '../components/Navbar/Navbar'
+import ProductDescriptionPage from '../pages/ProductDescriptionPage/ProductDescriptionPage'
 
 function Router(props: any) {
   return (
