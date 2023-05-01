@@ -5,12 +5,6 @@ import { Basket } from "../../../../api/src/baskets/baskets.model"
 import { UserContext } from "../../contexts/UserContext"
 
 export const RegisterForm = () => {
-  const userContext = useContext(UserContext)
-  if (!userContext) {
-    // quick test:
-    // console.log("User is not logged in")
-  }
-
   const [fname, setFName] = useState("")
   const [lname, setLName] = useState("")
   const [email, setEmail] = useState("")
@@ -49,7 +43,7 @@ export const RegisterForm = () => {
 
     const data = await postData("http://localhost:5000/users")
     console.log(data)
-    userContext?.updateUser((data as User).id)
+    // userContext?.updateUser((data as User).id)
   }
 
   //TODO: Make this post

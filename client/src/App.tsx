@@ -1,15 +1,17 @@
-import './styles/template.css'
-import './styles/navbar.css'
-import './styles/basket.css'
+import "./styles/template.css"
+import "./styles/basket.css"
+import "bootstrap/dist/css/bootstrap.min.css"
 
-import Router from './router/Router'
+import Router from "./router/Router"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserContextProvider } from "./contexts/UserContext"
 
 function App() {
   return (
     <>
-      <Router />
+      <UserContextProvider>
+        <Router />
+      </UserContextProvider>
     </>
   )
 }
