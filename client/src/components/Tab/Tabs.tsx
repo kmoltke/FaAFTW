@@ -8,14 +8,7 @@ import { LoginForm } from "../LoginForm/LoginForm"
 import { RegisterForm } from "../RegisterForm/RegisterForm"
 
 const Tabs = () => {
-  const [ActiveTab, setJustifyActive] = useState("login")
-
-  const handleJustifyClick = (value: any) => {
-    if (value === ActiveTab) {
-      return
-    }
-    setJustifyActive(value)
-  }
+  const [activeTab, setActiveTab] = useState("login")
 
   return (
     <div>
@@ -23,23 +16,23 @@ const Tabs = () => {
         <Button
           className="Button"
           variant="dark"
-          onClick={() => handleJustifyClick("login")}
-          active={ActiveTab === "login"}
+          onClick={() => setActiveTab("login")}
+          active={activeTab === "login"}
         >
           Login
         </Button>
         <Button
           className="Button"
           variant="dark"
-          onClick={() => handleJustifyClick("register")}
-          active={ActiveTab === "register"}
+          onClick={() => setActiveTab("register")}
+          active={activeTab === "register"}
         >
           Register
         </Button>
       </div>
 
       <div></div>
-      {ActiveTab === "login" ? <LoginForm /> : <RegisterForm />}
+      {activeTab === "login" ? <LoginForm /> : <RegisterForm />}
     </div>
   )
 }
