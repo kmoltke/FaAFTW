@@ -24,7 +24,7 @@ export const RegisterForm = () => {
   const nav = useNavigate()
   const ctx = useContext(UserContext)
   if (!ctx) {
-    throw new Error("User is undefined")
+    throw new Error("Context is undefined")
   }
 
   const handleFNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {

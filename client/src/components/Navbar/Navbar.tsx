@@ -17,6 +17,8 @@ function Navbar() {
     responsive === "" ? setResponsive("responsive") : setResponsive("")
   }
 
+  const isLoggedIn = () => !(ctx.user.id===0)
+
   return (
     <>
       <header>
@@ -35,7 +37,7 @@ function Navbar() {
             </a>
             <NavLink to={"/"}>Home</NavLink>
             <NavLink to={"/browse"}>Browse</NavLink>
-            {!(user.id===0) ? (
+            {isLoggedIn() ? (
               <NavLink
                 to={"/"}
                 onClick={() => updateUser({id:0,fname:"",lname:""})}
@@ -49,7 +51,7 @@ function Navbar() {
               </NavLink>
             )}
             <NavLink to={"/cart"} className={styles.navItem}>
-              {!(user.id===0) ? (
+              {isLoggedIn() ? (
                 <>
                   <span style={{ color: "#f23737" }}>{user.fname}</span>
                   {"'s Cart"}

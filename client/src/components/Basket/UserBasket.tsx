@@ -1,9 +1,7 @@
-import {Basket} from "../../../../api/src/baskets/baskets.model"
-import {BasketProduct} from "../../../../api/src/baskets/baskets.model";
+import {Basket} from "../../../../api/src/baskets/baskets.model";
 import {Card, Col, Container, Row} from "react-bootstrap";
 
-
-function Basket(basket: Basket) {
+function UserBasket(props: {id: number}) {
 
     return (
         <Container>
@@ -23,4 +21,4 @@ function Basket(basket: Basket) {
     )
 }
 
-export default Basket
+export default UserBasket
