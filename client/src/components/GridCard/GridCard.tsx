@@ -3,8 +3,6 @@ import styles from "./GridCard.module.css"
 import "../../styles/template.css"
 import {useContext, useState} from "react";
 import {addItemToCart, CartContext, Product} from "../../contexts/CartContext";
-// import {addToCart, CartContext} from "../../contexts/CartContext";
-// import {useContext} from "react";
 
 
 interface Props {
@@ -28,13 +26,6 @@ function GridCard(props: Props) {
     const handleAddToCart = () => {
         addItemToCart(dispatch, item, quantity)
     }
-
-    // const {cart, setCart} = useContext(CartContext)
-    //
-    // if (!ctx)
-    //     throw new Error("Cart is undefined")
-    // ctx.updateCart({(prev) => products: [...prev, {id:props.id, title:props.title, artist:props.artist, img:img, quantity:1}]})
-    // // const vinyl: Props = {}
 
     return (
         <>
