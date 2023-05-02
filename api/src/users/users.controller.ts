@@ -46,7 +46,13 @@ export const createUser = async (req: Request, res: Response) => {
         password,
       }
       await usersModelManager.add(newUser)
-      res.json(newUser)
+      res.json({
+        user: {
+          id: newUser.id,
+          fname: newUser.fname,
+          lname: newUser.lname,
+        },
+      })
     }
   } catch (error: any) {
     if (error instanceof HttpError) {
