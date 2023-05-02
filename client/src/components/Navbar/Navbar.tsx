@@ -1,10 +1,14 @@
 import { NavLink } from "react-router-dom"
-import { useUserContext } from "../../contexts/UserContext"
+// import { useUserContext } from "../../contexts/UserContext"
 import styles from "./Navbar.module.css"
-import { useState } from "react"
+import {useContext, useState} from "react"
+import {UserContext} from "../../contexts/UserContext";
 
 function Navbar() {
-  const { user, updateUser } = useUserContext()
+  const ctx = useContext(UserContext)
+  if (!ctx)
+    throw new Error("User is undefined")
+  const { user, updateUser } = ctx
   console.log(user)
 
   const [responsive, setResponsive] = useState("")
@@ -31,10 +35,10 @@ function Navbar() {
             </a>
             <NavLink to={"/"}>Home</NavLink>
             <NavLink to={"/browse"}>Browse</NavLink>
-            {user ? (
+            {!(user.id===0) ? (
               <NavLink
                 to={"/"}
-                onClick={() => updateUser(undefined)}
+                onClick={() => updateUser({id:0,fname:"",lname:""})}
                 className={styles.navItem}
               >
                 Logout
@@ -45,7 +49,7 @@ function Navbar() {
               </NavLink>
             )}
             <NavLink to={"/cart"} className={styles.navItem}>
-              {user ? (
+              {!(user.id===0) ? (
                 <>
                   <span style={{ color: "#f23737" }}>{user.fname}</span>
                   {"'s Cart"}

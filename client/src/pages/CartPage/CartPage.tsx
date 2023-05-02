@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import {useContext, useEffect, useState} from "react"
 import { Card, Col, Container, Row } from "react-bootstrap"
 import BasketSummary from "../../components/BasketSummary/BasketSummary"
 import { Basket } from "../../../../api/src/baskets/baskets.model"
+import {UserContext} from "../../contexts/UserContext";
 
 function CartPage() {
   const emptyBasket: Basket = {
@@ -11,18 +12,26 @@ function CartPage() {
     total: 0,
   }
   const [basket, setProducts] = useState(emptyBasket)
+  const ctx = useContext(UserContext)
 
-  useEffect(() => {
-    const api = async () => {
-      const data = await fetch(
-        "http://localhost:5000/users/1670705564259/basket"
-      )
-      const jsonData = await data.json()
-      setProducts(jsonData)
-    }
+  // const userContext: IUserContext = useContext(UserContext)
+  if (!ctx) {
+    throw new Error("User is undefined")
+  }
 
-    api()
-  }, [])
+
+
+  // useEffect(() => {
+  //   const api = async () => {
+  //     const data = await fetch(
+  //       "http://localhost:5000/users/1670705564259/basket"
+  //     )
+  //     const jsonData = await data.json()
+  //     setProducts(jsonData)
+  //   }
+  //
+  //   api()
+  // }, [])
 
   return (
     <Container>

@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
 import "./RegisterForm.css"
-import { User } from "../../../../api/src/users/users.model"
+// import { User } from "../../../../api/src/users/users.model"
 import { Basket } from "../../../../api/src/baskets/baskets.model"
 import { UserContext } from "../../contexts/UserContext"
+import { User } from "../../contexts/UserContext";
+import {useNavigate} from "react-router";
 
 export const RegisterForm = () => {
   const [fname, setFName] = useState("")
@@ -10,15 +12,20 @@ export const RegisterForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const emptyUser: User = {
-    id: 0,
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-  }
+  // const emptyUser: User = {
+  //   id: 0,
+  //   fname: "",
+  //   lname: "",
+  //   email: "",
+  //   password: "",
+  // }
 
-  const [user, setUser] = useState(emptyUser)
+  // const [user, setUser] = useState(emptyUser)
+  const nav = useNavigate()
+  const ctx = useContext(UserContext)
+  if (!ctx) {
+    throw new Error("User is undefined")
+  }
 
   const handleFNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFName(e.target.value)
@@ -41,9 +48,12 @@ export const RegisterForm = () => {
 
     console.log({ email, fname, lname, password })
 
-    const data = await postData("http://localhost:5000/users")
+    const data:{id:number,fname:string,lname:string,email:string,password:string} = await postData("http://localhost:5000/users")
+    ctx.updateUser({id: data.id, fname: data.fname, lname:data.lname})
     console.log(data)
-    // userContext?.updateUser((data as User).id)
+    //GO Back:
+    nav(-1)
+    // ctx.updateUser((data as User).id)
   }
 
   //TODO: Make this post

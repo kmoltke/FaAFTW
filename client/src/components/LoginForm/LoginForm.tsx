@@ -1,14 +1,21 @@
 import { useContext, useState } from "react"
 import styles from "./LoginForm.module.css"
-import { useUserContext } from "../../contexts/UserContext"
+// import { useUserContext } from "../../contexts/UserContext"
 import { useNavigate } from "react-router"
+import { UserContext} from "../../contexts/UserContext";
 
 export const LoginForm = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string>()
-  const { user, updateUser } = useUserContext()
+  // const { user, updateUser } = useUserContext()
+  const ctx = useContext(UserContext)
+  if (!ctx)
+    throw (new Error("User is undefined"))
+
+  const {user, updateUser} = ctx
+
 
   const handleEmailInput = (e: any) => {
     setEmail(e.target.value)
