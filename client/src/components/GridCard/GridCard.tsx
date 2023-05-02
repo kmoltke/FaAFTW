@@ -1,11 +1,13 @@
 import {NavLink} from "react-router-dom"
 import styles from "./GridCard.module.css"
 import "../../styles/template.css"
-import {addToCart, CartContext} from "../../contexts/CartContext";
-import {useContext} from "react";
+import {useContext, useState} from "react";
+import {addItemToCart, CartContext, Product} from "../../contexts/CartContext";
+// import {addToCart, CartContext} from "../../contexts/CartContext";
+// import {useContext} from "react";
 
 
-type Props = {
+interface Props {
     id: number
     title: string
     artist: string
@@ -18,7 +20,14 @@ function GridCard(props: Props) {
     const img = props.imageSrc ?? noImg
     const route = "/products/" + props.id
 
+    const item: Product = {id: props.id, album: props.title, artist: props.artist, price: props.price, imageSrc: img}
 
+
+    const [quantity, setQuantity] = useState(1)
+    const {dispatch} = useContext(CartContext)
+    const handleAddToCart = () => {
+        addItemToCart(dispatch, item, quantity)
+    }
 
     // const {cart, setCart} = useContext(CartContext)
     //
@@ -39,7 +48,9 @@ function GridCard(props: Props) {
                 </div>
                 <p className={styles.productPrice}>{props.price},-</p>
                 //TODO:
-                <button onClick={() => {}} className="cardButton btn btn-primary" id="liveAlertBtn">
+                <button onClick={() => {
+                    handleAddToCart()
+                }} className="cardButton btn btn-primary" id="liveAlertBtn">
                     Add to Cart
                 </button>
             </div>

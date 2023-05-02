@@ -1,35 +1,50 @@
-import React, { useContext, useState } from "react"
-
-
-export interface CartItem {
-  id: number
-  title: string
-  artist: string
-  img: string
-  quantity: number
-}
+import React, {useContext, useReducer, useState} from "react"
+import {cartReducer} from "../reducers/cartReducer";
+import {CartContext, initialCartState} from "./CartContext";
 
 export interface User {
-  id: number
-  fname: string
-  lname: string
-  products: CartItem[]
+    id: number
+    fname: string
+    lname: string
 }
 
 export interface IUserContext {
-  user: User
-  updateUser: (user: User) => void
+    user: User
+    updateUser: (user: User) => void
 }
 
 const defaultUserContext: IUserContext = {
-  user: {id: 0, fname: "", lname: "", products: []},
-  updateUser: () => {},
+    user: {id: 0, fname: "", lname: ""},
+    updateUser: () => {
+    },
 }
 
 export const UserContext = React.createContext<IUserContext | undefined>(
-    undefined
+    {
+        user: {id: 0, fname: "", lname: ""}, updateUser: () => {
+        }
+    }
 )
 
+// export const UserProvider = ({children}: any) => {
+//     const [userState, setUser] = useState<User>(
+//         {id: 0, fname: "", lname: ""}
+//     )
+//     const updateUser = (user: User) => {
+//         setUser(user)
+//     }
+//
+//     return (<UserContext.Provider value={{userState, setUser}}>{children}</UserContext.Provider>)
+// };
+
+export const UserProvider = ({ children }: any) => {
+  const [user, setUser] = useState<User>({ id: 0, fname: "", lname: "" });
+  const updateUser = (newUser: User) => {
+    setUser(newUser);
+  };
+
+  return <UserContext.Provider value={{user: user, updateUser: updateUser}}>{children}</UserContext.Provider>;
+};
 
 //
 // export function useUserContext() {

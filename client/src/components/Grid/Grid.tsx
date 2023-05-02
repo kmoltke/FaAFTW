@@ -11,7 +11,7 @@ function Grid(props: any) {
           <GridCard
             key={product.id}
             id={product.id}
-            title={product.album}
+            album={product.album}
             artist={product.artist}
             imageSrc={product.imageSrc}
             price={product.price}
