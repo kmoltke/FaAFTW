@@ -1,9 +1,19 @@
 import React, { useContext, useState } from "react"
 
+
+export interface CartItem {
+  id: number
+  title: string
+  artist: string
+  img: string
+  quantity: number
+}
+
 export interface User {
   id: number
   fname: string
   lname: string
+  products: CartItem[]
 }
 
 export interface IUserContext {
@@ -12,7 +22,7 @@ export interface IUserContext {
 }
 
 const defaultUserContext: IUserContext = {
-  user: {id: 0, fname: "", lname: ""},
+  user: {id: 0, fname: "", lname: "", products: []},
   updateUser: () => {},
 }
 

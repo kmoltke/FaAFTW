@@ -20,7 +20,7 @@ function CartPage() {
         throw new Error("User is undefined")
     }
 
-    const isLoggedIn = () => !(ctx.user.id===0)
+    const isLoggedIn = () => !(ctx.user.id === 0)
 
     const usrId = ctx.user.id
 
@@ -33,22 +33,25 @@ function CartPage() {
 
     return (
         <Container>
-            <Card>
-                <Row>
-                    <Col sm={8}>
-                        <h3>Products</h3>
-                        <hr/>
-                        {isLoggedIn() ? (<UserBasket id={usrId}></UserBasket>) : (<DefaultBasket></DefaultBasket>)}
-
-                    </Col>
-                    <Col sm={4}>
-                        <h3>Summary</h3>
-                        <hr/>
-                        <BasketSummary total={basket.total}></BasketSummary>
-                    </Col>
-                </Row>
-            </Card>
+            {isLoggedIn() ? (<UserBasket id={usrId}></UserBasket>) : (<DefaultBasket></DefaultBasket>)}
         </Container>
+        // <Container>
+        //     <Card>
+        //         <Row>
+        //             <Col sm={8}>
+        //                 <h3>Products</h3>
+        //                 <hr/>
+        //                 {isLoggedIn() ? (<UserBasket id={usrId}></UserBasket>) : (<DefaultBasket></DefaultBasket>)}
+        //
+        //             </Col>
+        //             <Col sm={4}>
+        //                 <h3>Summary</h3>
+        //                 <hr/>
+        //                 <BasketSummary total={basket.total}></BasketSummary>
+        //             </Col>
+        //         </Row>
+        //     </Card>
+        // </Container>
     )
 }
 

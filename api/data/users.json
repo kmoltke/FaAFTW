@@ -106,5 +106,12 @@
     "fname": "fdfd",
     "lname": "dfd",
     "password": "dfd"
+  },
+  {
+    "id": 1683028652991,
+    "email": "testman@dude.dk",
+    "fname": "Testman",
+    "lname": "Dude",
+    "password": "1234"
   }
 ]
