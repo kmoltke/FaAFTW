@@ -47,7 +47,6 @@ function GridCard(props: Props) {
                     <p className={styles.productArtist}>{props.artist}</p>
                 </div>
                 <p className={styles.productPrice}>{props.price},-</p>
-                //TODO:
                 <button onClick={() => {
                     handleAddToCart()
                 }} className="cardButton btn btn-primary" id="liveAlertBtn">

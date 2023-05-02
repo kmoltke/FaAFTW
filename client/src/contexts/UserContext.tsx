@@ -1,6 +1,4 @@
 import React, {useContext, useReducer, useState} from "react"
-import {cartReducer} from "../reducers/cartReducer";
-import {CartContext, initialCartState} from "./CartContext";
 
 export interface User {
     id: number

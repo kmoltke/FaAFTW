@@ -9,9 +9,9 @@ function Grid(props: any) {
       {products.map((product: any) => {
         return (
           <GridCard
-            key={product.id}
+            // key={product.id}
             id={product.id}
-            album={product.album}
+            title={product.title}
             artist={product.artist}
             imageSrc={product.imageSrc}
             price={product.price}

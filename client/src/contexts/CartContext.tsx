@@ -56,32 +56,3 @@ export const removeItemFromCart = (dispatch: React.Dispatch<Action>, productId: 
         payload: {id: productId},
     })
 }
-
-
-// import React from "react";
-//
-// export interface cartItem {
-//     id: number
-//     title: string
-//     artist: string
-//     img: string
-//     quantity: number
-// }
-//
-// export interface Cart {
-//     products: cartItem[]
-// }
-//
-// export interface ICartContext {
-//     cart: cartItem[]
-//     updateCart: (cartItem: cartItem) => void
-// }
-//
-// export const CartContext = React.createContext<ICartContext | undefined>(
-//     undefined
-// )
-//
-//
-// export const addToCart = (item: cartItem) => {
-//
-// }
