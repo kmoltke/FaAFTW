@@ -7,8 +7,15 @@ export const LoginForm = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState<string>()
+  const [formErrors, setFormErrors] = useState<FormError>()
   const { user, updateUser } = useUserContext()
+
+  type FormError = {
+    name?: string
+    email?: string
+    password?: string
+    general?: string
+  }
 
   const handleEmailInput = (e: any) => {
     setEmail(e.target.value)
@@ -21,6 +28,11 @@ export const LoginForm = () => {
   const handleFormSubmit = async (e: any) => {
     e.preventDefault()
 
+    if (email === "" && password === "") {
+      setFormErrors({ general: "Please fill in the required data to login" })
+      return
+    }
+
     const response = await fetch("http://localhost:5000/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,9 +40,10 @@ export const LoginForm = () => {
     })
 
     if (response.status !== 200) {
-      setError(
-        "Looks like either your email address or password were incorrect. Wanna try again?"
-      )
+      setFormErrors({
+        general:
+          "Looks like either your email address or password were incorrect. Wanna try again?",
+      })
       return
     }
 
@@ -69,11 +82,11 @@ export const LoginForm = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary w-100 login-button">
-          Submit
+          Login
         </button>
-        {error && (
+        {formErrors?.general && (
           <div className={styles.errorContainer}>
-            <div className={styles.error}>{error}</div>
+            <div className={styles.error}>{formErrors?.general}</div>
           </div>
         )}
       </form>
