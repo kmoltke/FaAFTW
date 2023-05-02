@@ -36,26 +36,33 @@ export const RegisterForm = () => {
     const regPassword: RegExp =
       /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
     if (password.length === 0) return { password: undefined }
-    if (!regPassword.test(password))
+    if (!regPassword.test(password)) {
       return {
         password:
           "Password requirements: 8-20 characters, 1 number, 1 letter, 1 symbol.",
       }
+    }
     return { password: undefined }
   }
 
   const validateFName = (name: string) => {
     const regName: RegExp = /^([a-zA-z]{2,}\s*)+$/
-    if (!regName.test(name)) return { fname: "Not a valid first name" }
-    if (name.length > 15)
+    if (!regName.test(name)) {
+      return { fname: "Not a valid first name" }
+    }
+    if (name.length > 15) {
       return { fname: "First name must be 15 characters of less" }
+    }
     return { fname: undefined }
   }
   const validateLName = (name: string) => {
     const regName: RegExp = /^([a-zA-z]{2,}\s*)+$/
-    if (!regName.test(name)) return { lname: "Not a valid last name" }
-    if (name.length > 15)
+    if (!regName.test(name)) {
+      return { lname: "Not a valid last name" }
+    }
+    if (name.length > 15) {
       return { lname: "Last name must be 15 characters of less" }
+    }
     return { lname: undefined }
   }
 
@@ -92,7 +99,7 @@ export const RegisterForm = () => {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (email === "" || password === "" || fname === "" || lname === "") {
+    if (!email || !password || !fname || !lname) {
       setFormErrors({ general: "Please fill in the required data to register" })
       return
     }

@@ -1,0 +1,95 @@
+.header {
+  justify-content: space-between;
+  display: flex;
+  max-width: 1275px;
+  margin: auto;
+  box-sizing: border-box;
+  padding-right: 1rem;
+}
+
+.info {
+  position: relative;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  margin-top: 2rem;
+}
+
+.filterOuter {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  box-sizing: border-box;
+}
+
+.filterWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.filterComponent {
+  position: relative;
+  display: inline-block;
+}
+.icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.filterSelectionButtonCont {
+  margin-top: 0.5rem;
+  height: 1.625rem;
+  padding: 0.3125rem 0.625rem;
+  background: #000;
+  color: #fff;
+  font-size: 0.75rem;
+  width: 100%;
+  border-radius: 0.3125rem;
+}
+
+.filterSelectionButton {
+  margin-top: 0.5rem;
+  max-height: 5rem;
+  align-items: center;
+  display: flex;
+  padding: 0.5rem 0.5rem 0.5rem;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  border-radius: 0.3125rem;
+  border-width: 0;
+}
+
+.filterSelectionButton p {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 720px) {
+  .filterWrapper {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .filterComponent {
+    display: block;
+  }
+
+  .header {
+    display: block;
+  }
+  .filterOuter {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

@@ -3,6 +3,12 @@ import styles from "./Grid.module.css"
 
 function Grid(props: any) {
   const { products } = props
+  const missing = 5 - products.length
+  const emptyDivs = []
+
+  for (let i = 0; i < missing; i++) {
+    emptyDivs.push(<div />)
+  }
 
   return (
     <div className={styles.grid}>
@@ -18,6 +24,7 @@ function Grid(props: any) {
           ></GridCard>
         )
       })}
+      {emptyDivs}
     </div>
   )
 }

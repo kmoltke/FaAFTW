@@ -5,7 +5,6 @@ import { useState } from "react"
 
 function Navbar() {
   const { user, updateUser } = useUserContext()
-  console.log(user)
 
   const [responsive, setResponsive] = useState("")
 
