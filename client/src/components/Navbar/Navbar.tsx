@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom"
-// import { useUserContext } from "../../contexts/UserContext"
 import styles from "./Navbar.module.css"
 import {useContext, useState} from "react"
 import {UserContext} from "../../contexts/UserContext";
@@ -17,7 +16,12 @@ function Navbar() {
     responsive === "" ? setResponsive("responsive") : setResponsive("")
   }
 
-  const isLoggedIn = () => !(ctx.user.id===0)
+  const isLoggedIn = () => {
+    console.log("isLoggedIn", user, user.id, user.id !== 0);
+    return !(user.id===0)
+  }
+
+
 
   return (
     <>
