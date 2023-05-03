@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react"
 import {UserContext} from "../../contexts/UserContext";
 
 function Navbar() {
+
     const ctx = useContext(UserContext)
     if (!ctx)
         throw new Error("User is undefined")

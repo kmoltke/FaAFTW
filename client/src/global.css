@@ -44,7 +44,7 @@ h3 {
 section {
   max-width: 1300px;
   margin: auto;
-  padding: 25px 50px 50px 50px;
+  padding: 25px 50px 25px 50px;
 }
 
 @media only screen and (max-width: 720px) {
