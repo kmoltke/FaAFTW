@@ -15,7 +15,7 @@ type Props = {
 
 function Filter(props: Props) {
   const [genre, setGenre] = useState("")
-  const [decades, setDecade] = useState("")
+  const [decade, setDecade] = useState("")
   const [artist, setArtist] = useState("")
 
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ function Filter(props: Props) {
   useEffect(() => {
     const genreParam = searchParams.get("genre") ?? ""
     const artistParam = searchParams.get("artist") ?? ""
-    const decadeParam = searchParams.get("decades") ?? ""
+    const decadeParam = searchParams.get("decade") ?? ""
 
     setGenre(genreParam)
     setArtist(artistParam)
@@ -122,17 +122,17 @@ function Filter(props: Props) {
               <FilterComponent
                 category="Decade"
                 data={yearsData}
-                value={decades}
+                value={decade}
                 onChange={appendSearchParams}
               ></FilterComponent>
-              {decades && (
+              {decade && (
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    removeSearchParams("decades")
+                    removeSearchParams("decade")
                   }}
                 >
-                  <p>{decades}</p>
+                  <p>{decade}</p>
                   <p>⨂</p>
                   {/* ⨉ */}
                 </button>
