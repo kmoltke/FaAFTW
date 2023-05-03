@@ -1,8 +1,14 @@
-import { Basket } from "../../../../api/src/baskets/baskets.model"
-import { Vinyl} from "../../../../api/src/vinyls/vinyls.model";
+import {CartItem} from "../../contexts/CartContext";
 
-function BasketItem(basket: Basket) {
+function BasketItem(props: CartItem) {
 
+    //TODO: Style 'n shit
+    return (
+        <div>
+            <p>{props.album}</p>
+            <p>{props.artist}</p>
+        </div>
+    )
 }
 
 export default BasketItem

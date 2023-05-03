@@ -1,41 +1,51 @@
-import React, { useContext, useState } from "react"
+import React, {useState} from "react"
 
-type User = {
-  id: number
-  fname: string
-  lname: string
+export interface User {
+    id: number
+    fname: string
+    lname: string
 }
 
 export interface IUserContext {
-  user: User | undefined
-  updateUser: (user: User | undefined) => void
+    user: User
+    updateUser: (user: User) => void
 }
 
 const defaultUserContext: IUserContext = {
-  user: undefined,
-  updateUser: () => {},
+    user: {id: 0, fname: "", lname: ""},
+    updateUser: () => {
+    },
 }
 
-export const UserContext = React.createContext(defaultUserContext)
+export const UserContext = React.createContext<IUserContext | undefined>(
+    {
+        user: {id: 0, fname: "", lname: ""}, updateUser: () => {
+        }
+    }
+)
 
-export function useUserContext() {
-  const context = useContext(UserContext)
-  return context
-}
+export const UserProvider = ({ children }: any) => {
+    const [user, setUser] = useState<User>({ id: 0, fname: "", lname: "" });
+    const updateUser = (newUser: User) => {
+        setUser(newUser);
+        console.log("UserContextProvider user", newUser); // log the updated user
+    };
 
-export function UserContextProvider({ children }: any) {
-  const [user, setUser] = useState<User>()
+    return (
+        <UserContext.Provider value={{ user: user, updateUser: updateUser }}>
+            {children}
+        </UserContext.Provider>
+    );
+};
 
-  const updateUser = (user: User | undefined) => {
-    setUser(user)
-  }
 
-  const userContext: IUserContext = {
-    user,
-    updateUser,
-  }
-
-  return (
-    <UserContext.Provider value={userContext}>{children}</UserContext.Provider>
-  )
-}
+// export const UserProvider = ({children}: any) => {
+//     const [user, setUser] = useState<User>({id: 0, fname: "", lname: ""});
+//     const updateUser = (newUser: User) => {
+//         console.log("UserContextProvider user", user);
+//         setUser(newUser);
+//     };
+//     //TEST
+//
+//     return <UserContext.Provider value={{user: user, updateUser: updateUser}}>{children}</UserContext.Provider>;
+// };

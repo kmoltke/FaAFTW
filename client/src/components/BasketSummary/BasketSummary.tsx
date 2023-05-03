@@ -5,7 +5,7 @@ interface Summary {
     total: number
 }
 
-function BasketSummary(summary: Summary) {
+function BasketSummary(props: Summary) {
     return (
         <Container>
             <h4>Shipping</h4>
@@ -16,7 +16,7 @@ function BasketSummary(summary: Summary) {
                 <Dropdown.Item href="#/action-1"></Dropdown.Item>
             </DropdownButton>
             <hr/>
-            <h4>Total Price: DKK {summary.total}</h4>
+            <h4>Total Price: DKK {props.total}</h4>
         </Container>
     )
 }
