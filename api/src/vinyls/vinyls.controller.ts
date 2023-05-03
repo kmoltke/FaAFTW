@@ -16,14 +16,14 @@ export const getAllVinyls = async (req: Request, res: Response) => {
   try {
     let allVinyls = await vinylsModelManager.getAll()
 
-    const { genre, decades, artist } = req.query
+    const { genre, decade, artist } = req.query
 
     if (genre) {
       allVinyls = allVinyls.filter((v) => v.genre === genre)
     }
 
-    if (decades) {
-      allVinyls = allVinyls.filter((v) => v.decade === decades)
+    if (decade) {
+      allVinyls = allVinyls.filter((v) => v.decade === decade)
     }
 
     if (artist) {

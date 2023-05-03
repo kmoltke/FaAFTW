@@ -2,62 +2,71 @@ import { useEffect, useState } from "react"
 import styles from "./Filter.module.css"
 import "../../styles/template.css"
 import FilterComponent from "../FilterComponent/FilterComponent"
-import { NavLink } from "react-router-dom"
+import {
+  NavLink,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom"
 
 type Props = {
-  value: Filters
   itemsNum: number
-  onChange: (val: Filters) => void
-}
-
-export type Filters = {
-  genre?: string
-  artist?: string
-  decades?: string
 }
 
 function Filter(props: Props) {
-  const [genres, setGenres] = useState<string[]>([])
-  const [artists, setArtist] = useState<string[]>([])
-  const [years, setYears] = useState<string[]>([])
+  const [genre, setGenre] = useState("")
+  const [decades, setDecade] = useState("")
+  const [artist, setArtist] = useState("")
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const [genresData, setGenresData] = useState<string[]>([])
+  const [artistsData, setArtistsData] = useState<string[]>([])
+  const [yearsData, setYearsData] = useState<string[]>([])
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const removeSearchParams = (key: string) => {
+    if (searchParams.has(key)) {
+      searchParams.delete(key)
+      setSearchParams(searchParams)
+    }
+  }
+
+  const appendSearchParams = (key: string, value: string) => {
+    if (!searchParams.has(key)) {
+      searchParams.set(key, value)
+      setSearchParams(searchParams)
+    }
+  }
+  useEffect(() => {
+    const genreParam = searchParams.get("genre") ?? ""
+    const artistParam = searchParams.get("artist") ?? ""
+    const decadeParam = searchParams.get("decades") ?? ""
+
+    setGenre(genreParam)
+    setArtist(artistParam)
+    setDecade(decadeParam)
+  }, [searchParams])
 
   useEffect(() => {
     const datafetch = async () => {
       const responses = await Promise.all([
         fetch("http://localhost:5000/categories/genre"),
         fetch("http://localhost:5000/categories/artist"),
-        fetch("http://localhost:5000/categories/decades"),
+        fetch("http://localhost:5000/categories/decade"),
       ])
 
       const data1 = await responses[0].json()
       const data2 = await responses[1].json()
       const data3 = await responses[2].json()
 
-      setGenres(data1)
-      setArtist(data2)
-      setYears(data3)
+      setGenresData(data1)
+      setArtistsData(data2)
+      setYearsData(data3)
     }
     datafetch()
   }, [])
-
-  const onGenreChange = (val: string | undefined) => {
-    props.onChange({
-      ...props.value,
-      genre: val,
-    })
-  }
-  const onArtistChange = (val: string | undefined) => {
-    props.onChange({
-      ...props.value,
-      artist: val,
-    })
-  }
-  const onDecadeChange = (val: string | undefined) => {
-    props.onChange({
-      ...props.value,
-      decades: val,
-    })
-  }
 
   return (
     <>
@@ -71,19 +80,19 @@ function Filter(props: Props) {
             <div className={styles.filterComponent}>
               <FilterComponent
                 category="Genre"
-                data={genres}
-                value={props.value.genre}
-                onChange={onGenreChange}
+                data={genresData}
+                value={genre}
+                onChange={appendSearchParams}
               ></FilterComponent>
 
-              {props.value.genre && (
+              {genre && (
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    onGenreChange("")
+                    removeSearchParams("genre")
                   }}
                 >
-                  <p>{props.value.genre}</p>
+                  <p>{genre}</p>
                   <p>⨂</p>
                   {/* ⨉ */}
                 </button>
@@ -92,18 +101,18 @@ function Filter(props: Props) {
             <div className={styles.filterComponent}>
               <FilterComponent
                 category="Artist"
-                data={artists}
-                value={props.value.artist}
-                onChange={onArtistChange}
+                data={artistsData}
+                value={artist}
+                onChange={appendSearchParams}
               ></FilterComponent>
-              {props.value.artist && (
+              {artist && (
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    onArtistChange("")
+                    removeSearchParams("artist")
                   }}
                 >
-                  <p>{props.value.artist}</p>
+                  <p>{artist}</p>
                   <p>⨂</p>
                   {/* ⨉ */}
                 </button>
@@ -112,18 +121,18 @@ function Filter(props: Props) {
             <div className={styles.filterComponent}>
               <FilterComponent
                 category="Decade"
-                data={years}
-                value={props.value.decades}
-                onChange={onDecadeChange}
+                data={yearsData}
+                value={decades}
+                onChange={appendSearchParams}
               ></FilterComponent>
-              {props.value.decades && (
+              {decades && (
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    onDecadeChange("")
+                    removeSearchParams("decades")
                   }}
                 >
-                  <p>{props.value.decades}</p>
+                  <p>{decades}</p>
                   <p>⨂</p>
                   {/* ⨉ */}
                 </button>

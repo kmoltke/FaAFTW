@@ -1,70 +1,51 @@
 import { useEffect, useState } from "react"
-import GridCard from "../../components/GridCard/GridCard"
 import Grid from "../../components/Grid/Grid"
 import "../../styles/template.css"
-import { useLocation, useNavigate } from "react-router-dom"
-import Filter, { Filters } from "../../components/Filter/Filter"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import Filter from "../../components/Filter/Filter"
 
 function HomePage() {
   const [products, setProducts] = useState([])
-  const [filters, setFilters] = useState<Filters>({})
-
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true)
   const location = useLocation()
-
-  const handleFilterChange = (filters: Filters) => {
-    const queryParams = new URLSearchParams(filters).toString()
-    navigate(`${location.pathname}?${queryParams}`)
-  }
-  const detectQueryParams = () => {
-    const queryParams = new URLSearchParams(location.search)
-    const genre = queryParams.get("genre")
-    const artist = queryParams.get("artist")
-    const decades = queryParams.get("decades")
-    const initialFilter = { genre: genre, artist: artist, decades: decades }
-    const filteredFilters = Object.fromEntries(
-      Object.entries(initialFilter).filter(([_, value]) => value !== null)
-    )
-    setFilters(filteredFilters)
-  }
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
-    detectQueryParams()
-  }, [])
+    const fetchProducts = async () => {
+      setLoading(true)
 
-  useEffect(() => {
-    const filteredFilters = Object.fromEntries(
-      Object.entries(filters).filter(([_, value]) => value !== "")
-    )
-    const queryParams = new URLSearchParams(filteredFilters).toString()
-    handleFilterChange(filteredFilters)
-    const url = "http://localhost:5000/products?" + queryParams
+      const url = "http://localhost:5000/products?" + searchParams.toString()
 
-    fetch(url)
-      .then((data) => {
-        if (data.status === 204) {
-          return []
-        }
-        return data.json()
-      })
-      .then(setProducts)
-  }, [filters])
+      const response = await fetch(url)
+      let data = []
+      if (response.status === 204) {
+        data = []
+      } else {
+        data = await response.json()
+      }
+      setProducts(data)
+      setLoading(false)
+    }
+    fetchProducts()
+  }, [searchParams])
 
   return (
     <main>
       <section>
-        <Filter
-          value={filters}
-          onChange={setFilters}
-          itemsNum={products.length}
-        />
+        <Filter itemsNum={products.length} />
       </section>
 
       <section>
-        {products.length > 0 ? (
-          <Grid products={products} />
+        {loading ? (
+          <p>Loading...</p>
         ) : (
-          <h3>No products found</h3>
+          <div>
+            {products.length > 0 ? (
+              <Grid products={products} />
+            ) : (
+              <h3>No products found</h3>
+            )}
+          </div>
         )}
       </section>
     </main>

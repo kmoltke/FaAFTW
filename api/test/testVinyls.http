@@ -22,19 +22,19 @@ GET http://localhost:5000/products?artist=Metallica
 
 
 // Get vinyls by category -> decades -> '70s'
-GET http://localhost:5000/products?decades=70s
+GET http://localhost:5000/products?decade=70s
 
 ###
 
 // Get vinyls by using two categories -> genre + decades
-GET http://localhost:5000/products?genre=Rock&decades=70s
+GET http://localhost:5000/products?genre=Rock&decade=70s
 
 ###
 
 // Get vinyls by using three categories -> genre + decades + artist
-GET http://localhost:5000/products?genre=Rock&decades=70s&artist=Led Zeppelin
+GET http://localhost:5000/products?genre=Rock&decade=70s&artist=Led Zeppelin
 
 ###
 
 // Empty response:
-GET http://localhost:5000/products?genre=Rock&decades=2010s&artist=The Beatles
+GET http://localhost:5000/products?genre=Rock&decade=2010s&artist=The Beatles
