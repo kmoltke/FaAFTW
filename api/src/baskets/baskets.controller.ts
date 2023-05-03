@@ -184,6 +184,7 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
       await basketModelManager.save(basketsArray)
     }
 
+    console.log(`Basket for user "${userId}" was successfully updated.`)
     res.send(`Basket for user "${userId}" was successfully updated.`)
   } catch (error: any) {
     if (error instanceof HttpError) {

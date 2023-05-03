@@ -12,6 +12,9 @@ export const cartReducer = (state: CartState = initialCartState, action: Action)
     switch (action.type) {
         case 'ADD_ITEM':
             if (isLoggedIn) {
+                console.log(`id: ${action.payload.id}`)
+                console.log(`price: ${action.payload.price}`)
+                console.log(`quantity: ${action.payload.quantity}`)
                 const response = fetch(`http://localhost:5000/users/${action.payload.userId}/basket/products`, {
                     method: "PUT",
                     headers: {"Content-Type": "application/json"},

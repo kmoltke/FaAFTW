@@ -28,10 +28,10 @@ function GridCard(props: Props) {
 
 
     // If we want to be able to bulk add:
-    const [quantity, setQuantity] = useState(1)
+    // const [quantity, setQuantity] = useState(1)
     const {dispatch} = useContext(CartContext)
     const handleAddToCart = () => {
-        addItemToCart(dispatch, item, quantity, userId)
+        addItemToCart(dispatch, item, 1, userId)
     }
 
     return (
