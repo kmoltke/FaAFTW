@@ -111,13 +111,14 @@ export const RegisterForm = () => {
     }
     console.log(formErrors)
 
-    const response = await fetch("http://localhost:5000/users", {
+    // Create user on DB:
+    const userResponse = await fetch("http://localhost:5000/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, fname, lname, password }),
     })
 
-    if (response.status !== 200) {
+    if (userResponse.status !== 200) {
       setFormErrors({
         general:
           "Looks like this email adress already exists... Wanna try again?",
@@ -125,8 +126,12 @@ export const RegisterForm = () => {
       return
     }
 
-    const data = await response.json()
 
+    const data = await userResponse.json()
+
+    const basketResponse = await fetch(`http://localhost:5000/users/${data.user.id}/basket`, {
+      method: `POST`
+    })
     updateUser(data.user)
     console.log(data)
     //GO Back:
