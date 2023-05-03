@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Grid from "../../components/Grid/Grid"
 import "../../styles/template.css"
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import Filter from "../../components/Filter/Filter"
 
 function HomePage() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
-  const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function HomePage() {
 
   return (
     <main>
-      <section>
+      <section id="browse">
         <Filter itemsNum={products.length} />
       </section>
 

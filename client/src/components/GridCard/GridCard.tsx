@@ -1,20 +1,21 @@
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import styles from "./GridCard.module.css"
 import "../../styles/template.css"
+
 import {useContext, useState} from "react";
 import {addItemToCart, CartContext, Product} from "../../contexts/CartContext";
 import {UserContext} from "../../contexts/UserContext";
 
-
 interface Props {
-    id: number
-    title: string
-    artist: string
-    price: number
-    imageSrc?: string
+  id: number
+  title: string
+  artist: string
+  price: number
+  imageSrc?: string
 }
 
 function GridCard(props: Props) {
+
     const ctx = useContext(UserContext)
     if (!ctx)
         throw new Error("UserContext undefined")
@@ -45,11 +46,15 @@ function GridCard(props: Props) {
                     <p className={styles.productArtist}>{props.artist}</p>
                 </div>
                 <p className={styles.productPrice}>{props.price},-</p>
-                <button onClick={() => {
-                    handleAddToCart()
-                }} className="cardButton btn btn-primary" id="liveAlertBtn">
-                    Add to Cart
-                </button>
+                <button
+          onClick={() => {
+            handleAddToCart()
+          }}
+          className={styles.cardButton}
+          id="liveAlertBtn"
+        >
+          Add to Cart
+        </button>
             </div>
         </>
     )

@@ -2,28 +2,16 @@ import { useEffect, useState } from "react"
 import styles from "./Filter.module.css"
 import "../../styles/template.css"
 import FilterComponent from "../FilterComponent/FilterComponent"
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 type Props = {
   itemsNum: number
 }
 
 function Filter(props: Props) {
-  const [genre, setGenre] = useState("")
-  const [decade, setDecade] = useState("")
-  const [artist, setArtist] = useState("")
-
-  const navigate = useNavigate()
-  const location = useLocation()
-
   const [genresData, setGenresData] = useState<string[]>([])
   const [artistsData, setArtistsData] = useState<string[]>([])
-  const [yearsData, setYearsData] = useState<string[]>([])
+  const [decadesData, setDecadesData] = useState<string[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
 
   const removeSearchParams = (key: string) => {
@@ -34,20 +22,9 @@ function Filter(props: Props) {
   }
 
   const appendSearchParams = (key: string, value: string) => {
-    if (!searchParams.has(key)) {
-      searchParams.set(key, value)
-      setSearchParams(searchParams)
-    }
+    searchParams.set(key, value)
+    setSearchParams(searchParams)
   }
-  useEffect(() => {
-    const genreParam = searchParams.get("genre") ?? ""
-    const artistParam = searchParams.get("artist") ?? ""
-    const decadeParam = searchParams.get("decade") ?? ""
-
-    setGenre(genreParam)
-    setArtist(artistParam)
-    setDecade(decadeParam)
-  }, [searchParams])
 
   useEffect(() => {
     const datafetch = async () => {
@@ -63,10 +40,24 @@ function Filter(props: Props) {
 
       setGenresData(data1)
       setArtistsData(data2)
-      setYearsData(data3)
+      setDecadesData(data3)
     }
     datafetch()
   }, [])
+
+  let genre = searchParams.get("genre") ?? ""
+  let artist = searchParams.get("artist") ?? ""
+  let decade = searchParams.get("decade") ?? ""
+
+  if (genresData && !genresData.includes(genre)) {
+    genre = ""
+  }
+  if (artistsData && !artistsData.includes(artist)) {
+    artist = ""
+  }
+  if (decadesData && !decadesData.includes(decade)) {
+    decade = ""
+  }
 
   return (
     <>
@@ -83,8 +74,7 @@ function Filter(props: Props) {
                 data={genresData}
                 value={genre}
                 onChange={appendSearchParams}
-              ></FilterComponent>
-
+              />
               {genre && (
                 <button
                   className={styles.filterSelectionButton}
@@ -94,7 +84,6 @@ function Filter(props: Props) {
                 >
                   <p>{genre}</p>
                   <p>⨂</p>
-                  {/* ⨉ */}
                 </button>
               )}
             </div>
@@ -104,7 +93,7 @@ function Filter(props: Props) {
                 data={artistsData}
                 value={artist}
                 onChange={appendSearchParams}
-              ></FilterComponent>
+              />
               {artist && (
                 <button
                   className={styles.filterSelectionButton}
@@ -114,17 +103,16 @@ function Filter(props: Props) {
                 >
                   <p>{artist}</p>
                   <p>⨂</p>
-                  {/* ⨉ */}
                 </button>
               )}
             </div>
             <div className={styles.filterComponent}>
               <FilterComponent
                 category="Decade"
-                data={yearsData}
+                data={decadesData}
                 value={decade}
                 onChange={appendSearchParams}
-              ></FilterComponent>
+              />
               {decade && (
                 <button
                   className={styles.filterSelectionButton}
@@ -134,7 +122,6 @@ function Filter(props: Props) {
                 >
                   <p>{decade}</p>
                   <p>⨂</p>
-                  {/* ⨉ */}
                 </button>
               )}
             </div>
