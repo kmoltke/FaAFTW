@@ -18,12 +18,9 @@ function Filter(props: Props) {
   const [decade, setDecade] = useState("")
   const [artist, setArtist] = useState("")
 
-  const navigate = useNavigate()
-  const location = useLocation()
-
   const [genresData, setGenresData] = useState<string[]>([])
   const [artistsData, setArtistsData] = useState<string[]>([])
-  const [yearsData, setYearsData] = useState<string[]>([])
+  const [decadesData, setDecadesData] = useState<string[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
 
   const removeSearchParams = (key: string) => {
@@ -39,15 +36,10 @@ function Filter(props: Props) {
       setSearchParams(searchParams)
     }
   }
-  useEffect(() => {
-    const genreParam = searchParams.get("genre") ?? ""
-    const artistParam = searchParams.get("artist") ?? ""
-    const decadeParam = searchParams.get("decade") ?? ""
 
-    setGenre(genreParam)
-    setArtist(artistParam)
-    setDecade(decadeParam)
-  }, [searchParams])
+  function arrayContains(value: string, array: string[]) {
+    return array.includes(value)
+  }
 
   useEffect(() => {
     const datafetch = async () => {
@@ -63,10 +55,29 @@ function Filter(props: Props) {
 
       setGenresData(data1)
       setArtistsData(data2)
-      setYearsData(data3)
+      setDecadesData(data3)
     }
     datafetch()
   }, [])
+
+  useEffect(() => {
+    let genreParam = searchParams.get("genre") ?? ""
+    let artistParam = searchParams.get("artist") ?? ""
+    let decadeParam = searchParams.get("decade") ?? ""
+    console.log(genresData)
+    if (genresData && !arrayContains(genreParam, genresData)) {
+      genreParam = ""
+    }
+    if (artistsData && !arrayContains(artistParam, artistsData)) {
+      artistParam = ""
+    }
+    if (decadesData && !arrayContains(decadeParam, decadesData)) {
+      decadeParam = ""
+    }
+    setGenre(genreParam)
+    setDecade(decadeParam)
+    setArtist(artistParam)
+  }, [searchParams, genresData, artistsData, decadesData])
 
   return (
     <>
@@ -121,7 +132,7 @@ function Filter(props: Props) {
             <div className={styles.filterComponent}>
               <FilterComponent
                 category="Decade"
-                data={yearsData}
+                data={decadesData}
                 value={decade}
                 onChange={appendSearchParams}
               ></FilterComponent>
