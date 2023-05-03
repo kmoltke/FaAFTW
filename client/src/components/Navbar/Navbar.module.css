@@ -65,6 +65,9 @@
 .icon {
   display: none;
 }
+.iconResponsive {
+  display: none;
+}
 
 /* Links on mouse-over */
 .logoel2:hover {
@@ -85,7 +88,8 @@
 }
 
 /* Display some links to the right */
-.navbarRight {
+.navbarRight,
+.navbarRightResponsive {
   float: right;
   overflow: hidden;
   margin-right: 1em;
@@ -96,38 +100,43 @@
   .navbar {
     padding: 20px 10px !important; /* Use !important to make sure that JavaScript doesn't override the padding on small screens */
   }
-  /* #navbar a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  #navbar-right {
-    float: none;
-  } */
 
   .logoel1 {
     display: none;
   }
 }
 
+/* .iconResponsive {
+  display: block;
+} */
+
 @media screen and (max-width: 600px) {
-  .navbarRight a {
+  .navbarRightLink {
     display: none;
   }
-  .navbarRight a.icon {
+  .icon,
+  .iconResponsive {
     display: block;
     position: fixed;
     right: 1em;
     top: 1em;
   }
 
-  .navbarRight .responsive {
-    position: relative;
-    width: 100%;
+  .iconResponsive {
+    position: fixed;
+    right: 1em;
+    top: 1em;
   }
 
-  .navbarRight .responsive a:not(:first-child) {
+  .navbarRightResponsive {
+    position: relative;
+    width: 100%;
+    float: none !important;
+  }
+
+  .navbarRightResponsive a:not(:first-child) {
     display: block;
     text-align: left;
+    float: none !important;
   }
 }
