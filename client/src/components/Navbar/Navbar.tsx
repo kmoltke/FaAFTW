@@ -46,15 +46,15 @@ function Navbar() {
   }
 
   const ctx = useContext(UserContext)
-  if (!ctx) throw new Error("User is undefined")
-  const { user, updateUser } = ctx
-  const name = user.fname
-  console.log("Navbaruser", user)
+    if (!ctx)
+        throw new Error("User is undefined")
+    const {user, updateUser} = ctx
+    const name = user.fname
 
-  useEffect(() => {
-    console.log("Navbar user effect:", user)
-  }, [user])
+    useEffect(() => {
+    }, [user]);
 
+  
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const toggleMenu = () => setShowMobileMenu((prev) => !prev)
