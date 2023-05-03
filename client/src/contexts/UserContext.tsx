@@ -25,10 +25,27 @@ export const UserContext = React.createContext<IUserContext | undefined>(
 )
 
 export const UserProvider = ({ children }: any) => {
-  const [user, setUser] = useState<User>({ id: 0, fname: "", lname: "" });
-  const updateUser = (newUser: User) => {
-    setUser(newUser);
-  };
+    const [user, setUser] = useState<User>({ id: 0, fname: "", lname: "" });
+    const updateUser = (newUser: User) => {
+        setUser(newUser);
+        console.log("UserContextProvider user", newUser); // log the updated user
+    };
 
-  return <UserContext.Provider value={{user: user, updateUser: updateUser}}>{children}</UserContext.Provider>;
+    return (
+        <UserContext.Provider value={{ user: user, updateUser: updateUser }}>
+            {children}
+        </UserContext.Provider>
+    );
 };
+
+
+// export const UserProvider = ({children}: any) => {
+//     const [user, setUser] = useState<User>({id: 0, fname: "", lname: ""});
+//     const updateUser = (newUser: User) => {
+//         console.log("UserContextProvider user", user);
+//         setUser(newUser);
+//     };
+//     //TEST
+//
+//     return <UserContext.Provider value={{user: user, updateUser: updateUser}}>{children}</UserContext.Provider>;
+// };

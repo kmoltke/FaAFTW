@@ -8,6 +8,7 @@ import ProductDescriptionPage from "../pages/ProductDescriptionPage/ProductDescr
 function Router(props: any) {
   return (
     <BrowserRouter>
+
       <Navbar />
       <Routes>
         <Route path="/browse" Component={() => <div>browse</div>} />

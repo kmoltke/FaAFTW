@@ -45,6 +45,7 @@ export const RegisterForm = () => {
             return {fname: "First name must be 15 characters of less"}
         return {fname: undefined}
     }
+
     const validateLName = (name: string) => {
         const regName: RegExp = /^([a-zA-z]{2,}\s*)+$/
         if (!regName.test(name)) return {lname: "Not a valid last name"}
@@ -92,6 +93,7 @@ export const RegisterForm = () => {
         }
 
         const errors = validate()
+
         if (errors.password || errors.fname || errors.lname) {
             return
         }
