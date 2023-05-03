@@ -28,7 +28,6 @@ export const UserProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>({ id: 0, fname: "", lname: "" });
     const updateUser = (newUser: User) => {
         setUser(newUser);
-        console.log("UserContextProvider user", newUser); // log the updated user
     };
 
     return (

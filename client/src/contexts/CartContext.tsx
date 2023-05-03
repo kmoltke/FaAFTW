@@ -43,10 +43,10 @@ export const CartProvider = ({children}: any) => {
     return (<CartContext.Provider value={{cartState, dispatch}}>{children}</CartContext.Provider>)
 };
 
-export const addItemToCart = (dispatch: React.Dispatch<Action>, product: Product, quantity: number) => {
+export const addItemToCart = (dispatch: React.Dispatch<Action>, product: Product, quantity: number, userId: number) => {
     dispatch({
         type: 'ADD_ITEM',
-        payload: {id: product.id, artist: product.artist, album: product.album, price: product.price, image: product.imageSrc},
+        payload: {id: product.id, artist: product.artist, album: product.album, price: product.price, image: product.imageSrc, quantity: quantity, userId: userId},
     })
 }
 
