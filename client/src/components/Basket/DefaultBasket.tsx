@@ -5,9 +5,9 @@ import BasketItem from '../BasketItem/BasketItem'
 import { CartContext, CartItem } from '../../contexts/CartContext'
 
 function DefaultBasket() {
-  const { cartState } = useContext(CartContext)
+  const { cartState: cart } = useContext(CartContext)
 
-  console.log('cart state: ', cartState)
+  console.log('cart state: ', cart)
 
   console.log('default basket renderd')
 
@@ -15,24 +15,30 @@ function DefaultBasket() {
     <Card>
       <Row>
         <Col sm={8}>
-          <h3>Products</h3>
-          <hr />
-          {cartState.items.map((prod: CartItem) => (
-            <BasketItem
-              key={prod.id}
-              id={prod.id}
-              artist={prod.artist}
-              album={prod.album}
-              quantity={prod.quantity}
-              price={prod.price}
-              image={prod.image}
-            ></BasketItem>
-          ))}
+          <div className="m-5">
+            <h1>Products</h1>
+            <hr />
+            {cart.items.length === 0 ? (
+              <h3>Your cart is empty, go shopping!</h3>
+            ) : (
+              cart.items.map((prod: CartItem) => (
+                <BasketItem
+                  key={prod.id}
+                  id={prod.id}
+                  artist={prod.artist}
+                  album={prod.album}
+                  quantity={prod.quantity}
+                  price={prod.price}
+                  image={prod.image}
+                ></BasketItem>
+              ))
+            )}
+          </div>
         </Col>
         <Col sm={4}>
           <h3>Summary</h3>
           <hr />
-          <BasketSummary total={cartState.total}></BasketSummary>
+          <BasketSummary total={cart.total}></BasketSummary>
         </Col>
       </Row>
     </Card>

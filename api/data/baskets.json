@@ -1,54 +1,30 @@
 [
   {
-    "id": 1680706770096,
-    "BasketId": 1680704188082,
-    "products": [],
-    "total": 0
-  },
-  {
-    "id": 1680705564259,
-    "BasketId": 1680706818189,
-    "products": [
-      {
-        "id": 2,
-        "quantity": 4,
-        "price": 600
-      },
-      {
-        "id": 5,
-        "quantity": 1,
-        "price": 120
-      },
-      {
-        "id": 4,
-        "quantity": 2,
-        "price": 240
-      }
-    ],
-    "total": 960
-  },
-  {
-    "id": 1780705564259,
-    "BasketId": 1681303656017,
-    "products": [
-      {
-        "id": 4,
-        "quantity": 1,
-        "price": 120
-      }
-    ],
-    "total": 120
-  },
-  {
     "id": 1683221100235,
-    "BasketId": 1683221102279,
+    "BasketId": 1683231887869,
     "products": [
       {
         "id": 1,
-        "price": 454,
-        "quantity": 2
+        "album": "Abbey Road",
+        "artist": "The Beatles",
+        "image": "/images/id1-1.jpg",
+        "price": 227
+      },
+      {
+        "id": 2,
+        "album": "IV",
+        "artist": "Led Zeppelin",
+        "image": "/images/id2-1.jpg",
+        "price": 177
+      },
+      {
+        "id": 3,
+        "album": "Dark Side of the Moon",
+        "artist": "Pink Floyd",
+        "image": "/images/id3-1.jpg",
+        "price": 177
       }
     ],
-    "total": 454
+    "total": 581
   }
 ]

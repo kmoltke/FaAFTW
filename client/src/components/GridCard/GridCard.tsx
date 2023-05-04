@@ -1,34 +1,34 @@
-import { NavLink } from "react-router-dom"
-import styles from "./GridCard.module.css"
-import "../../styles/template.css"
+import { NavLink } from 'react-router-dom'
+import styles from './GridCard.module.css'
+import '../../styles/template.css'
 
-import { useContext, useState } from "react"
-import { addItemToCart, CartContext, Product } from "../../contexts/CartContext"
-import { UserContext } from "../../contexts/UserContext"
+import { useContext } from 'react'
+import { addItemToCart, CartContext, Product } from '../../contexts/CartContext'
+import { UserContext } from '../../contexts/UserContext'
 
-interface Props {
+interface GridCardProps {
   id: number
   album: string
   artist: string
   price: number
-  imageSrc?: string
+  image?: string
 }
 
-function GridCard(props: Props) {
+function GridCard(props: GridCardProps) {
   const ctx = useContext(UserContext)
-  if (!ctx) throw new Error("UserContext undefined")
+  if (!ctx) throw new Error('UserContext undefined')
   const userId = ctx.user.id
 
-  const noImg = "/images/no-image.jpg"
-  const img = props.imageSrc ?? noImg
-  const route = "/products/" + props.id
+  const noImg = '/images/no-image.jpg'
+  const img = props.image ?? noImg
+  const route = '/products/' + props.id
 
   const item: Product = {
     id: props.id,
     album: props.album,
     artist: props.artist,
     price: props.price,
-    imageSrc: img,
+    image: img,
   }
 
   // If we want to be able to bulk add:
@@ -36,6 +36,11 @@ function GridCard(props: Props) {
   const { dispatch } = useContext(CartContext)
   const handleAddToCart = () => {
     addItemToCart(dispatch, item, 1, userId)
+    fetch(`http://localhost:5000/users/${userId}/basket/products`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(props),
+    })
   }
 
   return (
