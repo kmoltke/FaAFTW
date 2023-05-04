@@ -3,7 +3,6 @@
   display: block;
   overflow: hidden;
   background-color: #212121;
-  padding: 50px 10px; /* Large padding which will shrink on scroll (using JS) */
   transition: padding 0.2s; /* Adds a transition effect when the padding is decreased */
   position: fixed; /* Sticky/fixed navbar */
   width: 100%;
@@ -13,7 +12,7 @@
 }
 
 /* Style the navbar links */
-.navbar a {
+.navbarRightLink {
   font-family: "Oswald", sans-serif !important;
   font-weight: bold !important;
   float: left;
@@ -26,11 +25,14 @@
   border-radius: 4px;
   margin-bottom: 0 !important;
 }
-.navbar a.active {
+
+.navbarRightLink.active {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
-.navbar a:hover {
+.navbarRightLink:hover {
+  color: rgb(255, 255, 255);
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
@@ -41,13 +43,12 @@
   position: relative;
   font-weight: bold;
   transition: 0.4s;
-  text-decoration: none;
 }
 
 .logoel1 {
   position: absolute;
   max-width: 120px;
-  transform: translate(-50%, -50%);
+  transform: translate(28%, -50%);
   top: 53%;
   object-fit: contain;
   transition: opacity 250ms;
@@ -55,6 +56,15 @@
 }
 
 .logoel2 {
+  font-family: "Oswald", sans-serif !important;
+  font-weight: bold !important;
+  float: left;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 12px;
+  line-height: 25px;
+  border-radius: 4px;
+  margin-bottom: 0 !important;
   visibility: visible;
   font-size: 18px;
   max-width: 300px;
@@ -62,17 +72,21 @@
   transition: font-size 200ms;
 }
 
+.logoel2:hover {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
 .icon {
   display: none;
 }
+
 .iconResponsive {
   display: none;
 }
 
 /* Links on mouse-over */
-.logoel2:hover {
-  color: rgb(255, 0, 0);
-}
 
 .logoel1:hover {
   animation: rotate 0.55s infinite linear;
@@ -80,10 +94,10 @@
 
 @keyframes rotate {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(28%, -50%) rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(28%, -50%) rotate(360deg);
   }
 }
 
@@ -114,15 +128,45 @@
   .navbarRightLink {
     display: none;
   }
-  .icon,
+
+  .iconResponsive:hover {
+    color: rgb(255, 174, 174);
+  }
+  .icon:hover {
+    color: rgb(255, 174, 174);
+  }
+
   .iconResponsive {
     display: block;
+    font-family: "Oswald", sans-serif !important;
+    font-weight: bold !important;
+    float: left;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    margin-bottom: 0 !important;
     position: fixed;
     right: 1em;
     top: 1em;
   }
 
-  .iconResponsive {
+  .icon {
+    font-family: "Oswald", sans-serif !important;
+    font-weight: bold !important;
+    float: left;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    margin-bottom: 0 !important;
+    display: block;
     position: fixed;
     right: 1em;
     top: 1em;

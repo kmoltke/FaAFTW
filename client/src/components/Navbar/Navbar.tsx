@@ -46,15 +46,12 @@ function Navbar() {
   }
 
   const ctx = useContext(UserContext)
-    if (!ctx)
-        throw new Error("User is undefined")
-    const {user, updateUser} = ctx
-    const name = user.fname
+  if (!ctx) throw new Error("User is undefined")
+  const { user, updateUser } = ctx
+  const name = user.fname
 
-    useEffect(() => {
-    }, [user]);
+  useEffect(() => {}, [user])
 
-  
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const toggleMenu = () => setShowMobileMenu((prev) => !prev)
@@ -65,15 +62,17 @@ function Navbar() {
     <>
       <header>
         <div className={styles.navbar} ref={navbarRef}>
-          <a href="#default" className={styles.logo}>
+          <NavLink to={"/"} className={styles.logo}>
             <img
               className={styles.logoel1}
               ref={logoRef}
               src="/images/logo/332096491_571562201699624_6671416270433743475_n.png"
               alt=""
             />
-            <div className={styles.logoel2}>the vinyl countdown</div>
-          </a>
+            <div className={styles.logoel2} onClick={toggleMenu}>
+              the vinyl countdown
+            </div>
+          </NavLink>
           <div
             className={
               showMobileMenu ? styles.navbarRightResponsive : styles.navbarRight
@@ -86,7 +85,11 @@ function Navbar() {
               <i className="fa fa-bars"></i>
             </a>
             <NavLink
-              className={styles.navbarRightLink}
+              className={(navData) =>
+                navData.isActive
+                  ? `${styles.navbarRightLink} ${styles.active}`
+                  : styles.navbarRightLink
+              }
               to={"/"}
               onClick={() => {
                 window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
@@ -119,7 +122,11 @@ function Navbar() {
             ) : (
               <NavLink
                 to={"/login"}
-                className={styles.navbarRightLink}
+                className={(navData) =>
+                  navData.isActive
+                    ? `${styles.navbarRightLink} ${styles.active}`
+                    : styles.navbarRightLink
+                }
                 onClick={() => {
                   toggleMenu()
                 }}
@@ -129,7 +136,11 @@ function Navbar() {
             )}
             <NavLink
               to={"/cart"}
-              className={styles.navbarRightLink}
+              className={(navData) =>
+                navData.isActive
+                  ? `${styles.navbarRightLink} ${styles.active}`
+                  : styles.navbarRightLink
+              }
               onClick={() => {
                 toggleMenu()
               }}
