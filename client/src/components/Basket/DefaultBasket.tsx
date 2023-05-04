@@ -1,15 +1,15 @@
-import { Card, Col, Row } from 'react-bootstrap'
-import { useContext } from 'react'
-import BasketSummary from '../BasketSummary/BasketSummary'
-import BasketItem from '../BasketItem/BasketItem'
-import { CartContext, CartItem } from '../../contexts/CartContext'
+import { Card, Col, Row } from "react-bootstrap";
+import { useContext } from "react";
+import BasketSummary from "../BasketSummary/BasketSummary";
+import BasketItem from "../BasketItem/BasketItem";
+import { CartContext, CartItem } from "../../contexts/CartContext";
 
 function DefaultBasket() {
-  const { cartState: cart } = useContext(CartContext)
+  const { cartState: cart } = useContext(CartContext);
 
-  console.log('cart state: ', cart)
+  console.log("cart state: ", cart);
 
-  console.log('default basket renderd')
+  console.log("default basket renderd");
 
   return (
     <Card>
@@ -42,7 +42,7 @@ function DefaultBasket() {
         </Col>
       </Row>
     </Card>
-  )
+  );
 }
 
-export default DefaultBasket
+export default DefaultBasket;

@@ -1,29 +1,29 @@
-import { useContext } from 'react'
+import { useContext } from "react";
 import {
   CartContext,
   CartItem,
   removeItemFromCart,
-} from '../../contexts/CartContext'
-import { UserContext } from '../../contexts/UserContext'
+} from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
 
 function BasketItem(props: CartItem) {
-  const { dispatch } = useContext(CartContext)
-  const userContext = useContext(UserContext)
+  const { dispatch } = useContext(CartContext);
+  const userContext = useContext(UserContext);
 
   if (!userContext) {
-    throw new Error('UserContext undefined')
+    throw new Error("UserContext undefined");
   }
-  console.log('props: ', props)
+  console.log("props: ", props);
 
-  const { user } = userContext
+  const { user } = userContext;
 
   const handleRemoveItem = (id: number, price: number) => {
-    removeItemFromCart(dispatch, id, price)
+    removeItemFromCart(dispatch, id, price);
     fetch(`http://localhost:5000/users/${user.id}/basket/products/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    })
-  }
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+  };
 
   return (
     <div className="row m-4 d-flex justify-content-between align-items-center">
@@ -50,7 +50,7 @@ function BasketItem(props: CartItem) {
         </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default BasketItem
+export default BasketItem;

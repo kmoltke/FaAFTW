@@ -1,61 +1,61 @@
-import { useContext, useState } from 'react'
-import styles from './LoginForm.module.css'
-import { useNavigate } from 'react-router'
-import { UserContext } from '../../contexts/UserContext'
+import { useContext, useState } from "react";
+import styles from "./LoginForm.module.css";
+import { useNavigate } from "react-router";
+import { UserContext } from "../../contexts/UserContext";
 
 type FormError = {
-  name?: string
-  email?: string
-  password?: string
-  general?: string
-}
+  name?: string;
+  email?: string;
+  password?: string;
+  general?: string;
+};
 
 export const LoginForm = () => {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [formErrors, setFormErrors] = useState<FormError>()
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [formErrors, setFormErrors] = useState<FormError>();
 
-  const ctx = useContext(UserContext)
-  if (!ctx) throw new Error('User is undefined')
+  const ctx = useContext(UserContext);
+  if (!ctx) throw new Error("User is undefined");
 
-  const { updateUser } = ctx
+  const { updateUser } = ctx;
 
   const handleEmailInput = (e: any) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   const handlePasswordInput = (e: any) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleFormSubmit = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (email === '' && password === '') {
-      setFormErrors({ general: 'Please fill in the required data to login' })
-      return
+    if (email === "" && password === "") {
+      setFormErrors({ general: "Please fill in the required data to login" });
+      return;
     }
 
-    const loginResponse = await fetch('http://localhost:5000/users/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const loginResponse = await fetch("http://localhost:5000/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-    })
+    });
 
     if (loginResponse.status !== 200) {
       setFormErrors({
         general:
-          'Looks like either your email address or password were incorrect. Wanna try again?',
-      })
-      return
+          "Looks like either your email address or password were incorrect. Wanna try again?",
+      });
+      return;
     }
 
-    const data = await loginResponse.json()
+    const data = await loginResponse.json();
 
-    updateUser(data.user)
-    navigate('/')
-  }
+    updateUser(data.user);
+    navigate("/");
+  };
 
   return (
     <div className="d-flex justify-content-center">
@@ -95,5 +95,5 @@ export const LoginForm = () => {
         )}
       </form>
     </div>
-  )
-}
+  );
+};
