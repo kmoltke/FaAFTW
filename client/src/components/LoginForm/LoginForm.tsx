@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import styles from './LoginForm.module.css'
-// import { useUserContext } from "../../contexts/UserContext"
 import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 
@@ -15,13 +14,12 @@ export const LoginForm = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState<string>()
   const [formErrors, setFormErrors] = useState<FormError>()
-  // const { user, updateUser } = useUserContext()
+
   const ctx = useContext(UserContext)
   if (!ctx) throw new Error('User is undefined')
 
-  const { user, updateUser } = ctx
+  const { updateUser } = ctx
 
   const handleEmailInput = (e: any) => {
     setEmail(e.target.value)
@@ -39,13 +37,13 @@ export const LoginForm = () => {
       return
     }
 
-    const response = await fetch('http://localhost:5000/users/login', {
+    const loginResponse = await fetch('http://localhost:5000/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     })
 
-    if (response.status !== 200) {
+    if (loginResponse.status !== 200) {
       setFormErrors({
         general:
           'Looks like either your email address or password were incorrect. Wanna try again?',
@@ -53,7 +51,7 @@ export const LoginForm = () => {
       return
     }
 
-    const data = await response.json()
+    const data = await loginResponse.json()
 
     updateUser(data.user)
     navigate('/')

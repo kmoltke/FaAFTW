@@ -19,7 +19,7 @@ function Grid(props: any) {
             id={product.id}
             album={product.album}
             artist={product.artist}
-            imageSrc={product.imageSrc}
+            image={product.image}
             price={product.price}
           ></GridCard>
         )

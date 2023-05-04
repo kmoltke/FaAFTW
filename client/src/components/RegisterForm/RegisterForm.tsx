@@ -1,30 +1,30 @@
-import React, { useContext, useState } from "react"
-import styles from "./RegisterForm.module.css"
+import React, { useContext, useState } from 'react'
+import styles from './RegisterForm.module.css'
 
-import { User } from "../../../../api/src/users/users.model"
-import { useNavigate } from "react-router"
-import { UserContext } from "../../contexts/UserContext"
+import { User } from '../../../../api/src/users/users.model'
+import { useNavigate } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
 
 export const RegisterForm = () => {
   const navigate = useNavigate()
-  const [fname, setFName] = useState("")
-  const [lname, setLName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [fname, setFName] = useState('')
+  const [lname, setLName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [formErrors, setFormErrors] = useState<FormError>()
 
   const ctx = useContext(UserContext)
   if (!ctx) {
-    throw new Error("Context is undefined")
+    throw new Error('Context is undefined')
   }
   const { user, updateUser } = ctx
 
   const emptyUser: User = {
     id: 0,
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
+    fname: '',
+    lname: '',
+    email: '',
+    password: '',
   }
 
   type FormError = {
@@ -43,24 +43,24 @@ export const RegisterForm = () => {
     if (!regPassword.test(password))
       return {
         password:
-          "Password requirements: 8-20 characters, 1 number, 1 letter, 1 symbol.",
+          'Password requirements: 8-20 characters, 1 number, 1 letter, 1 symbol.',
       }
     return { password: undefined }
   }
 
   const validateFName = (name: string) => {
     const regName: RegExp = /^([a-zA-z]{2,}\s*)+$/
-    if (!regName.test(name)) return { fname: "Not a valid first name" }
+    if (!regName.test(name)) return { fname: 'Not a valid first name' }
     if (name.length > 15)
-      return { fname: "First name must be 15 characters of less" }
+      return { fname: 'First name must be 15 characters of less' }
     return { fname: undefined }
   }
 
   const validateLName = (name: string) => {
     const regName: RegExp = /^([a-zA-z]{2,}\s*)+$/
-    if (!regName.test(name)) return { lname: "Not a valid last name" }
+    if (!regName.test(name)) return { lname: 'Not a valid last name' }
     if (name.length > 15)
-      return { lname: "Last name must be 15 characters of less" }
+      return { lname: 'Last name must be 15 characters of less' }
     return { lname: undefined }
   }
 
@@ -97,9 +97,9 @@ export const RegisterForm = () => {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (email === "" || password === "" || fname === "" || lname === "") {
+    if (email === '' || password === '' || fname === '' || lname === '') {
       setFormErrors({
-        general: "Please fill in the required data to register",
+        general: 'Please fill in the required data to register',
       })
       return
     }
@@ -112,29 +112,23 @@ export const RegisterForm = () => {
     console.log(formErrors)
 
     // Create user on DB:
-    const userResponse = await fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const userResponse = await fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, fname, lname, password }),
     })
 
     if (userResponse.status !== 200) {
       setFormErrors({
         general:
-          "Looks like this email adress already exists... Wanna try again?",
+          'Looks like this email adress already exists... Wanna try again?',
       })
       return
     }
 
-
     const data = await userResponse.json()
 
-    const basketResponse = await fetch(`http://localhost:5000/users/${data.user.id}/basket`, {
-      method: `POST`
-    })
     updateUser(data.user)
-    console.log(data)
-    //GO Back:
     navigate(-1)
   }
 

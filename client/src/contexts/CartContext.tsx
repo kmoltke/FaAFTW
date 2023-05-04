@@ -6,7 +6,7 @@ export interface Product {
   artist: string
   album: string
   price: number
-  imageSrc: string
+  image: string
 }
 
 export interface CartItem {
@@ -51,6 +51,20 @@ export const CartProvider = ({ children }: any) => {
   )
 }
 
+export const setCart = (
+  dispatch: React.Dispatch<Action>,
+  items: CartItem[],
+  total: number
+) => {
+  dispatch({
+    type: 'SET_CART',
+    payload: {
+      items,
+      total,
+    },
+  })
+}
+
 export const addItemToCart = (
   dispatch: React.Dispatch<Action>,
   product: Product,
@@ -64,7 +78,7 @@ export const addItemToCart = (
       artist: product.artist,
       album: product.album,
       price: product.price,
-      image: product.imageSrc,
+      image: product.image,
       quantity: quantity,
       userId: userId,
     },

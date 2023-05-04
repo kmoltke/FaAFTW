@@ -9,24 +9,8 @@ export const cartReducer = (
   state: CartState = initialCartState,
   action: Action
 ) => {
-  const isLoggedIn = action.payload.userId !== 0
   switch (action.type) {
     case 'ADD_ITEM':
-      if (isLoggedIn) {
-        const response = fetch(
-          `http://localhost:5000/users/${action.payload.userId}/basket/products`,
-          {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              id: action.payload.id,
-              price: action.payload.price,
-              quantity: action.payload.quantity,
-            }),
-          }
-        )
-      }
-      console.log('add item state: ', state)
       const existingItemIndex = state.items.findIndex(
         (item: CartItem) => item.id === action.payload.id
       )
@@ -48,20 +32,6 @@ export const cartReducer = (
         }
       }
     case 'REMOVE_ITEM':
-      if (isLoggedIn) {
-        const response = fetch(
-          `http://localhost:5000/users/${action.payload.userId}/basket/products`,
-          {
-            method: `DELETE`,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              id: action.payload.id,
-              price: action.payload.price,
-              quantity: action.payload.quantity,
-            }),
-          }
-        )
-      }
       const filteredItems = state.items.filter(
         (item) => item.id !== action.payload.id
       )
@@ -69,6 +39,12 @@ export const cartReducer = (
       return {
         total: state.total - action.payload.price,
         items: filteredItems,
+      }
+
+    case 'SET_CART':
+      return {
+        items: [...action.payload.items],
+        total: action.payload.total,
       }
     default:
       return state
