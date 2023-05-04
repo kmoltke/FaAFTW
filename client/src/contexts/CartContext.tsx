@@ -65,6 +65,20 @@ export const setCart = (
   });
 };
 
+export const setCart = (
+  dispatch: React.Dispatch<Action>,
+  items: CartItem[],
+  total: number
+) => {
+  dispatch({
+    type: "SET_CART",
+    payload: {
+      items,
+      total,
+    },
+  });
+};
+
 export const addItemToCart = (
   dispatch: React.Dispatch<Action>,
   product: Product,
