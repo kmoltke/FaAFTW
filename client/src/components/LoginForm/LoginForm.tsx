@@ -1,30 +1,27 @@
-import { useContext, useState } from "react"
-import styles from "./LoginForm.module.css"
+import { useContext, useState } from 'react'
+import styles from './LoginForm.module.css'
 // import { useUserContext } from "../../contexts/UserContext"
-import { useNavigate } from "react-router"
-import { UserContext} from "../../contexts/UserContext";
+import { useNavigate } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
+
+type FormError = {
+  name?: string
+  email?: string
+  password?: string
+  general?: string
+}
 
 export const LoginForm = () => {
   const navigate = useNavigate()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState<string>()
   const [formErrors, setFormErrors] = useState<FormError>()
   // const { user, updateUser } = useUserContext()
   const ctx = useContext(UserContext)
-  if (!ctx)
-    throw (new Error("User is undefined"))
+  if (!ctx) throw new Error('User is undefined')
 
-  const {user, updateUser} = ctx
-
-  // const { user, updateUser } = useUserContext()
-
-  type FormError = {
-    name?: string
-    email?: string
-    password?: string
-    general?: string
-  }
+  const { user, updateUser } = ctx
 
   const handleEmailInput = (e: any) => {
     setEmail(e.target.value)
@@ -37,21 +34,21 @@ export const LoginForm = () => {
   const handleFormSubmit = async (e: any) => {
     e.preventDefault()
 
-    if (email === "" && password === "") {
-      setFormErrors({ general: "Please fill in the required data to login" })
+    if (email === '' && password === '') {
+      setFormErrors({ general: 'Please fill in the required data to login' })
       return
     }
 
-    const response = await fetch("http://localhost:5000/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const response = await fetch('http://localhost:5000/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     })
 
     if (response.status !== 200) {
       setFormErrors({
         general:
-          "Looks like either your email address or password were incorrect. Wanna try again?",
+          'Looks like either your email address or password were incorrect. Wanna try again?',
       })
       return
     }
@@ -59,7 +56,7 @@ export const LoginForm = () => {
     const data = await response.json()
 
     updateUser(data.user)
-    navigate("/")
+    navigate('/')
   }
 
   return (

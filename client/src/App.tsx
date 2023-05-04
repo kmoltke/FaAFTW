@@ -1,15 +1,13 @@
-import "./styles/template.css"
-import "./styles/basket.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import { User, UserContext, UserProvider } from "./contexts/UserContext"
+import './styles/template.css'
+import './styles/basket.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { User, UserContext, UserProvider } from './contexts/UserContext'
 // import {Cart, CartContext, cartItem} from "./contexts/CartContext";
 
-import Router from "./router/Router"
-
+import Router from './router/Router'
 // import {UserContextProvider} from "./contexts/UserContext"
-import { useState } from "react"
-import { CartContext, CartProvider } from "./contexts/CartContext"
-import { ScrollRestoration } from "react-router-dom"
+import { CartProvider } from './contexts/CartContext'
+import { ScrollRestoration } from 'react-router-dom'
 
 export function App() {
   // const [currUser, updateState] = useState<User>(

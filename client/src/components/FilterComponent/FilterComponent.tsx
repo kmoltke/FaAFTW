@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react"
-import styles from "./FilterComponent.module.css"
-import "../../styles/template.css"
+import styles from './FilterComponent.module.css'
+import '../../styles/template.css'
 
-type Props = {
+type FilterComponentProps = {
   category: string
   value: string | undefined
   onChange: (key: string, val: string) => void
   data: string[]
 }
 
-function FilterComponent(props: Props) {
+function FilterComponent(props: FilterComponentProps) {
   const category = props.category
   const param = category.toLowerCase()
   return (
@@ -22,7 +21,7 @@ function FilterComponent(props: Props) {
           props.onChange(param, e.target.value)
         }}
       >
-        <option value={""}>{category}</option>
+        <option value={''}>{category}</option>
 
         {props.data.map((item: any) => (
           <option key={item}>{item}</option>
