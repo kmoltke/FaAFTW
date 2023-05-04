@@ -7,6 +7,11 @@ export interface Product {
   album: string;
   price: number;
   image: string;
+  id: number
+  artist: string
+  album: string
+  price: number
+  image: string
 }
 
 export interface CartItem {
@@ -64,6 +69,22 @@ export const setCart = (
     },
   });
 };
+  )
+}
+
+export const setCart = (
+  dispatch: React.Dispatch<Action>,
+  items: CartItem[],
+  total: number
+) => {
+  dispatch({
+    type: 'SET_CART',
+    payload: {
+      items,
+      total,
+    },
+  })
+}
 
 export const addItemToCart = (
   dispatch: React.Dispatch<Action>,
@@ -78,6 +99,7 @@ export const addItemToCart = (
       artist: product.artist,
       album: product.album,
       price: product.price,
+      image: product.image,
       image: product.image,
       quantity: quantity,
       userId: userId,
