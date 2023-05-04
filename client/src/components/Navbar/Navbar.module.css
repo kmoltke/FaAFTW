@@ -1,6 +1,7 @@
 /* Create a sticky/fixed navbar */
 .navbar {
   display: block;
+  padding: 50px 10px;
   overflow: hidden;
   background-color: #212121;
   transition: padding 0.2s; /* Adds a transition effect when the padding is decreased */
