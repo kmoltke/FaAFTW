@@ -1,9 +1,9 @@
-import { Request, Response } from "express"
-import { ModelManager } from "../model/model-manager"
-import { Vinyl } from "./vinyls.model"
-import { HttpError } from "../utils/http-errors"
+import { Request, Response } from 'express'
+import { ModelManager } from '../model/model-manager'
+import { Vinyl } from './vinyls.model'
+import { HttpError } from '../utils/http-errors'
 
-const VINYLS_FILE = "./data/vinyls.json"
+const VINYLS_FILE = './data/vinyls.json'
 const vinylsModelManager = new ModelManager<Vinyl>(VINYLS_FILE)
 
 /**
@@ -31,7 +31,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
     }
 
     if (allVinyls.length === 0) {
-      res.status(204).send("No vinyls with provided categories")
+      res.status(204).send('No vinyls with provided categories')
     } else {
       let importants = getImportants(allVinyls)
       res.json(importants)
@@ -75,6 +75,6 @@ const getImportants = (vinyls: Vinyl[]) => {
     album: v.album,
     artist: v.artist,
     price: v.price,
-    imageSrc: v.image,
+    image: v.image,
   }))
 }

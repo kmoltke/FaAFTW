@@ -10,4 +10,5 @@ export interface Vinyl {
   label: string
   image: string
   description: string
+  featured: boolean
 }

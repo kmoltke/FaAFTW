@@ -1,21 +1,19 @@
-import styles from "./ProductDescriptionPage.module.css"
-import "../../global.css"
-import { useParams } from "react-router-dom"
-import { Vinyl } from "../../../../api/src/vinyls/vinyls.model"
-import { useEffect, useState } from "react"
-import { Col, Row, Button } from "react-bootstrap"
+import styles from './ProductDescriptionPage.module.css'
+import '../../global.css'
+import { useParams } from 'react-router-dom'
+import { Vinyl } from '../../../../api/src/vinyls/vinyls.model'
+import { useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap'
 
 function ProductDescriptionPage() {
   const { id } = useParams()
   const [product, setProduct] = useState<Vinyl>()
 
   useEffect(() => {
-    fetch("http://localhost:5000/products/" + id)
+    fetch('http://localhost:5000/products/' + id)
       .then((data) => data.json())
       .then((parsedData) => setProduct(parsedData))
   }, [])
-
-  console.log(product)
 
   return (
     <main>
