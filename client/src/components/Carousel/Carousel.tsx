@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import "./Carousel.css";
+import styles from "./Carousel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Vinyl } from "../../../../api/src/vinyls/vinyls.model";
 
 function ImageCarousel() {
   const [products, setProducts] = useState<any[]>();
@@ -15,37 +14,45 @@ function ImageCarousel() {
       .then((parsedData) => setProducts(parsedData));
   }, []);
 
-  console.log("featured products from carousel", products);
-
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
-            <h1> Featured new releases </h1>
-          </Col>
-        </Row>
-      </Container>
-      <Container>
-        <Row></Row>
-        <Carousel>
-          {products?.map((product) => {
-            if (product?.featured) {
-              return (
-                <Carousel.Item>
-                  <Link to="/products/">
-                    <img className="carousel-img" src={product?.imageSrc} />
-                  </Link>
-                  <Carousel.Caption>
-                    <p className="carousel h3"> {product?.album} </p>
-                    <p className="carousel h3"> {product?.artist} </p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              );
-            }
-          })}
-        </Carousel>
-      </Container>
+      <div>
+        <Container>
+          <Row>
+            <Col>
+              <p className={styles["carousel-h1"]}> Featured new releases </p>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Carousel>
+            {products?.map((product) => {
+              if (product?.featured) {
+                return (
+                  <Carousel.Item>
+                    <Link to={"/products/" + product.id}>
+                      <img
+                        className={styles["carousel-img"]}
+                        src={product?.image}
+                      />
+                    </Link>
+                    <Carousel.Caption>
+                      <p className={styles["carousel-h3"]}>
+                        {" "}
+                        {product?.album}{" "}
+                      </p>
+                      <p className={styles["carousel-h3"]}>
+                        {" "}
+                        {product?.artist}{" "}
+                      </p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                );
+              }
+            })}
+          </Carousel>
+        </Container>
+      </div>
     </>
   );
 }
@@ -53,6 +60,10 @@ function ImageCarousel() {
 export default ImageCarousel;
 
 /*
+
+   <Link to={"/products/" + product.id}>
+                    <img className="carousel-img" src={product?.image} />
+                  </Link>
 
   return (
     <>
