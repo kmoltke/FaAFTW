@@ -9,5 +9,7 @@ export interface Vinyl {
   type: string
   label: string
   image: string
+  featured?: boolean
+  featuredColor?: string
   description: string
 }

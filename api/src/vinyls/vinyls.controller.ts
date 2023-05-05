@@ -76,5 +76,6 @@ const getImportants = (vinyls: Vinyl[]) => {
     artist: v.artist,
     price: v.price,
     imageSrc: v.image,
+    featured: v.featured,
   }))
 }
