@@ -54,24 +54,27 @@ function ProductDescriptionPage() {
     <main>
       <section>
         <h1> Product Description </h1>
-        <div className={styles.productOuter} id="productOuter">
+        <div className={styles.productOuter}>
           <div>
             <img className={styles.productImage} src={product?.image} />
           </div>
-          <div className={styles.productOverview} id="productOverview">
+          <div className={styles.productOverview}>
             <h1 className={styles.productTitle}> {product?.album}</h1>
             <h3 className={styles.productArtist}> {product?.artist}</h3>
             <p className={styles.productPrice}> {product?.price}</p>
-            <Button
-              className="cardButton btn btn-primary"
-              onClick={handleAddToCart}
+            <button
+              onClick={() => {
+                handleAddToCart();
+              }}
+              className={styles.productButton}
             >
+              {" "}
               Add to Cart
-            </Button>
+            </button>
             <p> {product?.description}</p>
           </div>
         </div>
-        <div className={styles.productDetails} id="productDetails">
+        <div className={styles.productDetails}>
           <p> Year: {product?.year} </p>
           <p> Genre: {product?.genre} </p>
           <p> Type: {product?.type} </p>

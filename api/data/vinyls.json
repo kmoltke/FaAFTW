@@ -41,7 +41,7 @@
     "label": "PINK FLOYD RECORDS",
     "image": "/images/id3-1.jpg",
     "description": "The Dark Side of the Moon is the eighth album by the English rock band Pink Floyd. Originally released on March 1, 1973, on the label Harvest, it built on ideas explored in the band's earlier recordings and live shows, but departs from instrumental thematic by founding member Syd Barrett. The album explores themes including conflict, greed, the passage of time, and mental illness, the latter partly inspired by Barrett's deteriorating mental state.",
-    "featured": false,
+    "featured": true,
     "featuredColor": "#9acd32"
   },
   {
@@ -100,7 +100,7 @@
     "label": "Colombia Records",
     "image": "/images/id10-1.png",
     "description": "'Lemonade' is considered to be one of the greatest albums of all time, and is the most acclaimed studio album of Beyoncé's career. Primarily an pop and R&B album, 'Lemonade' encompasses a variety of genres, including reggae, blues, rock, hip hop, soul, funk, Americana, country, gospel, electronic, and trap. It features guest vocals from James Blake, Kendrick Lamar, the Weeknd, and Jack White. ",
-    "featured": false,
+    "featured": true,
     "featuredColor": "#foe68c"
   },
   {
@@ -145,7 +145,7 @@
     "label": "DAFT LIFE",
     "image": "/images/id7-1.jpg",
     "description": "Daft Club The remix album released in december, 2003 features remixes of track from the Discovery Album and one from their debut album Homework.",
-    "featured": false,
+    "featured": true,
     "featuredColor": "#fdf5e6"
   },
   {
@@ -250,7 +250,7 @@
     "label": "",
     "image": "/images/id17-1.jpg",
     "description": "The LP album, 'Live in the Park', by The Minds Of 99, is a brand new release from this year (2023).",
-    "featured": true,
+    "featured": false,
     "featuredColor": "#216d21"
   },
   {
