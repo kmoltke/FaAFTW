@@ -1,19 +1,54 @@
-import styles from './ProductDescriptionPage.module.css'
-import '../../global.css'
-import { useParams } from 'react-router-dom'
-import { Vinyl } from '../../../../api/src/vinyls/vinyls.model'
-import { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import styles from "./ProductDescriptionPage.module.css";
+import "../../global.css";
+import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Button } from "react-bootstrap";
+import {
+  addItemToCart,
+  CartContext,
+  Product,
+} from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
+
+export type Vinyl = {
+  id: number;
+  artist: string;
+  album: string;
+  decade: string;
+  year: number;
+  genre: string;
+  price: number;
+  type: string;
+  label: string;
+  image: string;
+  featured?: boolean;
+  featuredColor?: string;
+  description: string;
+};
 
 function ProductDescriptionPage() {
-  const { id } = useParams()
-  const [product, setProduct] = useState<Vinyl>()
+  const { id } = useParams();
+  const [product, setProduct] = useState<any>();
+
+  const ctx = useContext(UserContext);
+  if (!ctx) throw new Error("UserContext undefined");
+  const userId = ctx.user.id;
 
   useEffect(() => {
-    fetch('http://localhost:5000/products/' + id)
+    fetch("http://localhost:5000/products/" + id)
       .then((data) => data.json())
-      .then((parsedData) => setProduct(parsedData))
-  }, [])
+      .then((parsedData) => setProduct(parsedData));
+  }, []);
+
+  const { dispatch } = useContext(CartContext);
+  const handleAddToCart = () => {
+    addItemToCart(dispatch, product, 1, userId);
+    fetch(`http://localhost:5000/users/${userId}/basket/products`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
+    });
+  };
 
   return (
     <main>
@@ -27,7 +62,12 @@ function ProductDescriptionPage() {
             <h1 className={styles.productTitle}> {product?.album}</h1>
             <h3 className={styles.productArtist}> {product?.artist}</h3>
             <p className={styles.productPrice}> {product?.price}</p>
-            <Button className="cardButton btn btn-primary">Add to Cart</Button>
+            <Button
+              className="cardButton btn btn-primary"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </Button>
             <p> {product?.description}</p>
           </div>
         </div>
@@ -39,10 +79,10 @@ function ProductDescriptionPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
 
-export default ProductDescriptionPage
+export default ProductDescriptionPage;
 
 {
   /* Button to go back to front page
