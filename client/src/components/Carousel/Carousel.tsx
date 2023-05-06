@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import styles from "./Carousel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function ImageCarousel() {
@@ -20,7 +20,7 @@ function ImageCarousel() {
         <Container>
           <Row>
             <Col>
-              <p className={styles["carousel-h1"]}> Featured new releases </p>
+              <p className={styles.carouselh1}> Featured new releases </p>
             </Col>
           </Row>
         </Container>
@@ -32,19 +32,13 @@ function ImageCarousel() {
                   <Carousel.Item>
                     <Link to={"/products/" + product.id}>
                       <img
-                        className={styles["carousel-img"]}
+                        className={styles.carouselImg}
                         src={product?.image}
                       />
                     </Link>
                     <Carousel.Caption>
-                      <p className={styles["carousel-h3"]}>
-                        {" "}
-                        {product?.album}{" "}
-                      </p>
-                      <p className={styles["carousel-h3"]}>
-                        {" "}
-                        {product?.artist}{" "}
-                      </p>
+                      <p className={styles.carouselh3}> {product?.album} </p>
+                      <p className={styles.carouselh3}> {product?.artist} </p>
                     </Carousel.Caption>
                   </Carousel.Item>
                 );

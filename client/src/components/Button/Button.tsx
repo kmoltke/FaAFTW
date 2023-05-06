@@ -2,18 +2,10 @@ import React, { useContext } from "react";
 import { addItemToCart, CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
 import { toast, ToastContainer } from "react-toastify";
-import { Vinyl } from "../../types/types";
+import { Product } from "../../types/types";
 import styles from "../Button/button.module.css";
 import "../../global.css";
 import "react-toastify/dist/ReactToastify.css";
-
-type Product = {
-  id: number;
-  album: string;
-  artist: string;
-  price: number;
-  image: string;
-};
 
 type AddToCartButtonProps = {
   product: Product;

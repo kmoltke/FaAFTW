@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Grid from "../../components/Grid/Grid";
-import "../../styles/template.css";
+import "../../global.css";
 import { useSearchParams } from "react-router-dom";
 import Filter from "../../components/Filter/Filter";
 import ImageCarousel from "../../components/Carousel/Carousel";

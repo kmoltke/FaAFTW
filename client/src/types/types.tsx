@@ -1,4 +1,4 @@
-export type Vinyl = {
+export interface Vinyl {
   id: number;
   artist: string;
   album: string;
@@ -12,4 +12,12 @@ export type Vinyl = {
   featured?: boolean;
   featuredColor?: string;
   description: string;
-};
+}
+
+export interface Product {
+  id: number;
+  artist: string;
+  album: string;
+  price: number;
+  image: string;
+}
