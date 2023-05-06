@@ -12,7 +12,7 @@ function DefaultBasket() {
   console.log("default basket renderd");
 
   return (
-    <Card>
+    <Card style={{ marginTop: 70 }}>
       <Row>
         <Col sm={8}>
           <div className="m-5">

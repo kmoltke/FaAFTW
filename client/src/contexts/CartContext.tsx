@@ -1,13 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import { cartReducer } from "../reducers/cartReducer";
-
-export interface Product {
-  id: number;
-  artist: string;
-  album: string;
-  price: number;
-  image: string;
-}
+import { Product } from "../types/types";
 
 export interface CartItem {
   id: number;

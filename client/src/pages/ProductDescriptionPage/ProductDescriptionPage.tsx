@@ -28,7 +28,7 @@ function ProductDescriptionPage() {
             <h3 className={styles.productArtist}> {product?.artist}</h3>
             <p className={styles.productPrice}> {product?.price}</p>
             <AddToCart product={product} />
-            <p> {product?.description}</p>
+            <main> {product?.description}</main>
           </div>
         </div>
         <div className={styles.productDetails}>
