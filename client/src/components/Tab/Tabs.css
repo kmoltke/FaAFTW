@@ -1,8 +1,7 @@
 .Container {
   display: flex;
   text-align: center;
-  width: 400px;
-  margin-top: 50px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -12,4 +11,22 @@
   flex-grow: 1;
   text-align: center;
   margin: 10px;
+}
+
+@media screen and (max-width: 580px) {
+  .Container {
+    max-width: 400px;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 0pc;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+  }
+
+  .Button {
+    text-align: center;
+    margin: 10px 0px 10px 0px;
+    box-sizing: border-box;
+  }
 }

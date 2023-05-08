@@ -1,4 +1,8 @@
 /* Create a sticky/fixed navbar */
+.empty {
+  padding-top: 150px;
+}
+
 .navbar {
   display: block;
   padding: 50px 10px;
@@ -112,6 +116,10 @@
 
 /* Add responsiveness - on screens less than 580px wide, display the navbar vertically instead of horizontally */
 @media screen and (max-width: 580px) {
+  .empty {
+    padding-top: 95px;
+  }
+
   .navbar {
     padding: 20px 10px !important; /* Use !important to make sure that JavaScript doesn't override the padding on small screens */
   }

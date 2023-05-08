@@ -1,23 +1,24 @@
-import styles from "./ProductDescriptionPage.module.css";
-import "../../global.css";
-import { useParams } from "react-router-dom";
-import { Product } from "../../types/types";
-import { useEffect, useState } from "react";
-import AddToCart from "../../components/Button/Button";
-import "react-toastify/dist/ReactToastify.css";
+import styles from "./ProductDescriptionPage.module.css"
+import "../../global.css"
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import AddToCardButton from "../../components/AddToCardButton/AddToCardButton"
+import "react-toastify/dist/ReactToastify.css"
+import GoBackButton from "../../components/GoBackButton/GoBackButton"
 
 function ProductDescriptionPage() {
-  const { id } = useParams();
-  const [product, setProduct] = useState<any>();
+  const { id } = useParams()
+  const [product, setProduct] = useState<any>()
 
   useEffect(() => {
     fetch("http://localhost:5000/products/" + id)
       .then((data) => data.json())
-      .then((parsedData) => setProduct(parsedData));
-  }, []);
+      .then((parsedData) => setProduct(parsedData))
+  }, [])
 
   return (
     <main>
+      <GoBackButton />
       <section>
         <h1> Product Description </h1>
         <div className={styles.productOuter}>
@@ -28,7 +29,7 @@ function ProductDescriptionPage() {
             <h1 className={styles.productTitle}> {product?.album}</h1>
             <h3 className={styles.productArtist}> {product?.artist}</h3>
             <p className={styles.productPrice}> {product?.price}</p>
-            <AddToCart product={product} />
+            <AddToCardButton product={product} />
             <main> {product?.description}</main>
           </div>
         </div>
@@ -40,10 +41,10 @@ function ProductDescriptionPage() {
         </div>
       </section>
     </main>
-  );
+  )
 }
 
-export default ProductDescriptionPage;
+export default ProductDescriptionPage
 
 {
   /* Button to go back to front page

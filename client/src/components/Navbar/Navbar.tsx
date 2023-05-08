@@ -147,7 +147,14 @@ function Navbar() {
             >
               {isLoggedIn() ? (
                 <>
-                  <span style={{ color: "#f23737" }}>{user?.fname}</span>
+                  <span
+                    style={{
+                      textDecoration: "underline",
+                      textDecorationThickness: "2px",
+                    }}
+                  >
+                    {user?.fname}
+                  </span>
                   {"'s Cart"}
                 </>
               ) : (
@@ -157,11 +164,7 @@ function Navbar() {
           </div>
         </div>
       </header>
-      <div
-        style={{
-          paddingTop: "150px",
-        }}
-      />
+      <div className={styles.empty} />
     </>
   )
 }
