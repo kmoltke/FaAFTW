@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
-import { ModelManager } from '../model/model-manager'
-import { Vinyl } from './vinyls.model'
-import { HttpError } from '../utils/http-errors'
+import { Request, Response } from "express"
+import { ModelManager } from "../model/model-manager"
+import { Vinyl } from "./vinyls.model"
+import { HttpError } from "../utils/http-errors"
 
-const VINYLS_FILE = './data/vinyls.json'
+const VINYLS_FILE = "./data/vinyls.json"
 const vinylsModelManager = new ModelManager<Vinyl>(VINYLS_FILE)
 
 /**
@@ -16,7 +16,7 @@ export const getAllVinyls = async (req: Request, res: Response) => {
   try {
     let allVinyls = await vinylsModelManager.getAll()
 
-    const { genre, decade, artist } = req.query
+    const { genre, decade, artist, featured } = req.query
 
     if (genre) {
       allVinyls = allVinyls.filter((v) => v.genre === genre)
@@ -30,8 +30,12 @@ export const getAllVinyls = async (req: Request, res: Response) => {
       allVinyls = allVinyls.filter((v) => v.artist === artist)
     }
 
+    if (featured === "true") {
+      allVinyls = allVinyls.filter((v) => v.featured)
+    }
+
     if (allVinyls.length === 0) {
-      res.status(204).send('No vinyls with provided categories')
+      res.status(204).send("No vinyls with provided categories")
     } else {
       let importants = getImportants(allVinyls)
       res.json(importants)
@@ -77,5 +81,6 @@ const getImportants = (vinyls: Vinyl[]) => {
     price: v.price,
     image: v.image,
     featured: v.featured,
+    featuredColor: v.featuredColor,
   }))
 }

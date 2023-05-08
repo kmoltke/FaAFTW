@@ -21,4 +21,6 @@ export interface Product {
   price: number
   image: string
   quantity: number
+  featured?: boolean
+  featuredColor?: string
 }

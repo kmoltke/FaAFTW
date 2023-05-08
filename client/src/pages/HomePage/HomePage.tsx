@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Grid from '../../components/Grid/Grid'
 import '../../global.css'
 import { useSearchParams } from 'react-router-dom'
 import Filter from '../../components/Filter/Filter'
-import ImageCarousel from '../../components/Carousel/Carousel'
+import { Carousel } from 'react-bootstrap'
 
 function HomePage() {
   const [products, setProducts] = useState([])
@@ -31,7 +31,7 @@ function HomePage() {
 
   return (
     <main>
-      <ImageCarousel />
+      <Carousel />
       <section id="browse">
         <Filter itemsNum={products.length} />
       </section>

@@ -1,56 +1,61 @@
-import Carousel from 'react-bootstrap/Carousel'
-import { useEffect, useState } from 'react'
-import styles from './Carousel.module.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Col, Container, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import ReactCarousel from "react-bootstrap/Carousel"
+import { useEffect, useState } from "react"
+import styles from "./Carousel.module.css"
+import "../../global.css"
+import { Col, Container, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { Product } from "../../types/types"
+import "bootstrap/dist/css/bootstrap.min.css"
 
-function ImageCarousel() {
-  const [products, setProducts] = useState<any[]>()
+function Carousel() {
+  const [products, setProducts] = useState<Product[]>([])
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    fetch('http://localhost:5000/products/')
+    fetch("http://localhost:5000/products?featured=true")
       .then((data) => data.json())
       .then((parsedData) => setProducts(parsedData))
   }, [])
 
+  const activeProduct = products[activeIndex]
+
   return (
     <>
-      <div>
+      <section
+        style={{
+          backgroundColor: activeProduct?.featuredColor,
+          padding: "25px 0px 25px 0px",
+          maxWidth: "100%",
+        }}
+      >
         <Container>
           <Row>
             <Col>
-              <p className={styles.carouselh1}> Featured new releases </p>
+              <p className={styles.carouselh3}> Featured new releases </p>
             </Col>
           </Row>
         </Container>
         <Container>
           <Row></Row>
-          <Carousel>
-            {products?.map((product) => {
-              if (product?.featured) {
-                return (
-                  <Carousel.Item key={product.id}>
-                    <Link to={'/products/' + product.id}>
-                      <img
-                        className={styles.carouselImg}
-                        src={product?.image}
-                        alt={product.artist}
-                      />
-                    </Link>
-                    <Carousel.Caption>
-                      <p className={styles.carouselh3}> {product?.album} </p>
-                      <p className={styles.carouselh3}> {product?.artist} </p>
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                )
-              }
-            })}
-          </Carousel>
+          <ReactCarousel activeIndex={activeIndex} onSelect={setActiveIndex}>
+            {products?.map((product) => (
+              <ReactCarousel.Item key={product.id}>
+                <ReactCarousel.Caption className={styles.carouselh2}>
+                  <p>
+                    {" "}
+                    {product?.album} - {product?.artist} →
+                  </p>
+                </ReactCarousel.Caption>
+                <Link to={"/products/" + product.id}>
+                  <img className={styles.carouselImg} src={product?.image} />
+                </Link>
+              </ReactCarousel.Item>
+            ))}
+          </ReactCarousel>
         </Container>
-      </div>
+      </section>
     </>
   )
 }
 
-export default ImageCarousel
+export default Carousel
