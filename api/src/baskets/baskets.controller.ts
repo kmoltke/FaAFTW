@@ -162,12 +162,12 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
 
     const basketsArray = await basketModelManager.getAll()
     // find basket
-    const basketIndex = basketModelManager.findItem(basketsArray, userId)
-    if (basketIndex === -1)
+    const removedItemIndex = basketModelManager.findItem(basketsArray, userId)
+    if (removedItemIndex === -1)
       throw new HttpError(404, `Basket with ID:${userId} doesn't exist`)
     else {
       //find the products in the basket
-      const productsArray = basketsArray[basketIndex].products
+      const productsArray = basketsArray[removedItemIndex].products
       const productIndex = basketProductModelManager.findItem(
         productsArray,
         productId
@@ -178,19 +178,18 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
           `Product with ID:${productId} doesn't exist in the basket for user "${userId}"`
         )
       else {
-        //Decrement if quantity is > 1 otherwise delete
-        basketsArray[basketIndex].total -=
-          productsArray[productIndex].price /
-          productsArray[productIndex].quantity
-        productsArray[productIndex].price -=
-          productsArray[productIndex].price /
-          productsArray[productIndex].quantity
+        const filteredProducts = productsArray.filter(
+          (product) => product.id !== productId
+        )
+        basketsArray[0].products = filteredProducts
+        basketsArray[0].total -=
+          productsArray[removedItemIndex].quantity *
+          productsArray[removedItemIndex].price
 
-        productsArray[productIndex].quantity === 1
-          ? productsArray.splice(productIndex, 1)
-          : (productsArray[productIndex].quantity -= 1)
+        if (basketsArray[0].products.length === 0) basketsArray[0].total = 0
+
+        await basketModelManager.save(basketsArray)
       }
-      await basketModelManager.save(basketsArray)
     }
 
     res.send(`Basket for user "${userId}" was successfully updated.`)

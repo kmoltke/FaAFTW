@@ -20,6 +20,7 @@ export interface Product {
   album: string
   price: number
   image: string
+  quantity: number
   featured?: boolean
   featuredColor?: string
 }

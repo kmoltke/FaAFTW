@@ -11,6 +11,7 @@ interface GridCardProps {
   artist: string
   price: number
   image?: string
+  quantity: number
 }
 
 function GridCard(props: GridCardProps) {
@@ -24,6 +25,7 @@ function GridCard(props: GridCardProps) {
     artist: props.artist,
     price: props.price,
     image: img,
+    quantity: 1,
   }
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Grid from "../../components/Grid/Grid"
 import "../../global.css"
 import styles from "./HomePage.module.css"
