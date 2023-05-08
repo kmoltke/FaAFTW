@@ -108,6 +108,7 @@ function Navbar() {
             >
               Browse
             </NavLink>
+            //TODO: Reset cart when logging out
             {isLoggedIn() ? (
               <NavLink
                 to={"/"}
