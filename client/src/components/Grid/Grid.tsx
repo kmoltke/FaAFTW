@@ -21,6 +21,7 @@ function Grid(props: any) {
             artist={product.artist}
             image={product.image}
             price={product.price}
+            quantity={product.quantity}
           ></GridCard>
         )
       })}

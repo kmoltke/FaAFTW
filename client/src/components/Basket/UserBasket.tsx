@@ -37,16 +37,11 @@ function UserBasket() {
       .catch((error) =>
         console.log('error trying to create empty basket: ', error)
       )
-
     fetch(`http://localhost:5000/users/${user.id}/basket`)
       .then((response) => response.json())
-      .then((datita) => {
-        console.log('datita: ', datita)
-        return datita
-      })
       .then((data) => setCart(dispatch, data.products, data.total))
       .catch((error) => console.log(error))
-  }, [])
+  }, [setCart])
 
   return (
     <Card>
