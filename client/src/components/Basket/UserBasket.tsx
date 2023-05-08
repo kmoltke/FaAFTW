@@ -41,7 +41,7 @@ function UserBasket() {
       .then((response) => response.json())
       .then((data) => setCart(dispatch, data.products, data.total))
       .catch((error) => console.log(error))
-  }, [setCart])
+  }, [])
 
   return (
     <Card>
