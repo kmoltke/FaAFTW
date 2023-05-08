@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import Grid from "../../components/Grid/Grid"
 import "../../global.css"
+import styles from "./HomePage.module.css"
 import { useSearchParams } from "react-router-dom"
 import Filter from "../../components/Filter/Filter"
 import Carousel from "../../components/Carousel/Carousel"
@@ -8,7 +9,7 @@ import Carousel from "../../components/Carousel/Carousel"
 function HomePage() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,23 +33,25 @@ function HomePage() {
   return (
     <main>
       <Carousel />
-      <section id="browse">
-        <Filter itemsNum={products.length} />
-      </section>
+      <div className={styles.browse}>
+        <section id="browse">
+          <Filter itemsNum={products.length} />
+        </section>
 
-      <section>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            {products.length > 0 ? (
-              <Grid products={products} />
-            ) : (
-              <h3>No products found</h3>
-            )}
-          </div>
-        )}
-      </section>
+        <section>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              {products.length > 0 ? (
+                <Grid products={products} />
+              ) : (
+                <h3>No products found</h3>
+              )}
+            </div>
+          )}
+        </section>
+      </div>
     </main>
   )
 }
