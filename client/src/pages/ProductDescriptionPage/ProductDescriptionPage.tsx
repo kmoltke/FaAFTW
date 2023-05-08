@@ -1,37 +1,38 @@
-import styles from './ProductDescriptionPage.module.css'
-import '../../global.css'
-import { useParams } from 'react-router-dom'
-import { Vinyl } from '../../../../api/src/vinyls/vinyls.model'
-import { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import styles from "./ProductDescriptionPage.module.css";
+import "../../global.css";
+import { useParams } from "react-router-dom";
+import { Product } from "../../types/types";
+import { useEffect, useState } from "react";
+import AddToCart from "../../components/Button/Button";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductDescriptionPage() {
-  const { id } = useParams()
-  const [product, setProduct] = useState<Vinyl>()
+  const { id } = useParams();
+  const [product, setProduct] = useState<any>();
 
   useEffect(() => {
-    fetch('http://localhost:5000/products/' + id)
+    fetch("http://localhost:5000/products/" + id)
       .then((data) => data.json())
-      .then((parsedData) => setProduct(parsedData))
-  }, [])
+      .then((parsedData) => setProduct(parsedData));
+  }, []);
 
   return (
     <main>
       <section>
         <h1> Product Description </h1>
-        <div className={styles.productOuter} id="productOuter">
+        <div className={styles.productOuter}>
           <div>
             <img className={styles.productImage} src={product?.image} />
           </div>
-          <div className={styles.productOverview} id="productOverview">
+          <div className={styles.productOverview}>
             <h1 className={styles.productTitle}> {product?.album}</h1>
             <h3 className={styles.productArtist}> {product?.artist}</h3>
             <p className={styles.productPrice}> {product?.price}</p>
-            <Button className="cardButton btn btn-primary">Add to Cart</Button>
-            <p> {product?.description}</p>
+            <AddToCart product={product} />
+            <main> {product?.description}</main>
           </div>
         </div>
-        <div className={styles.productDetails} id="productDetails">
+        <div className={styles.productDetails}>
           <p> Year: {product?.year} </p>
           <p> Genre: {product?.genre} </p>
           <p> Type: {product?.type} </p>
@@ -39,10 +40,10 @@ function ProductDescriptionPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
 
-export default ProductDescriptionPage
+export default ProductDescriptionPage;
 
 {
   /* Button to go back to front page
