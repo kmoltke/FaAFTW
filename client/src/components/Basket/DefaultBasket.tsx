@@ -7,8 +7,6 @@ import { CartContext, CartItem } from '../../contexts/CartContext'
 function DefaultBasket() {
   const { cartState: cart } = useContext(CartContext)
 
-  console.log('cart state: ', cart)
-
   return (
     <Card style={{ marginTop: 70 }}>
       <Row>

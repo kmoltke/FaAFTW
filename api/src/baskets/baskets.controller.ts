@@ -187,16 +187,7 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
           productsArray[removedItemIndex].price
 
         if (basketsArray[0].products.length === 0) basketsArray[0].total = 0
-        //   basketsArray[removedItemIndex].total -=
-        //     productsArray[productIndex].price *
-        //     productsArray[productIndex].quantity
-        //   productsArray[productIndex].price -= productsArray[productIndex].price
-        //   productsArray[productIndex].quantity
 
-        //   productsArray[productIndex].quantity === 1
-        //     ? productsArray.splice(productIndex, 1)
-        //     : (productsArray[productIndex].quantity -= 1)
-        // }
         await basketModelManager.save(basketsArray)
       }
     }

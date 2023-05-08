@@ -24,8 +24,6 @@ function BasketItem(props: CartItem) {
     })
   }
 
-  // console.log('prop from cart item: ', props)
-
   return (
     <div className="row m-4 d-flex justify-content-between align-items-center">
       <div className="col-md-2 col-lg-2 col-xl-2">
