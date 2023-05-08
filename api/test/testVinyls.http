@@ -35,6 +35,10 @@ GET http://localhost:5000/products?genre=Rock&decade=70s
 GET http://localhost:5000/products?genre=Rock&decade=70s&artist=Led Zeppelin
 
 ###
+// Get featured vinyls 
+GET http://localhost:5000/products?featured=true
+
+###
 
 // Empty response:
 GET http://localhost:5000/products?genre=Rock&decade=2010s&artist=The Beatles

@@ -11,4 +11,5 @@ export interface Vinyl {
   image: string
   description: string
   featured?: boolean
+  featuredColor?: string
 }
