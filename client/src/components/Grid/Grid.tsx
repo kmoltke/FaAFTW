@@ -1,5 +1,5 @@
-import GridCard from '../GridCard/GridCard'
-import styles from './Grid.module.css'
+import GridCard from "../GridCard/GridCard"
+import styles from "./Grid.module.css"
 
 function Grid(props: any) {
   const { products } = props
@@ -11,21 +11,21 @@ function Grid(props: any) {
   }
 
   return (
-    <div className={styles.grid}>
-      {products.map((product: any) => {
-        return (
-          <GridCard
-            key={product.id}
-            id={product.id}
-            album={product.album}
-            artist={product.artist}
-            image={product.image}
-            price={product.price}
-          ></GridCard>
-        )
-      })}
-      {emptyDivs}
-    </div>
+      <div className={styles.grid}>
+        {products.map((product: any) => {
+          return (
+              <GridCard
+                  // key={product.id}
+                  id={product.id}
+                  album={product.title}
+                  artist={product.artist}
+                  image={product.image}
+                  price={product.price}
+              ></GridCard>
+          )
+        })}
+        {emptyDivs}
+      </div>
   )
 }
 

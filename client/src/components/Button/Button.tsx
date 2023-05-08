@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 type AddToCartButtonProps = {
   product: Product;
+
 };
 
 function AddToCart({ product }: AddToCartButtonProps) {
@@ -20,12 +21,6 @@ function AddToCart({ product }: AddToCartButtonProps) {
   const { dispatch } = useContext(CartContext);
   const handleAddToCart = () => {
     addItemToCart(dispatch, product, 1, userId);
-    fetch(`http://localhost:5000/users/${userId}/basket/products`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    });
-
     toast.success("Product has been added to cart", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });

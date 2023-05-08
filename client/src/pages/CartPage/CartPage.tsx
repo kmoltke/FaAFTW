@@ -8,7 +8,7 @@ function CartPage() {
   const ctx = useContext(UserContext)
   if (!ctx) throw new Error('UserContext undefined')
   const { user } = ctx
-  const isLoggedIn = () => user.id
+  const isLoggedIn = () => !(user.id === 0)
 
   return (
     <Container>{isLoggedIn() ? <UserBasket /> : <DefaultBasket />}</Container>
