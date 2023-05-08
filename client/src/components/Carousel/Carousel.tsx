@@ -24,35 +24,35 @@ function Carousel() {
       <section
         style={{
           backgroundColor: activeProduct?.featuredColor,
-          padding: "25px 0px 25px 0px",
           maxWidth: "100%",
         }}
       >
-        <Container>
-          <Row>
-            <Col>
-              <p className={styles.carouselh3}> Featured new releases </p>
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row></Row>
-          <ReactCarousel activeIndex={activeIndex} onSelect={setActiveIndex}>
-            {products?.map((product) => (
-              <ReactCarousel.Item key={product.id}>
-                <ReactCarousel.Caption className={styles.carouselh2}>
-                  <p>
-                    {" "}
-                    {product?.album} - {product?.artist} →
-                  </p>
-                </ReactCarousel.Caption>
-                <Link to={"/products/" + product.id}>
-                  <img className={styles.carouselImg} src={product?.image} />
-                </Link>
-              </ReactCarousel.Item>
-            ))}
-          </ReactCarousel>
-        </Container>
+        <h3 className={styles.carouselh3}> Featured new releases </h3>
+        <ReactCarousel
+          style={{
+            maxWidth: "1200px",
+            margin: "auto",
+          }}
+          activeIndex={activeIndex}
+          onSelect={setActiveIndex}
+        >
+          {products?.map((product) => (
+            <ReactCarousel.Item
+              key={product.id}
+              className={styles.carouselItem}
+            >
+              <ReactCarousel.Caption className={styles.carouselh1}>
+                <h1>
+                  {" "}
+                  {product?.album} - {product?.artist} →
+                </h1>
+              </ReactCarousel.Caption>
+              <Link to={"/products/" + product.id}>
+                <img className={styles.carouselImg} src={product?.image} />
+              </Link>
+            </ReactCarousel.Item>
+          ))}
+        </ReactCarousel>
       </section>
     </>
   )

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, ScrollRestoration } from "react-router-dom"
 import styles from "./Navbar.module.css"
 import { useContext, useEffect, useRef, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
