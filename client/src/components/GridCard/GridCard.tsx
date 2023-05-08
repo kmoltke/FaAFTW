@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom"
-import styles from "./GridCard.module.css"
-import "../../global.css"
-import { Product } from "../../types/types"
-import AddToCardButton from "../AddToCardButton/AddToCardButton"
-import "react-toastify/dist/ReactToastify.css"
+import { NavLink } from 'react-router-dom'
+import styles from './GridCard.module.css'
+import '../../global.css'
+import { Product } from '../../types/types'
+import AddToCardButton from '../AddToCardButton/AddToCardButton'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface GridCardProps {
   id: number
@@ -14,9 +14,9 @@ interface GridCardProps {
 }
 
 function GridCard(props: GridCardProps) {
-  const noImg = "/images/no-image.jpg"
+  const noImg = '/images/no-image.jpg'
   const img = props.image ?? noImg
-  const route = "/products/" + props.id
+  const route = '/products/' + props.id
 
   const item: Product = {
     id: props.id,

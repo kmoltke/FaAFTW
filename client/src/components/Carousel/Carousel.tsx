@@ -1,20 +1,18 @@
-import Carousel from "react-bootstrap/Carousel";
-import { useEffect, useState } from "react";
-import styles from "./Carousel.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import Carousel from 'react-bootstrap/Carousel'
+import { useEffect, useState } from 'react'
+import styles from './Carousel.module.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Col, Container, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function ImageCarousel() {
-  const [products, setProducts] = useState<any[]>();
+  const [products, setProducts] = useState<any[]>()
 
   useEffect(() => {
-    fetch("http://localhost:5000/products/")
+    fetch('http://localhost:5000/products/')
       .then((data) => data.json())
-      .then((parsedData) => setProducts(parsedData));
-  }, []);
-
-  console.log("featured products from carousel", products);
+      .then((parsedData) => setProducts(parsedData))
+  }, [])
 
   return (
     <>
@@ -32,11 +30,12 @@ function ImageCarousel() {
             {products?.map((product) => {
               if (product?.featured) {
                 return (
-                  <Carousel.Item>
-                    <Link to={"/products/" + product.id}>
+                  <Carousel.Item key={product.id}>
+                    <Link to={'/products/' + product.id}>
                       <img
                         className={styles.carouselImg}
                         src={product?.image}
+                        alt={product.artist}
                       />
                     </Link>
                     <Carousel.Caption>
@@ -44,14 +43,14 @@ function ImageCarousel() {
                       <p className={styles.carouselh3}> {product?.artist} </p>
                     </Carousel.Caption>
                   </Carousel.Item>
-                );
+                )
               }
             })}
           </Carousel>
         </Container>
       </div>
     </>
-  );
+  )
 }
 
-export default ImageCarousel;
+export default ImageCarousel

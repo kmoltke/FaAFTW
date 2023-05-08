@@ -110,10 +110,6 @@ export const addProductToBasket = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.userId)
     await userModelManager.getByID(userId) // Will throw user error if user does not exist
     const product = req.body // product is sent as part of the body
-    console.log(
-      'product information that arrived to the api addproducttobasket',
-      product
-    )
 
     const basketsArray = await basketModelManager.getAll()
     // find basket
@@ -197,7 +193,6 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
       await basketModelManager.save(basketsArray)
     }
 
-    console.log(`Basket for user "${userId}" was successfully updated.`)
     res.send(`Basket for user "${userId}" was successfully updated.`)
   } catch (error: any) {
     if (error instanceof HttpError) {

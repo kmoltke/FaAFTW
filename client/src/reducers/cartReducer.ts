@@ -18,17 +18,20 @@ export const cartReducer = (
       if (existingItemIndex !== -1) {
         // If the product already exists in the cart, update the quantity
         const updatedItems = [...state.items]
-        updatedItems[existingItemIndex].quantity += action.payload.quantity
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: updatedItems[existingItemIndex].quantity + 1,
+        }
 
         return {
           items: updatedItems,
-          total: state.total + action.payload.quantity * action.payload.price,
+          total: state.total + action.payload.price,
         }
       } else {
         // If the product is not already in the cart, add it
         return {
           items: [...state.items, action.payload],
-          total: state.total + action.payload.quantity * action.payload.price,
+          total: state.total + action.payload.price,
         }
       }
     case 'REMOVE_ITEM':
@@ -36,9 +39,15 @@ export const cartReducer = (
         (item) => item.id !== action.payload.id
       )
 
+      const removedItemIndex = state.items.findIndex(
+        (item: CartItem) => item.id === action.payload.id
+      )
+
+      const itemToRemove = state.items[removedItemIndex]
+
       return {
-        total: state.total - action.payload.price,
         items: filteredItems,
+        total: state.total - itemToRemove.quantity * itemToRemove.price, //Aca va el bug fix
       }
 
     case 'SET_CART':

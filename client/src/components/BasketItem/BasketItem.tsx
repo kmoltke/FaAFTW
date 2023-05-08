@@ -13,7 +13,6 @@ function BasketItem(props: CartItem) {
   if (!userContext) {
     throw new Error('UserContext undefined')
   }
-  console.log('props: ', props)
 
   const { user } = userContext
 
@@ -24,6 +23,8 @@ function BasketItem(props: CartItem) {
       headers: { 'Content-Type': 'application/json' },
     })
   }
+
+  // console.log('prop from cart item: ', props)
 
   return (
     <div className="row m-4 d-flex justify-content-between align-items-center">
@@ -39,7 +40,9 @@ function BasketItem(props: CartItem) {
         <h6 className="text-black mb-0">{props.album}</h6>
       </div>
       <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-        <h6 className="mb-0"> {`DKK${props.price} `} </h6>
+        <h6 className="mb-0">
+          Qty: {props.quantity} Total: {`DKK${props.price * props.quantity} `}{' '}
+        </h6>
       </div>
       <div className="col-md-1 col-lg-1 col-xl-1 text-end">
         <button

@@ -22,7 +22,6 @@ export class ModelManager<T extends { id: number }> {
   async getAll(): Promise<T[]> {
     try {
       let itemsTxt = await fs.readFile(this.filePath, 'utf8')
-      console.log(itemsTxt)
       return JSON.parse(itemsTxt)
     } catch (err: any) {
       throw new HttpError(404, `Server error: File does not exist`)
