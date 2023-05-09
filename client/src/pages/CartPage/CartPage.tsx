@@ -1,9 +1,9 @@
-import { Container } from "react-bootstrap"
 import DefaultBasket from "../../components/Basket/DefaultBasket"
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import UserBasket from "../../components/Basket/UserBasket"
 import GoBackButton from "../../components/GoBackButton/GoBackButton"
+import styles from "./CartPage.module.css"
 
 function CartPage() {
   const ctx = useContext(UserContext)
@@ -12,10 +12,15 @@ function CartPage() {
   const isLoggedIn = () => user.id
 
   return (
-    <>
+    <main>
       <GoBackButton />
-      <Container>{isLoggedIn() ? <UserBasket /> : <DefaultBasket />}</Container>
-    </>
+      <section>
+        <h1> Your cart</h1>
+        <div className={styles.container}>
+          {isLoggedIn() ? <UserBasket /> : <DefaultBasket />}
+        </div>
+      </section>
+    </main>
   )
 }
 

@@ -1,6 +1,6 @@
-import { Product } from '../../types/types'
-import GridCard from '../GridCard/GridCard'
-import styles from './Grid.module.css'
+import { Product } from "../../types/types"
+import GridCard from "../GridCard/GridCard"
+import styles from "./Grid.module.css"
 
 type Props = {
   products: Product[]
@@ -18,17 +18,7 @@ function Grid(props: Props) {
   return (
     <div className={styles.grid}>
       {products.map((product) => {
-        return (
-          <GridCard
-            key={product.id}
-            id={product.id}
-            album={product.album}
-            artist={product.artist}
-            image={product.image}
-            price={product.price}
-            quantity={product.quantity}
-          ></GridCard>
-        )
+        return <GridCard product={product}></GridCard>
       })}
       {emptyDivs}
     </div>

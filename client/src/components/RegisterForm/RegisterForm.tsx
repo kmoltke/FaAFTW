@@ -1,9 +1,16 @@
 import React, { useContext, useState } from "react"
 import styles from "./RegisterForm.module.css"
-
-import { User } from "../../../../api/src/users/users.model"
 import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
+import { User } from "../../types/types"
+
+type FormError = {
+  fname?: string
+  lname?: string
+  email?: string
+  password?: string
+  general?: string
+}
 
 export const RegisterForm = () => {
   const navigate = useNavigate()
@@ -25,14 +32,6 @@ export const RegisterForm = () => {
     lname: "",
     email: "",
     password: "",
-  }
-
-  type FormError = {
-    fname?: string
-    lname?: string
-    email?: string
-    password?: string
-    general?: string
   }
 
   //validation
@@ -206,7 +205,7 @@ export const RegisterForm = () => {
             </div>
           )}
         </div>
-        <button type="submit" className="btn btn-primary w-100 login-button">
+        <button type="submit" className={styles.button}>
           Register
         </button>
         {formErrors?.general && (

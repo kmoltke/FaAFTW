@@ -4,9 +4,9 @@ import Tabs from "../../components/Tab/Tabs"
 
 export const LoginPage = () => {
   return (
-    <>
+    <main>
       <GoBackButton />
       <Tabs />
-    </>
+    </main>
   )
 }

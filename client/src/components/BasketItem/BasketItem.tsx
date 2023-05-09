@@ -1,17 +1,17 @@
-import { useContext } from 'react'
+import { useContext } from "react"
 import {
   CartContext,
   CartItem,
   removeItemFromCart,
-} from '../../contexts/CartContext'
-import { UserContext } from '../../contexts/UserContext'
+} from "../../contexts/CartContext"
+import { UserContext } from "../../contexts/UserContext"
 
 function BasketItem(props: CartItem) {
   const { dispatch } = useContext(CartContext)
   const userContext = useContext(UserContext)
 
   if (!userContext) {
-    throw new Error('UserContext undefined')
+    throw new Error("UserContext undefined")
   }
 
   const { user } = userContext
@@ -19,8 +19,8 @@ function BasketItem(props: CartItem) {
   const handleRemoveItem = (id: number, price: number) => {
     removeItemFromCart(dispatch, id, price)
     fetch(`http://localhost:5000/users/${user.id}/basket/products/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
     })
   }
 
@@ -39,7 +39,7 @@ function BasketItem(props: CartItem) {
       </div>
       <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
         <h6 className="mb-0">
-          Qty: {props.quantity} Total: {`DKK${props.price * props.quantity} `}{' '}
+          Qty: {props.quantity} Total: {`DKK${props.price * props.quantity} `}{" "}
         </h6>
       </div>
       <div className="col-md-1 col-lg-1 col-xl-1 text-end">

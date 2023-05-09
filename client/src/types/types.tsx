@@ -1,19 +1,3 @@
-export interface Vinyl {
-  id: number
-  artist: string
-  album: string
-  decade: string
-  year: number
-  genre: string
-  price: number
-  type: string
-  label: string
-  image: string
-  featured?: boolean
-  featuredColor?: string
-  description: string
-}
-
 export interface Product {
   id: number
   artist: string
@@ -21,6 +5,20 @@ export interface Product {
   price: number
   image: string
   quantity: number
+  decade?: string
+  year?: number
+  genre?: string
+  type?: string
+  label?: string
+  description?: string
   featured?: boolean
   featuredColor?: string
+}
+
+export interface User {
+  id: number
+  fname: string
+  lname: string
+  email: string
+  password: string
 }

@@ -1,0 +1,11 @@
+.container {
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 40, 0.2);
+  transition: 0.3s;
+  text-align: left;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+}

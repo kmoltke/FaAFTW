@@ -188,7 +188,7 @@
     float: none !important;
   }
 
-  .navbarRightResponsive a:not(:first-child) {
+  .navbarRightResponsive a:not(:first-child, :nth-child(3)) {
     display: block;
     text-align: left;
     float: none !important;

@@ -1,0 +1,19 @@
+.shippingComponentWrap {
+  display: flex;
+  border-bottom: 1px solid black;
+  width: fit-content;
+}
+
+.shippingComponentSelect {
+  display: block;
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+}
+.icon {
+  padding-top: 5px;
+}
