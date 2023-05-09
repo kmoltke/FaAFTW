@@ -3,10 +3,7 @@ import { addItemToCart, CartContext } from "../../contexts/CartContext"
 import { UserContext } from "../../contexts/UserContext"
 import { toast, ToastContainer } from "react-toastify"
 import { Product } from "../../types/types"
-
 import styles from "../AddToCardButton/AddToCardButton.module.css"
-import "../../global.css"
-import "react-toastify/dist/ReactToastify.css"
 
 type AddToCartButtonProps = {
   product: Product
@@ -20,11 +17,6 @@ function AddToCardButton({ product }: AddToCartButtonProps) {
   const { dispatch } = useContext(CartContext)
   const handleAddToCart = () => {
     addItemToCart(dispatch, product, userId)
-    // fetch(`http://localhost:5000/users/${userId}/basket/products`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(product),
-    // })
 
     toast.success("Product has been added to cart", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -36,7 +28,6 @@ function AddToCardButton({ product }: AddToCartButtonProps) {
       <button onClick={handleAddToCart} className={styles.button}>
         Add to Cart
       </button>
-      <ToastContainer hideProgressBar />
     </div>
   )
 }

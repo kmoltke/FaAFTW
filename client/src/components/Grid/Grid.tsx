@@ -18,7 +18,7 @@ function Grid(props: Props) {
   return (
     <div className={styles.grid}>
       {products.map((product) => {
-        return <GridCard product={product}></GridCard>
+        return <GridCard product={product} />
       })}
       {emptyDivs}
     </div>

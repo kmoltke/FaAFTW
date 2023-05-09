@@ -3,7 +3,6 @@ import styles from "./GridCard.module.css"
 import "../../global.css"
 import { Product } from "../../types/types"
 import AddToCardButton from "../AddToCardButton/AddToCardButton"
-import "react-toastify/dist/ReactToastify.css"
 
 interface GridCardProps {
   product: Product
