@@ -1,4 +1,4 @@
-.Container {
+.container {
   display: flex;
   text-align: center;
   max-width: 400px;
@@ -6,7 +6,7 @@
   margin-right: auto;
 }
 
-.Button {
+.button {
   flex-basis: 0;
   flex-grow: 1;
   text-align: center;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 580px) {
-  .Container {
+  .container {
     max-width: 400px;
     flex-direction: column;
     text-align: center;
@@ -24,7 +24,7 @@
     padding: 1rem;
   }
 
-  .Button {
+  .button {
     text-align: center;
     margin: 10px 0px 10px 0px;
     box-sizing: border-box;

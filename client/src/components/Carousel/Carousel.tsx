@@ -1,11 +1,9 @@
+import styles from "./Carousel.module.css"
+
 import ReactCarousel from "react-bootstrap/Carousel"
 import { useEffect, useState } from "react"
-import styles from "./Carousel.module.css"
-import "../../global.css"
-import { Col, Container, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { Product } from "../../types/types"
-import "bootstrap/dist/css/bootstrap.min.css"
 
 function Carousel() {
   const [products, setProducts] = useState<Product[]>([])

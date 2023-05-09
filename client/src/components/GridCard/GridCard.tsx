@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom"
 import styles from "./GridCard.module.css"
-import "../../global.css"
+
+import { NavLink } from "react-router-dom"
 import { Product } from "../../types/types"
 import AddToCardButton from "../AddToCardButton/AddToCardButton"
 

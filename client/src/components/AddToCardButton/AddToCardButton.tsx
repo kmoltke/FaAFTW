@@ -1,9 +1,10 @@
+import styles from "../AddToCardButton/AddToCardButton.module.css"
+
 import { useContext } from "react"
 import { addItemToCart, CartContext } from "../../contexts/CartContext"
 import { UserContext } from "../../contexts/UserContext"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import { Product } from "../../types/types"
-import styles from "../AddToCardButton/AddToCardButton.module.css"
 
 type AddToCartButtonProps = {
   product: Product

@@ -1,20 +1,19 @@
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
+import styles from "./Tabs.module.css"
 
-import "../../global.css";
-import "./Tabs.css";
-import { LoginForm } from "../LoginForm/LoginForm";
-import { RegisterForm } from "../RegisterForm/RegisterForm";
+import { useState } from "react"
+import Button from "react-bootstrap/Button"
+
+import { LoginForm } from "../LoginForm/LoginForm"
+import { RegisterForm } from "../RegisterForm/RegisterForm"
 
 const Tabs = () => {
-  const [activeTab, setActiveTab] = useState("login");
+  const [activeTab, setActiveTab] = useState("login")
 
   return (
     <div>
-      <div className="Container">
+      <div className={styles.container}>
         <Button
-          className="Button"
+          className={styles.button}
           variant="dark"
           onClick={() => setActiveTab("login")}
           active={activeTab === "login"}
@@ -22,7 +21,7 @@ const Tabs = () => {
           Login
         </Button>
         <Button
-          className="Button"
+          className={styles.button}
           variant="dark"
           onClick={() => setActiveTab("register")}
           active={activeTab === "register"}
@@ -34,6 +33,6 @@ const Tabs = () => {
       <div></div>
       {activeTab === "login" ? <LoginForm /> : <RegisterForm />}
     </div>
-  );
-};
-export default Tabs;
+  )
+}
+export default Tabs

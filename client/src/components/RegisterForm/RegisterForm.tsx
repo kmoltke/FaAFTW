@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react"
 import styles from "./RegisterForm.module.css"
+
+import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
 import { User } from "../../types/types"

@@ -1,9 +1,7 @@
 import styles from "./ProductDescriptionPage.module.css"
-import "../../global.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import AddToCardButton from "../../components/AddToCardButton/AddToCardButton"
-import "react-toastify/dist/ReactToastify.css"
 import GoBackButton from "../../components/GoBackButton/GoBackButton"
 import { Product } from "../../types/types"
 

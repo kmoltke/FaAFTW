@@ -1,6 +1,4 @@
 import styles from "./FilterComponent.module.css"
-import "../../styles/template.css"
-import { Console, log } from "console"
 
 type FilterComponentProps = {
   category: string

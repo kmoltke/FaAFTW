@@ -1,6 +1,7 @@
+import styles from "./Grid.module.css"
+
 import { Product } from "../../types/types"
 import GridCard from "../GridCard/GridCard"
-import styles from "./Grid.module.css"
 
 type Props = {
   products: Product[]

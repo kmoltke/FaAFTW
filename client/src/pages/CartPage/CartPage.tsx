@@ -1,9 +1,11 @@
-import DefaultBasket from "../../components/Basket/DefaultBasket"
+import styles from "./CartPage.module.css"
+
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
+
+import DefaultBasket from "../../components/Basket/DefaultBasket"
 import UserBasket from "../../components/Basket/UserBasket"
 import GoBackButton from "../../components/GoBackButton/GoBackButton"
-import styles from "./CartPage.module.css"
 
 function CartPage() {
   const ctx = useContext(UserContext)

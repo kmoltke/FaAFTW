@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Grid from "../../components/Grid/Grid"
-import "../../global.css"
 import styles from "./HomePage.module.css"
 import { useSearchParams } from "react-router-dom"
 import Filter from "../../components/Filter/Filter"
