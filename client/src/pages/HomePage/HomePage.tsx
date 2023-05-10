@@ -4,9 +4,10 @@ import styles from "./HomePage.module.css"
 import { useSearchParams } from "react-router-dom"
 import Filter from "../../components/Filter/Filter"
 import Carousel from "../../components/Carousel/Carousel"
+import { Product } from "../../types/types"
 
 function HomePage() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [searchParams] = useSearchParams()
 

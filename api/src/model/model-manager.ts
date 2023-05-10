@@ -1,5 +1,5 @@
-import * as fs from 'fs/promises'
-import { HttpError } from '../utils/http-errors'
+import * as fs from "fs/promises"
+import { HttpError } from "../utils/http-errors"
 
 /**
  * ModelManager is a generic class to store filepath and provide necessary functions for each controller type
@@ -10,7 +10,7 @@ export class ModelManager<T extends { id: number }> {
 
   constructor(filePath: string) {
     this.filePath = filePath
-    const plural = filePath.replace(/.+\/([a-z]+).json/, '$1')
+    const plural = filePath.replace(/.+\/([a-z]+).json/, "$1")
     this.type = plural[0].toUpperCase() + plural.slice(1, plural.length - 1)
   }
 
@@ -21,7 +21,7 @@ export class ModelManager<T extends { id: number }> {
    */
   async getAll(): Promise<T[]> {
     try {
-      let itemsTxt = await fs.readFile(this.filePath, 'utf8')
+      let itemsTxt = await fs.readFile(this.filePath, "utf8")
       return JSON.parse(itemsTxt)
     } catch (err: any) {
       throw new HttpError(404, `Server error: File does not exist`)
@@ -83,6 +83,7 @@ export class ModelManager<T extends { id: number }> {
     // push to itemArray and save
     itemArr.push(newItem)
     await this.save(itemArr)
+    return newItem
   }
 
   // update existing item

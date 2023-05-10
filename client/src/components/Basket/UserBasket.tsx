@@ -1,16 +1,9 @@
-import { Card, Col, Row } from 'react-bootstrap'
-import { useContext, useEffect, useState } from 'react'
-import BasketSummary from '../BasketSummary/BasketSummary'
-import BasketItem from '../BasketItem/BasketItem'
-import { CartContext, CartItem, setCart } from '../../contexts/CartContext'
-import { UserContext } from '../../contexts/UserContext'
-interface Vinyl {
-  id: number
-  album: string
-  artist: string
-  price: number
-  image: string
-}
+import { Card, Col, Row } from "react-bootstrap"
+import { useContext, useEffect, useState } from "react"
+import BasketSummary from "../BasketSummary/BasketSummary"
+import BasketItem from "../BasketItem/BasketItem"
+import { CartContext, CartItem, setCart } from "../../contexts/CartContext"
+import { UserContext } from "../../contexts/UserContext"
 
 interface BasketItem {
   id: number
@@ -20,57 +13,36 @@ interface BasketItem {
 
 function UserBasket() {
   const { cartState: cart, dispatch } = useContext(CartContext)
-  const userContext = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
-  if (!userContext) {
-    throw new Error('UserContext undefined')
-  }
-
-  const user = userContext.user
+  const formatNumber = (x: number) =>
+    new Intl.NumberFormat("da-DK", { maximumFractionDigits: 0 }).format(x)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.id}/basket`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((response) => response.json())
-      .catch((error) =>
-        console.log('error trying to create empty basket: ', error)
-      )
-    fetch(`http://localhost:5000/users/${user.id}/basket`)
+    if (!user) {
+      return
+    }
+
+    fetch(`http://localhost:5000/users/${user?.id}/basket`)
       .then((response) => response.json())
       .then((data) => setCart(dispatch, data.products, data.total))
       .catch((error) => console.log(error))
-  }, [])
+  }, [user])
 
   return (
-    <Card>
+    <Card className="p-4">
       <Row>
         <Col sm={8}>
-          <div className="m-5">
-            <h1>Products</h1>
-            <hr />
-            {cart?.items?.length === 0 ? (
-              <h3>Your cart is empty, go shopping!</h3>
-            ) : (
-              cart?.items.map((prod: CartItem) => (
-                <BasketItem
-                  key={prod.id}
-                  id={prod.id}
-                  artist={prod.artist}
-                  album={prod.album}
-                  quantity={prod.quantity}
-                  price={prod.price}
-                  image={prod.image}
-                ></BasketItem>
-              ))
-            )}
-          </div>
+          {cart?.items?.length === 0 ? (
+            <h3>Your cart is empty, go shopping!</h3>
+          ) : (
+            cart?.items.map((prod: CartItem) => (
+              <BasketItem key={prod.id} {...prod} />
+            ))
+          )}
         </Col>
-        <Col sm={4}>
-          <h3>Summary</h3>
-          <hr />
-          <BasketSummary total={cart.total}></BasketSummary>
+        <Col sm={4} className="mt-4">
+          <BasketSummary total={formatNumber(cart.total)} />
         </Col>
       </Row>
     </Card>
