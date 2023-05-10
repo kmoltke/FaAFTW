@@ -141,5 +141,12 @@
     "fname": "Martin",
     "lname": "Lupa",
     "password": "passwordpassword1*"
+  },
+  {
+    "id": 1683747288787,
+    "email": "simon@boogiewoogie.dk",
+    "fname": "Simon",
+    "lname": "Kristensen",
+    "password": "Trump123!"
   }
 ]

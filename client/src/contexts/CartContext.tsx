@@ -1,6 +1,6 @@
-import React, { createContext, useReducer } from 'react'
-import { cartReducer } from '../reducers/cartReducer'
-import { Product } from '../types/types'
+import React, { createContext, useEffect, useReducer } from "react"
+import { cartReducer } from "../reducers/cartReducer"
+import { Product } from "../types/types"
 
 export interface CartItem {
   id: number
@@ -17,7 +17,7 @@ export interface CartState {
 }
 
 export interface Action {
-  type: string
+  type: "ADD_ITEM" | "REMOVE_ITEM" | "SET_CART" | "RESET_CART"
   payload?: any
 }
 
@@ -34,8 +34,14 @@ export const CartContext = createContext<{
   dispatch: () => {},
 })
 
+export const CART_KEY = "cart"
+
 export const CartProvider = ({ children }: any) => {
-  const [cartState, dispatch] = useReducer(cartReducer, initialCartState)
+  const [cartState, dispatch] = useReducer(cartReducer, getInitialState())
+
+  useEffect(() => {
+    localStorage.setItem(CART_KEY, JSON.stringify(cartState))
+  }, [cartState])
 
   return (
     <CartContext.Provider value={{ cartState, dispatch }}>
@@ -44,13 +50,18 @@ export const CartProvider = ({ children }: any) => {
   )
 }
 
+function getInitialState() {
+  const cart = localStorage.getItem(CART_KEY)
+  return cart ? JSON.parse(cart) : initialCartState
+}
+
 export const setCart = (
   dispatch: React.Dispatch<Action>,
   items: CartItem[],
   total: number
 ) => {
   dispatch({
-    type: 'SET_CART',
+    type: "SET_CART",
     payload: {
       items,
       total,
@@ -61,10 +72,10 @@ export const setCart = (
 export const addItemToCart = (
   dispatch: React.Dispatch<Action>,
   product: Product,
-  userId: number
+  userId?: number
 ) => {
   dispatch({
-    type: 'ADD_ITEM',
+    type: "ADD_ITEM",
     payload: {
       id: product.id,
       artist: product.artist,
@@ -83,7 +94,7 @@ export const removeItemFromCart = (
   productPrice: number
 ) => {
   dispatch({
-    type: 'REMOVE_ITEM',
+    type: "REMOVE_ITEM",
     payload: { id: productId, price: productPrice },
   })
 }

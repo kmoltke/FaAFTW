@@ -3,6 +3,7 @@ import styles from "./Navbar.module.css"
 import { NavLink } from "react-router-dom"
 import { useContext, useEffect, useRef, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
+import { CartContext } from "../../contexts/CartContext"
 
 function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null)
@@ -46,18 +47,18 @@ function Navbar() {
     }
   }
 
-  const ctx = useContext(UserContext)
-  if (!ctx) throw new Error("User is undefined")
-  const { user, updateUser } = ctx
-  const name = user.fname
-
-  useEffect(() => {}, [user])
+  const { user, updateUser } = useContext(UserContext)
+  const { cartState } = useContext(CartContext)
+  const totalItems = cartState.items.reduce(
+    (sum, curr) => sum + curr.quantity,
+    0
+  )
 
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const toggleMenu = () => setShowMobileMenu((prev) => !prev)
 
-  const isLoggedIn = () => !(user.id === 0)
+  const isLoggedIn = () => Boolean(user)
 
   return (
     <>
@@ -113,7 +114,7 @@ function Navbar() {
               <NavLink
                 to={"/"}
                 onClick={() => {
-                  updateUser({ id: 0, fname: "", lname: "" })
+                  updateUser(null)
                   toggleMenu()
                 }}
                 className={styles.navbarRightLink}
@@ -162,6 +163,27 @@ function Navbar() {
                 "Cart"
               )}
             </NavLink>
+
+            {totalItems ? (
+              <span
+                style={{
+                  background: "#aa0000",
+                  color: "white",
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "999px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  lineHeight: 0,
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  transform: "translate(-5px, 6px)",
+                }}
+              >
+                <span>{totalItems}</span>
+              </span>
+            ) : null}
           </div>
         </div>
       </header>

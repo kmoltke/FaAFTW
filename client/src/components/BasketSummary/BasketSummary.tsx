@@ -3,7 +3,7 @@ import { Container, Dropdown, DropdownButton, Row } from "react-bootstrap"
 import styles from "./BasketSummary.module.css"
 
 interface Summary {
-  total: number
+  total: string
 }
 
 function BasketSummary(props: Summary) {
@@ -11,16 +11,16 @@ function BasketSummary(props: Summary) {
     <Container>
       <h2>Summary</h2>
       <hr />
-      <h3>Shipping</h3>
-      <div className={styles.shippingComponentWrap}>
-        <select className={styles.shippingComponentSelect}>
-          <option value={""}>standard shipping 29,-</option>
-          <option value={""}>fast shipping 69,-</option>
-        </select>
-        <span className={styles.icon}> ▼ </span>
-      </div>
-      <hr />
       <h3>Total Price: {props.total},-</h3>
+      <hr />
+      <button
+        className="btn btn-success btn-lg"
+        onClick={() =>
+          alert("This would lead to a checkout page where you pay :-)")
+        }
+      >
+        CHECKOUT
+      </button>
     </Container>
   )
 }
