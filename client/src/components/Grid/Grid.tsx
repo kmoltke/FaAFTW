@@ -19,7 +19,7 @@ function Grid(props: Props) {
   return (
     <div className={styles.grid}>
       {products.map((product) => {
-        return <GridCard product={product} />
+        return <GridCard key={product.id} product={product} />
       })}
       {emptyDivs}
     </div>

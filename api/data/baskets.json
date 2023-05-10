@@ -3,5 +3,20 @@
     "id": 1670705564259,
     "BasketId": 1683737999680,
     "products": []
+  },
+  {
+    "id": 1683751119036,
+    "BasketId": 1683751119084,
+    "products": [
+      {
+        "id": 5,
+        "album": "Random Access Memories",
+        "artist": "Daft Punk",
+        "price": 245,
+        "image": "/images/id5-1.jpg",
+        "featured": false,
+        "quantity": 5
+      }
+    ]
   }
 ]
