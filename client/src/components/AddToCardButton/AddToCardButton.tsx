@@ -17,12 +17,13 @@ function AddToCardButton({ product }: AddToCartButtonProps) {
   const { dispatch } = useContext(CartContext)
   const handleAddToCart = () => {
     addItemToCart(dispatch, product, userId)
-
-    fetch(`http://localhost:5000/users/${userId}/basket/products`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify([{ ...product, quantity: 1 }]),
-    })
+    if (userId) {
+      fetch(`http://localhost:5000/users/${userId}/basket/products`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify([{ ...product, quantity: 1 }]),
+      })
+    }
 
     toast.success("Product has been added to cart", {
       position: toast.POSITION.BOTTOM_RIGHT,
