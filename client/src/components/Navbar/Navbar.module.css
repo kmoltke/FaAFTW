@@ -19,9 +19,9 @@
 
 /* Style the navbar links */
 .navbarRightLink {
+  display: inline-block;
   font-family: "Oswald", sans-serif !important;
   font-weight: bold !important;
-  float: left;
   color: rgb(255, 255, 255);
   text-align: center;
   padding: 12px;
@@ -192,5 +192,9 @@
     display: block;
     text-align: left;
     float: none !important;
+  }
+
+  .navbarRightResponsive a:nth-child(5) {
+    text-align: left;
   }
 }

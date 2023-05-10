@@ -162,28 +162,26 @@ function Navbar() {
               ) : (
                 "Cart"
               )}
+              {totalItems ? (
+                <span
+                  style={{
+                    background: "#aa0000",
+                    color: "white",
+                    width: "24px",
+                    height: "24px",
+                    borderRadius: "999px",
+                    display: "inline-block",
+                    lineHeight: 1.5,
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    transform: "translate(6px, -8px)",
+                    textAlign: "center",
+                  }}
+                >
+                  <span>{totalItems}</span>
+                </span>
+              ) : null}
             </NavLink>
-
-            {totalItems ? (
-              <span
-                style={{
-                  background: "#aa0000",
-                  color: "white",
-                  width: "24px",
-                  height: "24px",
-                  borderRadius: "999px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  lineHeight: 0,
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  transform: "translate(-5px, 6px)",
-                }}
-              >
-                <span>{totalItems}</span>
-              </span>
-            ) : null}
           </div>
         </div>
       </header>
