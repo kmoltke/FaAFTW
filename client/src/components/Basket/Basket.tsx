@@ -1,17 +1,11 @@
 import { Card, Col, Row } from "react-bootstrap"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import BasketSummary from "../BasketSummary/BasketSummary"
 import BasketItem from "../BasketItem/BasketItem"
 import { CartContext, CartItem, setCart } from "../../contexts/CartContext"
 import { UserContext } from "../../contexts/UserContext"
 
-interface BasketItem {
-  id: number
-  price: number
-  quantity: number
-}
-
-function UserBasket() {
+function Basket() {
   const { cartState: cart, dispatch } = useContext(CartContext)
   const { user } = useContext(UserContext)
 
@@ -49,4 +43,4 @@ function UserBasket() {
   )
 }
 
-export default UserBasket
+export default Basket

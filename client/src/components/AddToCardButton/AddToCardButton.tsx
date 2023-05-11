@@ -11,8 +11,8 @@ type AddToCartButtonProps = {
 }
 
 function AddToCardButton({ product }: AddToCartButtonProps) {
-  const ctx = useContext(UserContext)
-  const userId = ctx.user?.id
+  const { user } = useContext(UserContext)
+  const userId = user?.id
 
   const { dispatch } = useContext(CartContext)
   const handleAddToCart = () => {

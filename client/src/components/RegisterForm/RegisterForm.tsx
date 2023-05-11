@@ -3,7 +3,6 @@ import styles from "./RegisterForm.module.css"
 import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
-import { User } from "../../types/types"
 
 type FormError = {
   fname?: string
@@ -20,20 +19,7 @@ export const RegisterForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [formErrors, setFormErrors] = useState<FormError>()
-
-  const ctx = useContext(UserContext)
-  if (!ctx) {
-    throw new Error("Context is undefined")
-  }
-  const { user, updateUser } = ctx
-
-  const emptyUser: User = {
-    id: 0,
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-  }
+  const { updateUser } = useContext(UserContext)
 
   //validation
   const validatePassword = (password: string) => {

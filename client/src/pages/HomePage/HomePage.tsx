@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
-import Grid from "../../components/Grid/Grid"
 import styles from "./HomePage.module.css"
+
+import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import Grid from "../../components/Grid/Grid"
 import Filter from "../../components/Filter/Filter"
 import Carousel from "../../components/Carousel/Carousel"
 import { Product } from "../../types/types"

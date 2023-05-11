@@ -9,6 +9,17 @@ function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLImageElement>(null)
 
+  const { user, updateUser } = useContext(UserContext)
+  const { cartState } = useContext(CartContext)
+  const totalItems = cartState.items.reduce(
+    (sum, curr) => sum + curr.quantity,
+    0
+  )
+
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const toggleMenu = () => setShowMobileMenu((prev) => !prev)
+  const isLoggedIn = () => Boolean(user)
+
   useEffect(() => {
     /**
      * Defines the style of the navbar and logo based on scroll postion on the page
@@ -46,19 +57,6 @@ function Navbar() {
       })
     }
   }
-
-  const { user, updateUser } = useContext(UserContext)
-  const { cartState } = useContext(CartContext)
-  const totalItems = cartState.items.reduce(
-    (sum, curr) => sum + curr.quantity,
-    0
-  )
-
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-
-  const toggleMenu = () => setShowMobileMenu((prev) => !prev)
-
-  const isLoggedIn = () => Boolean(user)
 
   return (
     <>

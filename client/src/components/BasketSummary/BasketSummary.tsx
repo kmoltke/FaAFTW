@@ -2,11 +2,11 @@ import React from "react"
 import { Container, Dropdown, DropdownButton, Row } from "react-bootstrap"
 import styles from "./BasketSummary.module.css"
 
-interface Summary {
+interface SummaryProps {
   total: string
 }
 
-function BasketSummary(props: Summary) {
+function BasketSummary(props: SummaryProps) {
   return (
     <Container>
       <h2>Summary</h2>

@@ -8,12 +8,7 @@ import { UserContext } from "../../contexts/UserContext"
 
 function BasketItem(props: CartItem) {
   const { dispatch } = useContext(CartContext)
-  const userContext = useContext(UserContext)
-
-  if (!userContext) {
-    throw new Error("UserContext undefined")
-  }
-  const { user } = userContext
+  const { user } = useContext(UserContext)
 
   const handleRemoveItem = (id: number, price: number) => {
     removeItemFromCart(dispatch, id, price)
