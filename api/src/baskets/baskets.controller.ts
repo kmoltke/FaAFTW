@@ -156,7 +156,7 @@ export const addProductToBasket = async (req: Request, res: Response) => {
     })
     await basketModelManager.save(basketsArray)
 
-    res.send(`Basket for user "${userId}" was successfully updated.`)
+    res.json(withTotal(basketsArray[basketIndex]))
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
