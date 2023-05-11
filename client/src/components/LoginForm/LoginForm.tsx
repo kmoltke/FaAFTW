@@ -16,11 +16,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [formErrors, setFormErrors] = useState<FormError>()
-
-  const ctx = useContext(UserContext)
-  if (!ctx) throw new Error("User is undefined")
-
-  const { updateUser } = ctx
+  const { updateUser } = useContext(UserContext)
 
   const handleEmailInput = (e: any) => {
     setEmail(e.target.value)

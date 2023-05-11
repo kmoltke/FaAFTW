@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react"
-import { CART_KEY, CartContext, CartState } from "./CartContext"
+import { CartContext, CartState } from "./CartContext"
+import { User } from "../types/types"
 
-interface User {
-  id: number
-  fname: string
-  lname: string
-}
+const USER_KEY = "user"
+
 interface IUserContext {
   user: User | null
   updateUser: (user: User | null) => void
@@ -15,8 +13,6 @@ export const UserContext = React.createContext<IUserContext>({
   user: null,
   updateUser: () => {},
 })
-
-const USER_KEY = "user"
 
 export const UserProvider = ({ children }: any) => {
   const { cartState, dispatch } = useContext(CartContext)
@@ -33,7 +29,6 @@ export const UserProvider = ({ children }: any) => {
       localStorage.setItem(USER_KEY, JSON.stringify(newUser))
     }
   }
-
   return (
     <UserContext.Provider value={{ user, updateUser }}>
       {children}

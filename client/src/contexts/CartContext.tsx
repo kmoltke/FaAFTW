@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useReducer } from "react"
 import { cartReducer } from "../reducers/cartReducer"
 import { Product } from "../types/types"
 
+export const CART_KEY = "cart"
+
 export interface CartItem {
   id: number
   artist: string
@@ -33,8 +35,6 @@ export const CartContext = createContext<{
   cartState: initialCartState,
   dispatch: () => {},
 })
-
-export const CART_KEY = "cart"
 
 export const CartProvider = ({ children }: any) => {
   const [cartState, dispatch] = useReducer(cartReducer, getInitialState())

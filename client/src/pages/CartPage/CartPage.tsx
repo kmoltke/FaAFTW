@@ -1,6 +1,6 @@
 import styles from "./CartPage.module.css"
 
-import UserBasket from "../../components/Basket/UserBasket"
+import Basket from "../../components/Basket/Basket"
 import GoBackButton from "../../components/GoBackButton/GoBackButton"
 
 function CartPage() {
@@ -10,7 +10,7 @@ function CartPage() {
       <section>
         <h1>Your cart</h1>
         <div className={styles.container}>
-          <UserBasket />
+          <Basket />
         </div>
       </section>
     </main>
