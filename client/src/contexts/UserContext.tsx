@@ -16,13 +16,12 @@ export const UserContext = React.createContext<IUserContext>({
 
 export const UserProvider = ({ children }: any) => {
   const { cartState, dispatch } = useContext(CartContext)
-  const [user, setUser] = useState<User | null>(getInitialState)
+  const [user, setUser] = useState<User | null>(null)
   const updateUser = async (newUser: User | null) => {
     setUser(newUser)
     if (!newUser) {
       // clear cart ctx
       dispatch({ type: "RESET_CART" })
-      localStorage.removeItem(USER_KEY)
     } else {
       // post all items in ctx cart to the api
       const updatedCart = await combineLocalAndServerCart(newUser.id, cartState)
@@ -30,8 +29,6 @@ export const UserProvider = ({ children }: any) => {
       if (updatedCart) {
         setCart(dispatch, updatedCart.products, newUser.id)
       }
-
-      localStorage.setItem(USER_KEY, JSON.stringify(newUser))
     }
   }
   return (
@@ -52,9 +49,4 @@ async function combineLocalAndServerCart(userId: number, cart: CartState) {
   )
 
   return await result.json()
-}
-
-function getInitialState() {
-  const user = localStorage.getItem(USER_KEY)
-  return user ? JSON.parse(user) : null
 }
