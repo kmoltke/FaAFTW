@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { CartContext, CartState } from "./CartContext"
+import { CartContext, CartState, setCart } from "./CartContext"
 import { User } from "../types/types"
 
 const USER_KEY = "user"
@@ -16,17 +16,19 @@ export const UserContext = React.createContext<IUserContext>({
 
 export const UserProvider = ({ children }: any) => {
   const { cartState, dispatch } = useContext(CartContext)
-  const [user, setUser] = useState<User | null>(getInitialState)
-  const updateUser = (newUser: User | null) => {
+  const [user, setUser] = useState<User | null>(null)
+  const updateUser = async (newUser: User | null) => {
     setUser(newUser)
     if (!newUser) {
       // clear cart ctx
       dispatch({ type: "RESET_CART" })
-      localStorage.removeItem(USER_KEY)
     } else {
       // post all items in ctx cart to the api
-      combineLocalAndServerCart(newUser.id, cartState)
-      localStorage.setItem(USER_KEY, JSON.stringify(newUser))
+      const updatedCart = await combineLocalAndServerCart(newUser.id, cartState)
+
+      if (updatedCart) {
+        setCart(dispatch, updatedCart.products, newUser.id)
+      }
     }
   }
   return (
@@ -37,14 +39,14 @@ export const UserProvider = ({ children }: any) => {
 }
 
 async function combineLocalAndServerCart(userId: number, cart: CartState) {
-  fetch(`http://localhost:5000/users/${userId}/basket/products`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(cart.items),
-  })
-}
+  const result = await fetch(
+    `http://localhost:5000/users/${userId}/basket/products`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(cart.items),
+    }
+  )
 
-function getInitialState() {
-  const user = localStorage.getItem(USER_KEY)
-  return user ? JSON.parse(user) : null
+  return await result.json()
 }

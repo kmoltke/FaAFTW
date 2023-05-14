@@ -37,22 +37,13 @@ export const CartContext = createContext<{
 })
 
 export const CartProvider = ({ children }: any) => {
-  const [cartState, dispatch] = useReducer(cartReducer, getInitialState())
-
-  useEffect(() => {
-    localStorage.setItem(CART_KEY, JSON.stringify(cartState))
-  }, [cartState])
+  const [cartState, dispatch] = useReducer(cartReducer, initialCartState)
 
   return (
     <CartContext.Provider value={{ cartState, dispatch }}>
       {children}
     </CartContext.Provider>
   )
-}
-
-function getInitialState() {
-  const cart = localStorage.getItem(CART_KEY)
-  return cart ? JSON.parse(cart) : initialCartState
 }
 
 export const setCart = (
