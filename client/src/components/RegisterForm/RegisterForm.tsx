@@ -128,7 +128,6 @@ export const RegisterForm = () => {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={handleFormSubmit}
-        // action="http://127.0.0.1:5500/index.html"
         className={`p-3 ${styles.loginForm}`}
         id="loginForm"
       >

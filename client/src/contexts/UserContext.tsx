@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react"
 import { CartContext, CartState, setCart } from "./CartContext"
 import { User } from "../types/types"
 
-const USER_KEY = "user"
-
 interface IUserContext {
   user: User | null
   updateUser: (user: User | null) => void

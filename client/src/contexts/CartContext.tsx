@@ -1,8 +1,6 @@
-import React, { createContext, useEffect, useReducer } from "react"
+import React, { createContext, useReducer } from "react"
 import { cartReducer } from "../reducers/cartReducer"
 import { Product } from "../types/types"
-
-export const CART_KEY = "cart"
 
 export interface CartItem {
   id: number
