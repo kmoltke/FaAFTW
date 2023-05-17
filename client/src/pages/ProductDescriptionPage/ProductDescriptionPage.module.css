@@ -1,4 +1,22 @@
-/* product-description.html */
+.productOuter {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 40, 0.2);
+}
+.productImage {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  padding: 50px;
+}
 
 .image {
   display: block;
@@ -7,62 +25,39 @@
   object-fit: cover;
 }
 
+.productOverview {
+  display: block;
+  width: 55%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 .productArtist {
   margin-left: 0;
 }
 
-.productDetails {
-  max-width: 1300px;
-  background-color: #efefef;
-  padding: 15px;
-  margin-top: 1em;
-  border-radius: 10px;
-  margin-left: 1em;
-  margin-right: auto;
-  margin-top: 1em;
-}
-
-.productImage {
-  display: block;
-  width: 100%;
-  object-fit: cover;
-  max-width: 500px;
-}
-.productOuter {
-  margin-top: 1em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.productOverview {
-  display: block;
-  width: 55%;
-  margin-left: 15px;
+.productTitle {
+  margin-bottom: 0.5em;
 }
 
 .productPrice {
-  font-size: 24px;
   margin-bottom: 0.5em;
   margin-top: 0.5em;
-  font-family: "Oswald", sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  letter-spacing: -0.01em;
 }
 
-.productTitle {
-  font-size: 1.96875rem;
-  font-size: 36px;
-  margin-bottom: 0.5em;
-  font-family: "Oswald", sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  margin-left: 0;
+.productDescription {
+  margin-top: 1em;
+}
+
+.productDetails {
+  background-color: white;
+  padding: 15px;
+  margin-top: 1em;
+  border-radius: 10px;
+  margin-right: auto;
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 40, 0.2);
 }
 
 /* mobile */
@@ -74,7 +69,7 @@
   .productOverview {
     display: block;
     width: 100%;
-    margin-left: 0px;
+    padding: 15px;
   }
 
   .productImage {

@@ -1,11 +1,11 @@
-import { Request, Response } from 'express'
-import { ModelManager } from '../model/model-manager'
-import { Basket, BasketProduct } from './baskets.model'
-import { User } from '../users/users.model'
-import { HttpError } from '../utils/http-errors'
+import { Request, Response } from "express"
+import { ModelManager } from "../model/model-manager"
+import { Basket, BasketProduct, BasketWithTotal } from "./baskets.model"
+import { User } from "../users/users.model"
+import { HttpError } from "../utils/http-errors"
 
-const BASKETS_FILE = './data/baskets.json'
-const USERS_FILE = './data/users.json'
+const BASKETS_FILE = "./data/baskets.json"
+const USERS_FILE = "./data/users.json"
 const basketModelManager = new ModelManager<Basket>(BASKETS_FILE)
 const basketProductModelManager = new ModelManager<BasketProduct>(BASKETS_FILE)
 const userModelManager = new ModelManager<User>(USERS_FILE)
@@ -19,7 +19,7 @@ const userModelManager = new ModelManager<User>(USERS_FILE)
 export const getAllBaskets = async (req: Request, res: Response) => {
   try {
     const baskets = await basketModelManager.getAll()
-    res.json(baskets)
+    res.json(baskets.map(withTotal))
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
@@ -40,13 +40,26 @@ export const getBasketById = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.userId)
     await userModelManager.getByID(userId)
     const basket = await basketModelManager.getByID(userId)
-    res.json(basket)
+    res.json(withTotal(basket))
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
     } else {
       res.status(500).send(error.message)
     }
+  }
+}
+
+function withTotal(basket: Basket): BasketWithTotal {
+  let total = 0
+
+  basket.products.forEach((product) => {
+    total += product.price * product.quantity
+  })
+
+  return {
+    ...basket,
+    total,
   }
 }
 
@@ -61,14 +74,9 @@ export const addEmptyBasket = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.userId)
     await userModelManager.getByID(userId)
 
-    const newBasket = {
-      id: userId,
-      BasketId: Date.now(),
-      products: [],
-      total: 0,
-    }
-    await basketModelManager.add(newBasket)
-    res.status(201).send('Basket created successfully')
+    await createBasketForUser(userId)
+
+    res.status(201).send("Basket created successfully")
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
@@ -76,6 +84,15 @@ export const addEmptyBasket = async (req: Request, res: Response) => {
       res.status(500).send(error.message)
     }
   }
+}
+
+function createBasketForUser(userId: number) {
+  const newBasket = {
+    id: userId,
+    BasketId: Date.now(),
+    products: [],
+  }
+  return basketModelManager.add(newBasket)
 }
 
 /**
@@ -89,7 +106,7 @@ export const removeBasket = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.userId)
     await userModelManager.getByID(userId)
     await basketModelManager.remove(userId)
-    res.send('Basket successfully removed')
+    res.send("Basket successfully removed")
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
@@ -109,14 +126,19 @@ export const addProductToBasket = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId)
     await userModelManager.getByID(userId) // Will throw user error if user does not exist
-    const product = req.body // product is sent as part of the body
+    const addedProducts = req.body // product is sent as part of the body
 
     const basketsArray = await basketModelManager.getAll()
-    // find basket
-    const basketIndex = basketModelManager.findItem(basketsArray, userId)
-    if (basketIndex === -1)
-      throw new HttpError(404, `Basket for user "${userId}" doesn't exist`)
-    else {
+    // find basket or create new empty one
+    let basketIndex = basketModelManager.findItem(basketsArray, userId)
+    if (basketIndex === -1) {
+      const basket = await createBasketForUser(userId)
+      basketsArray.push(basket)
+      basketIndex = basketsArray.length - 1
+    }
+
+    // carry on with the found or new basket
+    addedProducts.forEach((product: BasketProduct) => {
       //find the products
       const productsArray = basketsArray[basketIndex].products
       const productIndex = basketProductModelManager.findItem(
@@ -130,15 +152,11 @@ export const addProductToBasket = async (req: Request, res: Response) => {
       } else {
         //else update its quantity and price
         productsArray[productIndex].quantity += product.quantity
-        productsArray[productIndex].price += product.price * product.quantity
       }
+    })
+    await basketModelManager.save(basketsArray)
 
-      //assign the new total to the "total" property of the basket
-      basketsArray[basketIndex].total += product.price
-      await basketModelManager.save(basketsArray)
-    }
-
-    res.send(`Basket for user "${userId}" was successfully updated.`)
+    res.json(withTotal(basketsArray[basketIndex]))
   } catch (error: any) {
     if (error instanceof HttpError) {
       res.status(error.statusCode).send(error.message)
@@ -162,14 +180,14 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
 
     const basketsArray = await basketModelManager.getAll()
     // find basket
-    const removedItemIndex = basketModelManager.findItem(basketsArray, userId)
-    if (removedItemIndex === -1)
+    const basketIndex = basketModelManager.findItem(basketsArray, userId)
+    if (basketIndex === -1)
       throw new HttpError(404, `Basket with ID:${userId} doesn't exist`)
     else {
       //find the products in the basket
-      const productsArray = basketsArray[removedItemIndex].products
+      const basket = basketsArray[basketIndex]
       const productIndex = basketProductModelManager.findItem(
-        productsArray,
+        basket.products,
         productId
       )
       if (productIndex === -1)
@@ -178,15 +196,10 @@ export const removeProductFromBasket = async (req: Request, res: Response) => {
           `Product with ID:${productId} doesn't exist in the basket for user "${userId}"`
         )
       else {
-        const filteredProducts = productsArray.filter(
+        const filteredProducts = basket.products.filter(
           (product) => product.id !== productId
         )
-        basketsArray[0].products = filteredProducts
-        basketsArray[0].total -=
-          productsArray[removedItemIndex].quantity *
-          productsArray[removedItemIndex].price
-
-        if (basketsArray[0].products.length === 0) basketsArray[0].total = 0
+        basket.products = filteredProducts
 
         await basketModelManager.save(basketsArray)
       }

@@ -1,8 +1,8 @@
 // Add products in a basket for a specific user
-PUT http://localhost:5000/users/1680705564259/basket/products
+PUT http://localhost:5000/users/1670705564259/basket/products
 content-type: application/json
 
-{"id": 1, "quantity":1, "price": 200}
+[{"id": 1, "quantity":1, "price": 200}]
 
 ###
 

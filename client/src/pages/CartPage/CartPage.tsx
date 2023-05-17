@@ -1,21 +1,19 @@
-import { Container } from "react-bootstrap"
-import DefaultBasket from "../../components/Basket/DefaultBasket"
-import { useContext } from "react"
-import { UserContext } from "../../contexts/UserContext"
-import UserBasket from "../../components/Basket/UserBasket"
+import styles from "./CartPage.module.css"
+
+import Basket from "../../components/Basket/Basket"
 import GoBackButton from "../../components/GoBackButton/GoBackButton"
 
 function CartPage() {
-  const ctx = useContext(UserContext)
-  if (!ctx) throw new Error("UserContext undefined")
-  const { user } = ctx
-  const isLoggedIn = () => user.id
-
   return (
-    <>
+    <main>
       <GoBackButton />
-      <Container>{isLoggedIn() ? <UserBasket /> : <DefaultBasket />}</Container>
-    </>
+      <section>
+        <h1>Your cart</h1>
+        <div className={styles.container}>
+          <Basket />
+        </div>
+      </section>
+    </main>
   )
 }
 

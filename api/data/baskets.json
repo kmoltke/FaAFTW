@@ -1,8 +1,16 @@
 [
   {
-    "id": 1683221100235,
-    "BasketId": 1683575229495,
-    "products": [],
-    "total": 0
+    "id": 1670705564259,
+    "BasketId": 1683737999680,
+    "products": [
+      {
+        "id": 3,
+        "artist": "Pink Floyd",
+        "album": "Dark Side of the Moon",
+        "price": 177,
+        "image": "/images/id3-1.jpg",
+        "quantity": 8
+      }
+    ]
   }
 ]

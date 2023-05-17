@@ -3,14 +3,16 @@ import {
   initialCartState,
   Action,
   CartItem,
-} from '../contexts/CartContext'
+} from "../contexts/CartContext"
+
+import { ADD_ITEM, REMOVE_ITEM, RESET_CART, SET_CART} from "../contexts/CartActions";
 
 export const cartReducer = (
   state: CartState = initialCartState,
   action: Action
 ) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case ADD_ITEM:
       const existingItemIndex = state.items.findIndex(
         (item: CartItem) => item.id === action.payload.id
       )
@@ -34,7 +36,7 @@ export const cartReducer = (
           total: state.total + action.payload.price,
         }
       }
-    case 'REMOVE_ITEM':
+    case REMOVE_ITEM:
       const filteredItems = state.items.filter(
         (item) => item.id !== action.payload.id
       )
@@ -50,10 +52,16 @@ export const cartReducer = (
         total: state.total - itemToRemove.quantity * itemToRemove.price, //Aca va el bug fix
       }
 
-    case 'SET_CART':
+    case SET_CART:
       return {
         items: [...action.payload.items],
         total: action.payload.total,
+      }
+
+    case RESET_CART:
+      return {
+        items: [],
+        total: 0,
       }
     default:
       return state

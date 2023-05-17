@@ -1,9 +1,16 @@
-import React, { useContext, useState } from "react"
 import styles from "./RegisterForm.module.css"
 
-import { User } from "../../../../api/src/users/users.model"
+import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
+
+type FormError = {
+  fname?: string
+  lname?: string
+  email?: string
+  password?: string
+  general?: string
+}
 
 export const RegisterForm = () => {
   const navigate = useNavigate()
@@ -12,28 +19,7 @@ export const RegisterForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [formErrors, setFormErrors] = useState<FormError>()
-
-  const ctx = useContext(UserContext)
-  if (!ctx) {
-    throw new Error("Context is undefined")
-  }
-  const { user, updateUser } = ctx
-
-  const emptyUser: User = {
-    id: 0,
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-  }
-
-  type FormError = {
-    fname?: string
-    lname?: string
-    email?: string
-    password?: string
-    general?: string
-  }
+  const { updateUser } = useContext(UserContext)
 
   //validation
   const validatePassword = (password: string) => {
@@ -142,7 +128,6 @@ export const RegisterForm = () => {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={handleFormSubmit}
-        // action="http://127.0.0.1:5500/index.html"
         className={`p-3 ${styles.loginForm}`}
         id="loginForm"
       >
@@ -206,7 +191,7 @@ export const RegisterForm = () => {
             </div>
           )}
         </div>
-        <button type="submit" className="btn btn-primary w-100 login-button">
+        <button type="submit" className={styles.button}>
           Register
         </button>
         {formErrors?.general && (

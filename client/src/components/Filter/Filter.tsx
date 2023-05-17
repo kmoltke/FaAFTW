@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import styles from './Filter.module.css'
-import '../../styles/template.css'
-import FilterComponent from '../FilterComponent/FilterComponent'
-import { useSearchParams } from 'react-router-dom'
+import styles from "./Filter.module.css"
+
+import { useEffect, useState } from "react"
+import FilterComponent from "../FilterComponent/FilterComponent"
+import { useSearchParams } from "react-router-dom"
 
 type FilterProps = {
   itemsNum: number
@@ -29,9 +29,9 @@ function Filter(props: FilterProps) {
   useEffect(() => {
     const datafetch = async () => {
       const responses = await Promise.all([
-        fetch('http://localhost:5000/categories/genre'),
-        fetch('http://localhost:5000/categories/artist'),
-        fetch('http://localhost:5000/categories/decade'),
+        fetch("http://localhost:5000/categories/genre"),
+        fetch("http://localhost:5000/categories/artist"),
+        fetch("http://localhost:5000/categories/decade"),
       ])
 
       const data1 = await responses[0].json()
@@ -45,18 +45,18 @@ function Filter(props: FilterProps) {
     datafetch()
   }, [])
 
-  let genre = searchParams.get('genre') ?? ''
-  let artist = searchParams.get('artist') ?? ''
-  let decade = searchParams.get('decade') ?? ''
+  let genre = searchParams.get("genre") ?? ""
+  let artist = searchParams.get("artist") ?? ""
+  let decade = searchParams.get("decade") ?? ""
 
   if (genresData && !genresData.includes(genre)) {
-    genre = ''
+    genre = ""
   }
   if (artistsData && !artistsData.includes(artist)) {
-    artist = ''
+    artist = ""
   }
   if (decadesData && !decadesData.includes(decade)) {
-    decade = ''
+    decade = ""
   }
 
   return (
@@ -79,7 +79,7 @@ function Filter(props: FilterProps) {
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    removeSearchParams('genre')
+                    removeSearchParams("genre")
                   }}
                 >
                   <p>{genre}</p>
@@ -98,7 +98,7 @@ function Filter(props: FilterProps) {
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    removeSearchParams('artist')
+                    removeSearchParams("artist")
                   }}
                 >
                   <p>{artist}</p>
@@ -117,7 +117,7 @@ function Filter(props: FilterProps) {
                 <button
                   className={styles.filterSelectionButton}
                   onClick={() => {
-                    removeSearchParams('decade')
+                    removeSearchParams("decade")
                   }}
                 >
                   <p>{decade}</p>

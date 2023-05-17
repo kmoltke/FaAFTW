@@ -1,27 +1,38 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  ScrollRestoration,
-} from "react-router-dom"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { LoginPage } from "../pages/LoginPage/LoginPage"
 import CartPage from "../pages/CartPage/CartPage"
 import HomePage from "../pages/HomePage/HomePage"
-import Navbar from "../components/Navbar/Navbar"
 import ProductDescriptionPage from "../pages/ProductDescriptionPage/ProductDescriptionPage"
+import Root from "./Root"
 
 function Router(props: any) {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/login" Component={LoginPage} />
-        <Route path="/cart" Component={CartPage} />
-        <Route path="/" Component={HomePage} />
-        <Route path="/products/:id" element={<ProductDescriptionPage />} />
-      </Routes>
-    </BrowserRouter>
-  )
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
+        {
+          index: true,
+          path: "",
+          element: <HomePage />,
+        },
+        {
+          path: "login",
+          element: <LoginPage />,
+        },
+        {
+          path: "cart",
+          element: <CartPage />,
+        },
+        {
+          path: "products/:id",
+          element: <ProductDescriptionPage />,
+        },
+      ],
+    },
+  ])
+
+  return <RouterProvider router={router} />
 }
 
 export default Router

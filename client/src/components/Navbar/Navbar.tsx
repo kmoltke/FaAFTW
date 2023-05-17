@@ -1,11 +1,24 @@
-import { NavLink } from "react-router-dom"
 import styles from "./Navbar.module.css"
+
+import { NavLink } from "react-router-dom"
 import { useContext, useEffect, useRef, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
+import { CartContext } from "../../contexts/CartContext"
 
 function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLImageElement>(null)
+
+  const { user, updateUser } = useContext(UserContext)
+  const { cartState } = useContext(CartContext)
+  const totalItems = cartState.items.reduce(
+    (sum, curr) => sum + curr.quantity,
+    0
+  )
+
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const toggleMenu = () => setShowMobileMenu((prev) => !prev)
+  const isLoggedIn = () => Boolean(user)
 
   useEffect(() => {
     /**
@@ -44,19 +57,6 @@ function Navbar() {
       })
     }
   }
-
-  const ctx = useContext(UserContext)
-  if (!ctx) throw new Error("User is undefined")
-  const { user, updateUser } = ctx
-  const name = user.fname
-
-  useEffect(() => {}, [user])
-
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-
-  const toggleMenu = () => setShowMobileMenu((prev) => !prev)
-
-  const isLoggedIn = () => !(user.id === 0)
 
   return (
     <>
@@ -112,7 +112,7 @@ function Navbar() {
               <NavLink
                 to={"/"}
                 onClick={() => {
-                  updateUser({ id: 0, fname: "", lname: "" })
+                  updateUser(null)
                   toggleMenu()
                 }}
                 className={styles.navbarRightLink}
@@ -160,6 +160,25 @@ function Navbar() {
               ) : (
                 "Cart"
               )}
+              {totalItems ? (
+                <span
+                  style={{
+                    background: "#aa0000",
+                    color: "white",
+                    width: "24px",
+                    height: "24px",
+                    borderRadius: "999px",
+                    display: "inline-block",
+                    lineHeight: 1.5,
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    transform: "translate(6px, -8px)",
+                    textAlign: "center",
+                  }}
+                >
+                  <span>{totalItems}</span>
+                </span>
+              ) : null}
             </NavLink>
           </div>
         </div>

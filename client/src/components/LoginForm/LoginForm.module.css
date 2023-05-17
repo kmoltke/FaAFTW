@@ -3,7 +3,8 @@
 }
 
 .loginButton {
-  background-color: #212121;
+  background-color: #ffffff;
+  color: #000;
 }
 
 .error {
@@ -19,4 +20,17 @@
   background-size: 24px;
   background-position: 30px center;
   background-color: #fae7ec;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 15px;
+  border-radius: 7px;
 }
